@@ -26,6 +26,12 @@ export class MysetsService {
         '', 'Tekst'),
       new Track('AAAAAA',
         'Ed Sheeran',
+        '', 'Tekst'),
+      new Track('AAAAAA',
+        'Ed Sheeran',
+        '', 'Tekst'),
+      new Track('AAAAAA',
+        'Ed Sheeran',
         '', 'Tekst')
     ])];
   activeSetChange = new EventEmitter<LyricSet>();

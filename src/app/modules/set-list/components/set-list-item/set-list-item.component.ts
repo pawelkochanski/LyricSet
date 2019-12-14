@@ -9,7 +9,6 @@ import {MysetsService} from '../../../../core/services/mysets.service';
 })
 export class SetListItemComponent implements OnInit {
   @Input() set: LyricSet;
-
   constructor(private mysetsService: MysetsService) {
   }
 
