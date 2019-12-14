@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MysetsService} from './core/services/mysets.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'LyricSett';
+  subscription: any;
+  selectedIndex = 0;
+  isTracklistSelected = false;
+
+  constructor(private mysetsService: MysetsService) {
+    this.subscription = this.mysetsService.getActiveSetChangeEmitter().subscribe(() => this.onActiveSetChange());
+  }
+
+  onActiveSetChange() {
+    this.selectedIndexChange(1);
+    this.isTracklistSelected = true;
+  }
+
+  selectedIndexChange(val: number) {
+    this.selectedIndex = val;
+  }
 }
