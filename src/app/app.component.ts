@@ -8,17 +8,26 @@ import {MysetsService} from './core/services/mysets.service';
 })
 export class AppComponent {
   title = 'LyricSett';
-  subscription: any;
+  subscriptionSet: any;
+  subscriptionTrack: any;
   selectedIndex = 0;
   isTracklistSelected = false;
+  isTrackSelected = false;
 
   constructor(private mysetsService: MysetsService) {
-    this.subscription = this.mysetsService.getActiveSetChangeEmitter().subscribe(() => this.onActiveSetChange());
+    this.subscriptionSet = this.mysetsService.getActiveSetChangeEmitter().subscribe(() => this.onActiveSetChange());
+    this.subscriptionTrack = this.mysetsService.getActiveTrackChangeEmitter().subscribe(() => this.onActiveTrackChange());
   }
 
   onActiveSetChange() {
     this.selectedIndexChange(1);
     this.isTracklistSelected = true;
+    this.isTrackSelected = false;
+  }
+
+  onActiveTrackChange() {
+    this.selectedIndexChange(2);
+    this.isTrackSelected = true;
   }
 
   selectedIndexChange(val: number) {

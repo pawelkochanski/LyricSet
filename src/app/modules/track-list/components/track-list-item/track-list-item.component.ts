@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Track} from '../../../../shared/models/Track.model';
+import {MysetsService} from '../../../../core/services/mysets.service';
 
 @Component({
   selector: 'app-track-list-item',
@@ -8,9 +9,12 @@ import {Track} from '../../../../shared/models/Track.model';
 })
 export class TrackListItemComponent implements OnInit {
   @Input() track: Track;
-  constructor() { }
+  constructor(private mysetsService: MysetsService) { }
 
   ngOnInit() {
   }
 
+  onTrackClicked(track: Track) {
+    this.mysetsService.emitActiveTrackChange(track);
+  }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatToolbarModule} from '@angular/material';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 
@@ -16,7 +17,8 @@ import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatT
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ]
 })
 export class CoreModule { }

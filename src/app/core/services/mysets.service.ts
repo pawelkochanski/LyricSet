@@ -35,6 +35,7 @@ export class MysetsService {
         '', 'Tekst')
     ])];
   activeSetChange = new EventEmitter<LyricSet>();
+  activeTrackChange = new EventEmitter<Track>();
 
   emitActiveSetChange(set: LyricSet) {
     this.activeSetChange.emit(set);
@@ -44,6 +45,12 @@ export class MysetsService {
     return this.activeSetChange;
   }
 
+  getActiveTrackChangeEmitter() {
+    return this.activeTrackChange;
+  }
+  emitActiveTrackChange(track: Track) {
+    this.activeTrackChange.emit(track);
+  }
   constructor() {
 
   }

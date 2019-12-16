@@ -1,4 +1,4 @@
-<mat-list-item class="mat-elevation-z3">
+<mat-list-item class="mat-elevation-z3" (click)="onTrackClicked(track)">
   <img matListAvatar [src]="track.img">
   <h1 matLine>{{track.title}}</h1>
   <p matLine>{{track.artist}}</p>

@@ -5,5 +5,9 @@
     <input matInput type="search" placeholder="Find your song.." >
   </mat-form-field>
   <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
-  <button mat-icon-button ><mat-icon>account_box</mat-icon></button>
+  <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item>Settings</button>
+    <button mat-menu-item>Account</button>
+  </mat-menu>
 </mat-toolbar>
