@@ -2,4 +2,5 @@
   <img matListAvatar [src]="track.img">
   <h1 matLine>{{track.title}}</h1>
   <p matLine>{{track.artist}}</p>
+  <mat-icon *ngIf="this.mysetsService.activeTrack === this.track">arrow_right_alt</mat-icon>
 </mat-list-item>

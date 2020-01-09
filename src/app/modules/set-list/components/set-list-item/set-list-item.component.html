@@ -1,6 +1,10 @@
-<mat-list-item class="mat-elevation-z3 item" (click)="onItemClicked()">
+<mat-list-item
+  class="mat-elevation-z3 item"
+  (click)="onItemClicked()"
+  [ngClass]="{'clicked': this.mysetsService.activeSet === this.set }">
   <img matListAvatar [src]="set.image">
   <h1 matLine>{{set.name}}</h1>
   <p matLine>{{set.description}}</p>
+  <mat-icon *ngIf="this.mysetsService.activeSet === this.set">arrow_right_alt</mat-icon>
 </mat-list-item>
 

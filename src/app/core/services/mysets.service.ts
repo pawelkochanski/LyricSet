@@ -6,6 +6,9 @@ import {Track} from '../../shared/models/Track.model';
   providedIn: 'root'
 })
 export class MysetsService {
+  activeSet: LyricSet;
+  activeTrack: Track;
+
   mySetList: LyricSet[] = [new LyricSet('12-12-2004', 'Koncert taki i taki', '', [
     new Track('Perfect',
       'Ed Sheeran',
@@ -38,6 +41,8 @@ export class MysetsService {
   activeTrackChange = new EventEmitter<Track>();
 
   emitActiveSetChange(set: LyricSet) {
+    this.activeTrack = null;
+    this.activeSet = set;
     this.activeSetChange.emit(set);
   }
 
@@ -49,6 +54,7 @@ export class MysetsService {
     return this.activeTrackChange;
   }
   emitActiveTrackChange(track: Track) {
+    this.activeTrack = track;
     this.activeTrackChange.emit(track);
   }
   constructor() {
