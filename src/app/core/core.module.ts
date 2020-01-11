@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import {AngularMaterialModule} from '../shared/angular-material.module';
+import {RouterModule} from '@angular/router';
+import {HomeModule} from '../modules/home/home.module';
 
 @NgModule({
   declarations: [NavbarComponent],
@@ -10,7 +12,9 @@ import {AngularMaterialModule} from '../shared/angular-material.module';
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    RouterModule,
+    HomeModule
   ]
 })
 export class CoreModule { }

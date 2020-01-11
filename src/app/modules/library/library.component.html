@@ -1,0 +1,20 @@
+<mat-card style="text-align: center" ><h1>My Library</h1></mat-card>
+<mat-card>
+  <mat-tab-group
+    (selectedIndexChange)="selectedIndexChange($event)"
+    [selectedIndex]="selectedIndex"
+    mat-align-tabs="center"
+    backgroundColor="primary"
+    mat-stretch-tabs
+    animationDuration="0ms">
+    <mat-tab label="My Sets">
+      <app-set-list></app-set-list>
+    </mat-tab>
+    <mat-tab label="Tracklist" [disabled]="!isTracklistSelected">
+      <app-track-list></app-track-list>
+    </mat-tab>
+    <mat-tab label="Track" [disabled]="!isTrackSelected">
+      <app-song></app-song>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

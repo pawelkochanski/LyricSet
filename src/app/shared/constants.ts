@@ -1,10 +1,11 @@
 import {LyricSet} from './interfaces';
 
+
 export const testList: LyricSet[] = [
   {
     name: '12-12-2020' ,
     description: 'Koncert taki i taki',
-    image: '',
+    image: 'https://image.ceneostatic.pl/data/products/30480327/i-ed-sheeran-x-deluxe-edition-cd.jpg',
     tracklist: [
       {
         title: 'Perfect',

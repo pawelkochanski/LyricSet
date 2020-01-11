@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SongComponent } from './components/song/song.component';
+import { HomeComponent } from './home.component';
 import {AngularMaterialModule} from '../../shared/angular-material.module';
 
 
 
 @NgModule({
-  declarations: [SongComponent],
-  exports: [
-    SongComponent
-  ],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     AngularMaterialModule
   ]
 })
-export class SongModule { }
+export class HomeModule { }
