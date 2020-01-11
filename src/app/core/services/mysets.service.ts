@@ -1,42 +1,16 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {LyricSet} from '../../shared/models/LyricSet.model';
-import {Track} from '../../shared/models/Track.model';
+import {testList} from '../../shared/constants';
+import {LyricSet, Track} from '../../shared/interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MysetsService {
-  activeSet: LyricSet;
+  activeSet: {};
   activeTrack: Track;
 
-  mySetList: LyricSet[] = [new LyricSet('12-12-2004', 'Koncert taki i taki', '', [
-    new Track('Perfect',
-      'Ed Sheeran',
-      'https://image.ceneostatic.pl/data/products/30480327/i-ed-sheeran-x-deluxe-edition-cd.jpg', 'Tekst'),
-    new Track('Perfect',
-      'Ed Sheeran',
-      'https://image.ceneostatic.pl/data/products/30480327/i-ed-sheeran-x-deluxe-edition-cd.jpg', 'Tekst')
-    , new Track('Perfect',
-      'Ed Sheeran',
-      'https://image.ceneostatic.pl/data/products/30480327/i-ed-sheeran-x-deluxe-edition-cd.jpg', 'Tekst')
-  ]),
-    new LyricSet('AAAAAA', 'AAAAAAAAA', '', [
-      new Track('AAAAAA',
-        'Ed Sheeran',
-        '', 'Tekst'),
-      new Track('AAAAAA',
-        'Ed Sheeran',
-        '', 'Tekst'),
-      new Track('AAAAAA',
-        'Ed Sheeran',
-        '', 'Tekst'),
-      new Track('AAAAAA',
-        'Ed Sheeran',
-        '', 'Tekst'),
-      new Track('AAAAAA',
-        'Ed Sheeran',
-        '', 'Tekst')
-    ])];
+  mysetlist: LyricSet[] = testList;
+
   activeSetChange = new EventEmitter<LyricSet>();
   activeTrackChange = new EventEmitter<Track>();
 
@@ -46,18 +20,16 @@ export class MysetsService {
     this.activeSetChange.emit(set);
   }
 
-  getActiveSetChangeEmitter() {
+  getActiveSetChangeEmitter(): EventEmitter<LyricSet> {
     return this.activeSetChange;
   }
 
-  getActiveTrackChangeEmitter() {
+  getActiveTrackChangeEmitter(): EventEmitter<Track> {
     return this.activeTrackChange;
   }
-  emitActiveTrackChange(track: Track) {
+
+  emitActiveTrackChange(track: Track): void {
     this.activeTrack = track;
     this.activeTrackChange.emit(track);
-  }
-  constructor() {
-
   }
 }

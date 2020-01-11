@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {LyricSet} from '../../../../shared/models/LyricSet.model';
 import {MysetsService} from '../../../../core/services/mysets.service';
+import {LyricSet} from '../../../../shared/interfaces';
 
 @Component({
   selector: 'app-set-list',
@@ -10,12 +10,12 @@ import {MysetsService} from '../../../../core/services/mysets.service';
 export class SetListComponent implements OnInit {
   mySetList: LyricSet[];
 
-  constructor(private mysetsService: MysetsService) {
+  constructor(private readonly mysetsService: MysetsService) {
   }
 
 
   ngOnInit() {
-    this.mySetList = this.mysetsService.mySetList;
+    this.mySetList = this.mysetsService.mysetlist;
   }
 
 }

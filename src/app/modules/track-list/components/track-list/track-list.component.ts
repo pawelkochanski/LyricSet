@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {LyricSet} from '../../../../shared/models/LyricSet.model';
+import {LyricSet} from '../../../../shared/interfaces';
 
 @Component({
   selector: 'app-track-list',
@@ -11,7 +11,7 @@ export class TrackListComponent implements OnInit, OnDestroy {
   activeSet: LyricSet;
   subscription: any;
 
-  constructor(private mysetsService: MysetsService) {
+  constructor(private readonly mysetsService: MysetsService) {
   }
 
   ngOnInit() {

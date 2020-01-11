@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SongComponent } from './components/song/song.component';
-import {MatCardModule} from '@angular/material/card';
+import {AngularMaterialModule} from '../../shared/angular-material.module';
 
 
 
@@ -12,7 +12,7 @@ import {MatCardModule} from '@angular/material/card';
   ],
   imports: [
     CommonModule,
-    MatCardModule
+    AngularMaterialModule
   ]
 })
 export class SongModule { }
