@@ -16,6 +16,6 @@ export class SetListItemComponent implements OnInit {
   }
 
   onItemClicked() {
-    this.mysetsService.emitActiveSetChange(this.set);
+    this.mysetsService.changeActiveSet(this.set);
   }
 }

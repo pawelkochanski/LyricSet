@@ -12,12 +12,14 @@ import {
   MatMenuModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule,
   ],
   exports: [
     MatCardModule,
@@ -29,7 +31,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
-    MatMenuModule
+    MatMenuModule,
+    BrowserAnimationsModule
   ]
 })
 export class AngularMaterialModule {

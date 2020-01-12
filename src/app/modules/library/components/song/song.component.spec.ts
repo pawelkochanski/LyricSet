@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SongComponent } from './song.component';
+import {AngularMaterialModule} from '../../../../shared/angular-material.module';
 
 describe('SongComponent', () => {
   let component: SongComponent;
@@ -8,6 +9,7 @@ describe('SongComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [AngularMaterialModule],
       declarations: [ SongComponent ]
     })
     .compileComponents();

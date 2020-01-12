@@ -15,6 +15,6 @@ export class TrackListItemComponent implements OnInit {
   }
 
   onTrackClicked(track: Track) {
-    this.mysetsService.emitActiveTrackChange(track);
+    this.mysetsService.changeActiveTrack(track);
   }
 }

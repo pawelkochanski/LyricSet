@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TrackListComponent } from './track-list.component';
+import {TrackListComponent} from './track-list.component';
+import {AngularMaterialModule} from '../../../../shared/angular-material.module';
+import {TrackListItemComponent} from '../track-list-item/track-list-item.component';
 
 describe('TrackListComponent', () => {
   let component: TrackListComponent;
@@ -8,9 +10,10 @@ describe('TrackListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrackListComponent ]
+      imports: [AngularMaterialModule],
+      declarations: [TrackListComponent, TrackListItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -14,9 +14,14 @@ export class MysetsService {
   activeSetChange = new EventEmitter<LyricSet>();
   activeTrackChange = new EventEmitter<Track>();
 
-  emitActiveSetChange(set: LyricSet) {
+
+  changeActiveSet(set: LyricSet) {
     this.activeTrack = null;
     this.activeSet = set;
+    this.emitActiveSetChange(set);
+  }
+
+  emitActiveSetChange(set: LyricSet) {
     this.activeSetChange.emit(set);
   }
 
@@ -28,8 +33,17 @@ export class MysetsService {
     return this.activeTrackChange;
   }
 
-  emitActiveTrackChange(track: Track): void {
+  changeActiveTrack(track: Track) {
     this.activeTrack = track;
+    this.emitActiveTrackChange(track);
+  }
+
+  emitActiveTrackChange(track: Track): void {
     this.activeTrackChange.emit(track);
+  }
+
+  clearActives() {
+    this.activeSet = null;
+    this.activeTrack = null;
   }
 }

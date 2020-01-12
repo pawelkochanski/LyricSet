@@ -1,6 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SetListComponent } from './set-list.component';
+import {SetListComponent} from './set-list.component';
+import {AngularMaterialModule} from '../../../../shared/angular-material.module';
+
+import {SetListItemComponent} from '../set-list-item/set-list-item.component';
+
 
 describe('SetListComponent', () => {
   let component: SetListComponent;
@@ -8,9 +12,10 @@ describe('SetListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SetListComponent ]
+      imports: [AngularMaterialModule],
+      declarations: [SetListComponent, SetListItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

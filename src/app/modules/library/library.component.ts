@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MysetsService} from '../../core/services/mysets.service';
 
 @Component({
@@ -6,9 +6,8 @@ import {MysetsService} from '../../core/services/mysets.service';
   templateUrl: './library.component.html',
   styleUrls: ['./library.component.scss']
 })
-export class LibraryComponent implements OnInit {
+export class LibraryComponent implements OnInit, OnDestroy {
 
-  title = 'Library';
   subscriptionSet: any;
   subscriptionTrack: any;
   selectedIndex = 0;
@@ -36,6 +35,9 @@ export class LibraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+  ngOnDestroy(): void {
+    this.mysetsService.clearActives();
   }
 
 
