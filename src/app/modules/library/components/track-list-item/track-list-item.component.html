@@ -1,6 +1,10 @@
-<mat-list-item class="mat-elevation-z3" (click)="onTrackClicked(track)">
-  <img matListAvatar [src]="track.img">
+<mat-list-item class="mat-elevation-z3" cdkDrag>
+  <img matListAvatar
+       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
+       [src]="track.img"
+  >
   <h1 matLine>{{track.title}}</h1>
   <p matLine>{{track.artist}}</p>
-  <mat-icon *ngIf="this.mysetsService.activeTrack === this.track">arrow_right_alt</mat-icon>
+  <button mat-icon-button
+  [routerLink]="track.title"><mat-icon>remove_red_eye</mat-icon></button>
 </mat-list-item>

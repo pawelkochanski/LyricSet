@@ -5,6 +5,7 @@ import {CoreModule} from './core/core.module';
 import {AngularMaterialModule} from './shared/angular-material.module';
 import {LibraryModule} from './modules/library/library.module';
 import {AppRoutingModule} from './core/app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {AppRoutingModule} from './core/app-routing.module';
     AngularMaterialModule,
     LibraryModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

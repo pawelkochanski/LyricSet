@@ -6,6 +6,7 @@ import {LyricSet, Track} from '../../shared/interfaces';
   providedIn: 'root'
 })
 export class MysetsService {
+
   activeSet: {};
   activeTrack: Track;
 

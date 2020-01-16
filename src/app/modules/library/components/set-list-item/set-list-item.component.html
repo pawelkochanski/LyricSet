@@ -1,10 +1,10 @@
 <mat-list-item
   class="mat-elevation-z3 item"
-  (click)="onItemClicked()"
-  [ngClass]="{'clicked': this.mysetsService.activeSet === this.set }">
-  <img matListAvatar [src]="set?.image">
+  [routerLink]="this.set.name"
+  [routerLinkActive]="['is-active']">
+  <img alt="" matListAvatar
+       [src]="set.image"
+       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'">
   <h1 matLine>{{set?.name}}</h1>
-  <p matLine>{{set?.description}}</p>
-  <mat-icon *ngIf="this.mysetsService.activeSet === this.set">arrow_right_alt</mat-icon>
 </mat-list-item>
 

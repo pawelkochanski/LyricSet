@@ -1,25 +1,28 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
 import {LyricSet} from '../../../../shared/interfaces';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-track-list',
   templateUrl: './track-list.component.html',
   styleUrls: ['./track-list.component.scss']
 })
-export class TrackListComponent implements OnInit, OnDestroy {
+export class TrackListComponent implements OnInit {
   activeSet: LyricSet;
-  subscription: any;
 
-  constructor(private readonly mysetsService: MysetsService) {
+  constructor(private readonly mysetsService: MysetsService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.subscription = this.mysetsService.getActiveSetChangeEmitter().subscribe(set => (this.activeSet = set));
+    this.route.params.subscribe(
+      (params: Params) => {
+        this.activeSet = this.mysetsService.mysetlist.find((element) => {
+          return element.name === params['set'];
+        });
+      }
+    );
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
 }

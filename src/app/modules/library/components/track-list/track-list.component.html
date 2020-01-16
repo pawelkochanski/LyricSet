@@ -1,3 +1,23 @@
-<mat-action-list *ngIf="activeSet">
-  <app-track-list-item *ngFor="let track of activeSet.tracklist" [track]="track"></app-track-list-item>
-</mat-action-list>
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title>{{activeSet.name}}</mat-card-title>
+    <mat-card-subtitle>
+      {{activeSet.description}}
+    </mat-card-subtitle>
+    <div>
+      <button mat-button><mat-icon>play_circle_outline</mat-icon></button>
+      <button mat-button><mat-icon>edit</mat-icon></button>
+    </div>
+
+  </mat-card-title-group>
+  <img mat-card-md-image
+       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
+       [src]="activeSet.image"/>
+</mat-card>
+
+<div *ngIf="activeSet">
+  <mat-list>
+    <app-track-list-item *ngFor="let track of activeSet.tracklist" [track]="track"></app-track-list-item>
+  </mat-list>
+</div>
+

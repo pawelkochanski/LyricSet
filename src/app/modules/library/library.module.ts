@@ -7,6 +7,8 @@ import {SongComponent} from './components/song/song.component';
 import {TrackListComponent} from './components/track-list/track-list.component';
 import {TrackListItemComponent} from './components/track-list-item/track-list-item.component';
 import {LibraryComponent} from './library.component';
+import {RouterModule} from '@angular/router';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -20,10 +22,12 @@ import {LibraryComponent} from './library.component';
   exports: [
     LibraryComponent
   ],
-  imports: [
-    CommonModule,
-    AngularMaterialModule,
-  ]
+    imports: [
+        CommonModule,
+        AngularMaterialModule,
+        RouterModule,
+        DragDropModule,
+    ]
 })
 export class LibraryModule {
 }

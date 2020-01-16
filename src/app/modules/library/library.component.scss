@@ -1,3 +1,17 @@
-mat-card{
-  margin-bottom: 15px;
+mat-sidenav-content{
+  justify-content: center;
+  align-content: center;
+  padding:10px 50px;
+}
+mat-sidenav{
+  height: 100%;
+}
+mat-sidenav-container{
+  height: 100%;
+}
+
+
+mat-toolbar{
+  text-align: center;
+  margin-bottom: 40px;
 }

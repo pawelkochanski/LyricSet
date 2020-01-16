@@ -1,20 +1,13 @@
-<mat-card style="text-align: center" ><h1>My Library</h1></mat-card>
-<mat-card>
-  <mat-tab-group
-    (selectedIndexChange)="selectedIndexChange($event)"
-    [selectedIndex]="selectedIndex"
-    mat-align-tabs="center"
-    backgroundColor="primary"
-    mat-stretch-tabs
-    animationDuration="0ms">
-    <mat-tab label="My Sets">
+<div class="main-container">
+  <mat-toolbar><h1>My Library</h1></mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
       <app-set-list></app-set-list>
-    </mat-tab>
-    <mat-tab label="Tracklist" [disabled]="!isTracklistSelected">
-      <app-track-list></app-track-list>
-    </mat-tab>
-    <mat-tab label="Track" [disabled]="!isTrackSelected">
-      <app-song></app-song>
-    </mat-tab>
-  </mat-tab-group>
-</mat-card>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
+
