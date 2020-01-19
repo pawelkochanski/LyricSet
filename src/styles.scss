@@ -5,3 +5,11 @@ body {margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   height: 100%;
   margin: 20px 100px;
 }
+
+.separator{
+  flex: 1 1 auto;
+}
+
+.cursor-move{
+  cursor: move;
+}

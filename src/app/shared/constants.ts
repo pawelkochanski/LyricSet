@@ -24,6 +24,12 @@ export const testList: LyricSet[] = [
         artist: 'Ed Sheeran',
         img: 'https://image.ceneostatic.pl/data/products/30480327/i-ed-sheeran-x-deluxe-edition-cd.jpg',
         lyrics: 'Tekst'
+      },
+      {
+        title: 'AAAAAA',
+        artist: 'Ed Sheeran',
+        img: '',
+        lyrics: 'Tekst'
       }
     ]
   },

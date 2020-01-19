@@ -9,6 +9,7 @@ import {TrackListItemComponent} from './components/track-list-item/track-list-it
 import {LibraryComponent} from './library.component';
 import {RouterModule} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SetHeaderComponent } from './components/set-header/set-header.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SetListItemComponent,
     SongComponent,
     TrackListComponent,
-    TrackListItemComponent],
+    TrackListItemComponent,
+    SetHeaderComponent],
   exports: [
     LibraryComponent
   ],
