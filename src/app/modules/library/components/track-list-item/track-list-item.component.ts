@@ -14,7 +14,4 @@ export class TrackListItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  onTrackClicked(track: Track) {
-    this.mysetsService.changeActiveTrack(track);
-  }
 }

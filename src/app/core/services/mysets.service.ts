@@ -7,44 +7,20 @@ import {LyricSet, Track} from '../../shared/interfaces';
 })
 export class MysetsService {
 
-  activeSet: {};
-  activeTrack: Track;
+  isEditMode = false;
+  activeSet: LyricSet;
 
   mysetlist: LyricSet[] = testList;
 
-  activeSetChange = new EventEmitter<LyricSet>();
-  activeTrackChange = new EventEmitter<Track>();
-
-
-  changeActiveSet(set: LyricSet) {
-    this.activeTrack = null;
-    this.activeSet = set;
-    this.emitActiveSetChange(set);
+  changeMode() {
+    this.isEditMode = !this.isEditMode;
   }
 
-  emitActiveSetChange(set: LyricSet) {
-    this.activeSetChange.emit(set);
+  setActiveSet(activeSet: LyricSet) {
+    this.activeSet = activeSet;
   }
 
-  getActiveSetChangeEmitter(): EventEmitter<LyricSet> {
-    return this.activeSetChange;
-  }
-
-  getActiveTrackChangeEmitter(): EventEmitter<Track> {
-    return this.activeTrackChange;
-  }
-
-  changeActiveTrack(track: Track) {
-    this.activeTrack = track;
-    this.emitActiveTrackChange(track);
-  }
-
-  emitActiveTrackChange(track: Track): void {
-    this.activeTrackChange.emit(track);
-  }
-
-  clearActives() {
-    this.activeSet = null;
-    this.activeTrack = null;
+  setEditMode(mode: boolean) {
+    this.isEditMode = mode;
   }
 }

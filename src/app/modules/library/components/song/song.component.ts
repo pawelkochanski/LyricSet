@@ -10,7 +10,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 })
 export class SongComponent implements OnInit {
   track: Track;
-  subscription: any;
+  playMode: boolean;
 
   constructor(private readonly mysetsService: MysetsService, private route: ActivatedRoute) {
   }
@@ -19,14 +19,18 @@ export class SongComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        let activeSet = this.mysetsService.mysetlist.find((element) => {
-          return element.name === params['set'];
+        const activeSet = this.mysetsService.mysetlist.find((element) => {
+          return element.name === params.set;
         });
         this.track = activeSet.tracklist.find((element) => {
-          return element.title === params['song'];
-        })
+          return element.title === params.song;
+        });
       }
     );
+    this.route.queryParams.subscribe((params: Params) => {
+      this.playMode = params.playMode === '1';
+      console.log(this.playMode);
+    });
   }
 
 }

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title-group>
+    <mat-card-title class="text-highlight">
+    {{this.mySetsService.activeSet.name}}</mat-card-title>
+    <mat-card-subtitle>
+      {{this.mySetsService.activeSet.description}}
+    </mat-card-subtitle>
+    <div>
+      <button mat-button [routerLink]="this.mySetsService.activeSet.tracklist[0].title" [queryParams]="{playMode: 1}">
+        <mat-icon>play_circle_outline</mat-icon>
+      </button>
+      <button mat-button (click)="changeMode()" [ngClass]="this.mySetsService.isEditMode ? 'text-highlight' : ''">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-title-group>
+  <img mat-card-md-image
+       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
+       [src]="this.mySetsService.activeSet.image"/>
+</mat-card>

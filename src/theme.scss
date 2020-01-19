@@ -27,8 +27,10 @@ $theme: mat-light-theme($primary, $accent, $warn);
 $background: map-get($theme, background);
 $foreground: map-get($theme, foreground);
 
-mat-list-item.is-active{
+.text-highlight{
   color: mat-color($accent)!important;
 }
+
+
 
 
