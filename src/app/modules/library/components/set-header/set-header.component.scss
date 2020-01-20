@@ -1,6 +1,7 @@
 mat-card{
   display: flex;
   justify-content: space-between;
+  height: 120px;
 }
 mat-card-title-group{
   display:flex;
@@ -9,3 +10,11 @@ mat-card-title-group{
 mat-form-field{
   margin: 0;
 }
+.edit-container{
+  display: flex;
+  flex-direction: column;
+}
+textarea{
+  resize: none;
+}
+

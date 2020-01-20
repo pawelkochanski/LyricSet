@@ -19,18 +19,30 @@ export class SongComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        const activeSet = this.mysetsService.mysetlist.find((element) => {
-          return element.name === params.set;
-        });
-        this.track = activeSet.tracklist.find((element) => {
-          return element.title === params.song;
-        });
+        this.mysetsService.setActiveSet(this.mysetsService.mysetlist[params.setindex]);
+        this.track = this.mysetsService.activeSet.tracklist[params.songindex];
       }
     );
     this.route.queryParams.subscribe((params: Params) => {
       this.playMode = params.playMode === '1';
       console.log(this.playMode);
     });
+  }
+
+  checkIfTrackIsLast(): boolean {
+    return this.mysetsService.getTrackIndex(this.track) === this.mysetsService.activeSet.tracklist.length - 1;
+  }
+
+  checkIfTrackIsFirst(): boolean {
+    return this.mysetsService.getTrackIndex(this.track) === 0;
+  }
+
+  getNextSongIndex() {
+    return this.mysetsService.getTrackIndex(this.track) + 1;
+  }
+
+  getPreviousSongIndex() {
+    return this.mysetsService.getTrackIndex(this.track) - 1;
   }
 
 }

@@ -1,21 +1,33 @@
 <mat-card>
   <mat-card-title-group>
-    <mat-card-title class="text-highlight">
-    {{this.mySetsService.activeSet.name}}</mat-card-title>
-    <mat-card-subtitle>
-      {{this.mySetsService.activeSet.description}}
-    </mat-card-subtitle>
+    <div *ngIf="!mySetsService.isEditMode; else temp">
+      <mat-card-title class="text-highlight">
+        {{this.mySetsService.activeSet.name}}</mat-card-title>
+      <mat-card-subtitle>
+        <textarea matInput disabled rows="2" cols="35">{{this.mySetsService.activeSet.description}}</textarea>
+      </mat-card-subtitle>
+    </div>
+    <ng-template #temp>
+      <div class="edit-title">
+        <mat-card-title>
+          <input  maxlength="15" #title matInput placeholder="Edit me!">
+        </mat-card-title>
+        <mat-card-subtitle>
+          <textarea #description matInput rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
+        </mat-card-subtitle>
+      </div>
+    </ng-template>
+    <div class="separator"></div>
     <div>
-      <button mat-button [routerLink]="this.mySetsService.activeSet.tracklist[0].title" [queryParams]="{playMode: 1}">
+      <button mat-button [routerLink]="[0]" [queryParams]="{playMode: 1}">
         <mat-icon>play_circle_outline</mat-icon>
       </button>
       <button mat-button (click)="changeMode()" [ngClass]="this.mySetsService.isEditMode ? 'text-highlight' : ''">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
-
   </mat-card-title-group>
-  <img mat-card-md-image
+  <img mat-card-md-image alt=""
        (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
        [src]="this.mySetsService.activeSet.image"/>
 </mat-card>

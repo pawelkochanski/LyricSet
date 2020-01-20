@@ -1,6 +1,6 @@
 <mat-list-item
   class="mat-elevation-z3 item"
-  [routerLink]="this.set.name"
+  [routerLink]="[mysetsService.getSetIndex(set)]"
   [routerLinkActive]="['text-highlight']">
   <img alt="" matListAvatar
        [src]="set.image"

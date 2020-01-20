@@ -10,6 +10,7 @@ import {LibraryComponent} from './library.component';
 import {RouterModule} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SetHeaderComponent } from './components/set-header/set-header.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { SetHeaderComponent } from './components/set-header/set-header.component
         AngularMaterialModule,
         RouterModule,
         DragDropModule,
+        FormsModule,
     ]
 })
 export class LibraryModule {

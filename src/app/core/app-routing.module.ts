@@ -9,8 +9,8 @@ import {SongComponent} from '../modules/library/components/song/song.component';
 
 const appRoutes: Routes = [
   {path: 'library', component: LibraryComponent, children: [
-      {path: ':set', component: TrackListComponent},
-      {path: ':set/:song', component: SongComponent}
+      {path: ':setindex', component: TrackListComponent},
+      {path: ':setindex/:songindex', component: SongComponent}
     ]},
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
