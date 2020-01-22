@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LyricSet} from '../../../../shared/interfaces';
+import {LyricSet} from '../../../../shared/interfaces/lyric-set';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-set-list-item',

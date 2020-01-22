@@ -5,7 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {CoreModule} from './core/core.module';
 import {LibraryModule} from './modules/library/library.module';
-import {AppRoutingModule} from './core/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {

@@ -4,7 +4,7 @@ import {AppComponent} from './app.component';
 import {CoreModule} from './core/core.module';
 import {AngularMaterialModule} from './shared/angular-material.module';
 import {LibraryModule} from './modules/library/library.module';
-import {AppRoutingModule} from './core/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 

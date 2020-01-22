@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import {testList} from '../../shared/constants';
-import {LyricSet, Track} from '../../shared/interfaces';
+import {Track} from '../../shared/interfaces/track';
+import {LyricSet} from '../../shared/interfaces/lyric-set';
 
 @Injectable({
   providedIn: 'root'

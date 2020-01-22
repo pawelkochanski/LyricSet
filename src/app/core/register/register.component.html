@@ -1,0 +1,32 @@
+<div class="main-container">
+  <mat-card>
+    <mat-card-title>Register</mat-card-title>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput>
+        <mat-error *ngIf="f.username.errors?.required">Username is required!</mat-error>
+        <mat-error *ngIf="f.username.errors?.minlength">Username must be at least 3 characters!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input formControlName="email" matInput>
+        <mat-error *ngIf="f.email.errors?.required">Email is required!</mat-error>
+        <mat-error *ngIf="f.email.errors?.email">This isn't a correct E-mail!</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput>
+        <mat-error *ngIf="f.password.errors?.required">Password is required!</mat-error>
+        <mat-error *ngIf="f.password.errors?.specialsign && !f.password.errors?.required">Minimum 8 characters, at least one letter and one number:</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Repeat password</mat-label>
+        <input type="password" formControlName="repPassword" matInput>
+        <mat-error *ngIf="f.repPassword.errors?.matchOther">Passwords don't match!</mat-error>
+      </mat-form-field>
+      <button  mat-raised-button type="submit">Submit</button>
+    </form>
+
+  </mat-card>
+</div>

@@ -1,4 +1,4 @@
-import {LyricSet} from './interfaces';
+import {LyricSet} from './interfaces/lyric-set';
 
 
 export const testList: LyricSet[] = [

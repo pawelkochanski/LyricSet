@@ -1,9 +1,4 @@
-export interface Track {
-  title: string;
-  artist: string;
-  img: string;
-  lyrics: string;
-}
+import {Track} from './track';
 
 export interface LyricSet {
   name: string;
