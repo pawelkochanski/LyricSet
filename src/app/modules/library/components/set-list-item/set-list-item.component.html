@@ -1,5 +1,4 @@
 <mat-list-item
-  class="mat-elevation-z3 item"
   [routerLink]="[mysetsService.getSetIndex(set)]"
   [routerLinkActive]="['text-highlight']">
   <img alt="" matListAvatar
@@ -7,4 +6,5 @@
        (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'">
   <h1 matLine>{{set?.name}}</h1>
 </mat-list-item>
+<mat-divider></mat-divider>
 

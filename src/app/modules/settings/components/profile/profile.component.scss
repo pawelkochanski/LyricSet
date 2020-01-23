@@ -1,0 +1,49 @@
+.header{
+  font-size: 20px ;
+  margin: 10px 0;
+}
+label{
+  margin-right: 10px;
+}
+.splitted-left{
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 60%;
+}
+
+.splitted-right{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+form{
+  display:flex;
+  flex-direction: column;
+}
+
+mat-form-field{
+  margin-bottom: 15px;
+}
+
+img{
+  width: 80%;
+}
+
+
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+ngx-mat-file-input{
+  cursor: pointer;
+}
+
+.button-holder{
+  width:100%;
+  margin: 10px;
+}

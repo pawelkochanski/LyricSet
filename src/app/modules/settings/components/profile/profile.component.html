@@ -1,0 +1,41 @@
+<div class="header">Profile</div>
+<mat-divider></mat-divider>
+<div class="split-container">
+  <div class="splitted-left">
+    <form (ngSubmit)="onSubmit()">
+      <label>Display Name:</label>
+      <mat-form-field floatLabel="never" appearance="outline">
+        <input matInput placeholder="Username">
+        <mat-hint>This is the name that is being shown to others!</mat-hint>
+      </mat-form-field>
+      <label>Bio:</label>
+      <mat-form-field floatLabel="never" appearance="outline">
+        <textarea matInput></textarea>
+        <mat-hint>Tell the world something about you :)</mat-hint>
+      </mat-form-field>
+      <label>URL</label>
+      <mat-form-field floatLabel="never" appearance="outline">
+        <input matInput>
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit">Update</button>
+    </form>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div class="splitted-right">
+    <div class="button-holder">
+      <label>Profile picture:</label>
+    </div>
+    <img src="http://cdn.onlinewebfonts.com/svg/img_266351.png">
+    <div class="button-holder">
+      <button mat-raised-button [matMenuTriggerFor]="appMenu"><mat-icon>edit</mat-icon></button>
+      <mat-menu #appMenu="matMenu">
+        <form>
+          <label for="upload-photo" mat-menu-item>Upload Photo</label>
+          <input type="file" name="photo" id="upload-photo"/>
+          <label mat-menu-item>Remove Photo</label>
+        </form>
+      </mat-menu>
+
+    </div>
+  </div>
+</div>

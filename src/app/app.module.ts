@@ -6,11 +6,14 @@ import {AngularMaterialModule} from './shared/angular-material.module';
 import {LibraryModule} from './modules/library/library.module';
 import {AppRoutingModule} from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {RegisterModule} from './modules/register/register.module';
+import {LoginModule} from './modules/login/login.module';
+import {SettingsModule} from './modules/settings/settings.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LibraryModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RegisterModule,
+    LoginModule,
+    SettingsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

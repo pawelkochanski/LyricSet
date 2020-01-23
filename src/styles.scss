@@ -3,7 +3,9 @@ body {margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .main-container{
   height: 100%;
-  margin: 20px 100px;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 0;
 }
 
 .separator{
@@ -12,4 +14,11 @@ body {margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .cursor-move{
   cursor: move;
+}
+
+.split-container{
+  display: flex;
+  flex-direction: row;
+  margin:0;
+  padding: 0;
 }

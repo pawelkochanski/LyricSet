@@ -9,7 +9,7 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule,
-  MatMenuModule
+  MatMenuModule, MatCheckboxModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
   ],
   exports: [
+    MatCheckboxModule,
     MatCardModule,
     MatSidenavModule,
     MatTabsModule,

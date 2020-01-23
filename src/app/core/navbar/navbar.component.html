@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
-  <button mat-button class="brand" [routerLink]="['home']"><mat-icon>assignment</mat-icon>LyricSet</button>
+  <button mat-button class="brand" [routerLink]="['home']"><mat-icon>queue_music</mat-icon>LyricSet</button>
   <button mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
   <div class="separator"></div>
   <mat-form-field floatLabel="never" color="accent">
@@ -8,7 +8,7 @@
   <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
   <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
   <mat-menu #appMenu="matMenu">
-    <button mat-menu-item>Settings</button>
-    <button mat-menu-item>Account</button>
+    <button mat-menu-item [routerLink]="['settings']">Settings</button>
+    <button mat-menu-item>Logout</button>
   </mat-menu>
 </mat-toolbar>
