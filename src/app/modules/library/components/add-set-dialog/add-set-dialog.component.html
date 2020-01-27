@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Add new LyricSet!</h1>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close] cdkFocusInitial>Add</button>
+</div>
