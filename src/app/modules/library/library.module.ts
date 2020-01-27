@@ -11,6 +11,7 @@ import {RouterModule} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SetHeaderComponent } from './components/set-header/set-header.component';
 import {FormsModule} from '@angular/forms';
+import { AddSetDialogComponent } from './components/add-set-dialog/add-set-dialog.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {FormsModule} from '@angular/forms';
     SongComponent,
     TrackListComponent,
     TrackListItemComponent,
-    SetHeaderComponent],
+    SetHeaderComponent,
+    AddSetDialogComponent],
   exports: [
     LibraryComponent
   ],

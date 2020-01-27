@@ -10,6 +10,7 @@ import {RegisterModule} from './modules/register/register.module';
 import {LoginModule} from './modules/login/login.module';
 import {SettingsModule} from './modules/settings/settings.module';
 import {PasswordDialogComponent} from './modules/settings/components/password-dialog/password-dialog.component';
+import {AddSetDialogComponent} from './modules/library/components/add-set-dialog/add-set-dialog.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {PasswordDialogComponent} from './modules/settings/components/password-di
     SettingsModule
   ],
   entryComponents: [
-    PasswordDialogComponent
+    PasswordDialogComponent,
+    AddSetDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

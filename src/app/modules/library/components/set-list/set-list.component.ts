@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
 import {LyricSet} from '../../../../shared/interfaces/lyric-set';
+import {MatDialog} from '@angular/material';
+import {AddSetDialogComponent} from '../add-set-dialog/add-set-dialog.component';
 
 @Component({
   selector: 'app-set-list',
@@ -10,12 +12,22 @@ import {LyricSet} from '../../../../shared/interfaces/lyric-set';
 export class SetListComponent implements OnInit {
   mySetList: LyricSet[];
 
-  constructor(private readonly mysetsService: MysetsService) {
+  constructor(private readonly mysetsService: MysetsService, public dialog: MatDialog) {
   }
 
 
   ngOnInit() {
     this.mySetList = this.mysetsService.mysetlist;
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddSetDialogComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
