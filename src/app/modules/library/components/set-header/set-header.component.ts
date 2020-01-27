@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-set-header',
@@ -12,7 +12,7 @@ export class SetHeaderComponent implements OnInit {
   @ViewChild('title', {static: false}) titleinput: ElementRef;
   @ViewChild('description', {static: false}) descinput: ElementRef;
 
-  constructor(private readonly mySetsService: MysetsService) {
+  constructor(private readonly mySetsService: MysetsService, private router: Router) {
   }
 
   ngOnInit() {
@@ -35,7 +35,8 @@ export class SetHeaderComponent implements OnInit {
   }
 
   onRemoveSet() {
-    this.mySetsService.activeSet = null;
     this.mySetsService.mysetlist.splice(this.mySetsService.getSetIndex(this.mySetsService.activeSet), 1);
+    this.mySetsService.activeSet = null;
+    this.router.navigate(['/library']);
   }
 }

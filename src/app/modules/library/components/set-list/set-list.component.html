@@ -1,7 +1,10 @@
-<mat-nav-list>
-  <app-set-list-item *ngFor="let set of mySetList;" [set]="set">
-  </app-set-list-item>
-</mat-nav-list>
+<div>
+  <mat-nav-list>
+    <app-set-list-item *ngFor="let set of mySetList;" [set]="set">
+    </app-set-list-item>
+  </mat-nav-list>
+  <button mat-raised-button color="accent"><mat-icon>add</mat-icon></button>
+</div>
 
 
 
