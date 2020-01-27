@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RegisterModule} from './modules/register/register.module';
 import {LoginModule} from './modules/login/login.module';
 import {SettingsModule} from './modules/settings/settings.module';
+import {PasswordDialogComponent} from './modules/settings/components/password-dialog/password-dialog.component';
 
 
 @NgModule({
@@ -25,6 +26,9 @@ import {SettingsModule} from './modules/settings/settings.module';
     RegisterModule,
     LoginModule,
     SettingsModule
+  ],
+  entryComponents: [
+    PasswordDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

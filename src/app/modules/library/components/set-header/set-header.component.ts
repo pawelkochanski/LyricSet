@@ -22,13 +22,20 @@ export class SetHeaderComponent implements OnInit {
     if (this.mySetsService.isEditMode) {
       const name = this.titleinput.nativeElement.value;
       const desc = this.descinput.nativeElement.value;
-      if (name === '' || desc === '') {
-        this.mySetsService.changeMode();
-        return;
+
+      if (name) {
+        this.mySetsService.activeSet.name = name;
       }
-      this.mySetsService.activeSet.name = this.titleinput.nativeElement.value;
-      this.mySetsService.activeSet.description = this.descinput.nativeElement.value;
+      if (desc) {
+        this.mySetsService.activeSet.description = desc;
+      }
+
     }
     this.mySetsService.changeMode();
+  }
+
+  onRemoveSet() {
+    this.mySetsService.activeSet = null;
+    this.mySetsService.mysetlist.splice(this.mySetsService.getSetIndex(this.mySetsService.activeSet), 1);
   }
 }

@@ -9,6 +9,7 @@ import {LoginComponent} from './modules/login/login.component';
 import {RegisterComponent} from './modules/register/register.component';
 import {SettingsComponent} from './modules/settings/settings.component';
 import {ProfileComponent} from './modules/settings/components/profile/profile.component';
+import {AccountComponent} from './modules/settings/components/account/account.component';
 
 const appRoutes: Routes = [
   {
@@ -24,7 +25,8 @@ const appRoutes: Routes = [
   {
     path: 'settings', component: SettingsComponent, children: [
       {path: '', redirectTo: 'profile', pathMatch: 'full'},
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {path: 'account', component: AccountComponent}
     ]
   }
 ];

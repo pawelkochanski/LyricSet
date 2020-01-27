@@ -9,9 +9,14 @@ import {Track} from '../../../../shared/interfaces/track';
 })
 export class TrackListItemComponent implements OnInit {
   @Input() track: Track;
-  constructor(private readonly mysetsService: MysetsService) { }
+
+  constructor(private readonly mysetsService: MysetsService) {
+  }
 
   ngOnInit() {
   }
 
+  OnRemoveClick() {
+    this.mysetsService.activeSet.tracklist.splice(this.mysetsService.getTrackIndex(this.track), 1);
+  }
 }

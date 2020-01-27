@@ -25,6 +25,9 @@
       <button mat-button (click)="changeMode()" [ngClass]="this.mySetsService.isEditMode ? 'text-highlight' : ''">
         <mat-icon>edit</mat-icon>
       </button>
+      <button mat-button *ngIf="mySetsService.isEditMode" (click)="onRemoveSet()" color="warn">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </div>
   </mat-card-title-group>
   <img mat-card-md-image alt=""

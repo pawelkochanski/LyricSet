@@ -9,10 +9,13 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule,
-  MatMenuModule, MatCheckboxModule
+  MatMenuModule,
+  MatCheckboxModule,
+  MatDialogModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialog} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -33,7 +36,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     MatInputModule,
     MatToolbarModule,
     MatMenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ]
 })
 export class AngularMaterialModule {

@@ -10,10 +10,20 @@
   </div>
   <div class="separator">
   </div>
-  <button mat-icon-button
-          [routerLink]="[mysetsService.getTrackIndex(track)]"
-          [queryParams]="{playMode : 0}">
+  <button
+    *ngIf="!mysetsService.isEditMode; else tmp"
+    mat-icon-button
+    [routerLink]="[mysetsService.getTrackIndex(track)]"
+    [queryParams]="{playMode : 0}">
     <mat-icon>remove_red_eye</mat-icon>
   </button>
+  <ng-template #tmp>
+    <button
+      mat-icon-button
+      (click) = OnRemoveClick()
+      color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </ng-template>
   <mat-divider></mat-divider>
 </div>

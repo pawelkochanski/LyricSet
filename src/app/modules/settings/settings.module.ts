@@ -6,19 +6,20 @@ import {RouterModule} from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import {FormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material';
-import {MaterialFileInputModule} from 'ngx-material-file-input';
+import { AccountComponent } from './components/account/account.component';
+import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
+
 
 
 
 @NgModule({
-  declarations: [SettingsComponent, ProfileComponent],
+  declarations: [SettingsComponent, ProfileComponent, AccountComponent, PasswordDialogComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
     RouterModule,
     FormsModule,
-    MatExpansionModule,
-    MaterialFileInputModule
+    MatExpansionModule
   ]
 })
 export class SettingsModule { }
