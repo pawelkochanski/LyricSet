@@ -25,12 +25,20 @@
       <button mat-button (click)="changeMode()" [ngClass]="this.mySetsService.isEditMode ? 'text-highlight' : ''">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-button *ngIf="mySetsService.isEditMode" (click)="onRemoveSet()" color="warn">
+      <button mat-raised-button *ngIf="mySetsService.isEditMode" (click)="onRemoveSet()" color="warn">
         <mat-icon>delete_forever</mat-icon>
       </button>
     </div>
   </mat-card-title-group>
-  <img mat-card-md-image alt=""
-       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
-       [src]="this.mySetsService.activeSet.image"/>
+  <div class="img-container">
+    <div class="img-buttons-container" *ngIf="mySetsService.isEditMode">
+      <button mat-icon-button color="warn"><mat-icon>close</mat-icon></button>
+      <button mat-icon-button color="warn"><mat-icon>edit</mat-icon></button>
+    </div>
+
+    <img mat-card-md-image alt=""
+         (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
+         [src]="this.mySetsService.activeSet.image"/>
+  </div>
+
 </mat-card>

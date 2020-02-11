@@ -17,4 +17,13 @@ mat-form-field{
 textarea{
   resize: none;
 }
+.img-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.img-buttons-container{
+  display: flex;
+  flex-direction: column;
+}
 
