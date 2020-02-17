@@ -1,4 +1,4 @@
-import { Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {testList} from '../../shared/constants';
 import {Track} from '../../shared/interfaces/track';
 import {LyricSet} from '../../shared/interfaces/lyric-set';
@@ -29,7 +29,11 @@ export class MysetsService {
     return this.mysetlist.indexOf(set);
   }
 
-  getTrackIndex(track: Track) {
+  getTrackIndex(track: Track): number {
     return this.activeSet.tracklist.indexOf(track);
+  }
+
+  addSet(result: string): void {
+      this.mysetlist.push({name: result, description: '', tracklist: [], image: ''});
   }
 }

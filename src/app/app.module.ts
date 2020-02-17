@@ -11,6 +11,7 @@ import {LoginModule} from './modules/login/login.module';
 import {SettingsModule} from './modules/settings/settings.module';
 import {PasswordDialogComponent} from './modules/settings/components/password-dialog/password-dialog.component';
 import {AddSetDialogComponent} from './modules/library/components/add-set-dialog/add-set-dialog.component';
+import { PageNotFoundModule } from './modules/page-not-found/page-not-found.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {AddSetDialogComponent} from './modules/library/components/add-set-dialog
     BrowserAnimationsModule,
     RegisterModule,
     LoginModule,
-    SettingsModule
+    SettingsModule,
+    PageNotFoundModule,
   ],
   entryComponents: [
     PasswordDialogComponent,

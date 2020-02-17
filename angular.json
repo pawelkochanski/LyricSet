@@ -72,7 +72,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "lyric-set:build:production"
+              "browserTarget": "lyric-set:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
 import {Router} from '@angular/router';
 

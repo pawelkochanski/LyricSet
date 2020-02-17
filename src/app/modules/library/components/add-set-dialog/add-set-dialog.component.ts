@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {DialogData} from '../../../settings/components/password-dialog/password-dialog.component';
+
 
 @Component({
   selector: 'app-add-set-dialog',
@@ -8,13 +8,14 @@ import {DialogData} from '../../../settings/components/password-dialog/password-
   styleUrls: ['./add-set-dialog.component.scss']
 })
 export class AddSetDialogComponent implements OnInit {
+  name: string;
 
   ngOnInit() {
   }
 
+
   constructor(
-    public dialogRef: MatDialogRef<AddSetDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    public dialogRef: MatDialogRef<AddSetDialogComponent>) {
   }
 
   onNoClick(): void {

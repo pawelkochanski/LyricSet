@@ -10,6 +10,7 @@ import {RegisterComponent} from './modules/register/register.component';
 import {SettingsComponent} from './modules/settings/settings.component';
 import {ProfileComponent} from './modules/settings/components/profile/profile.component';
 import {AccountComponent} from './modules/settings/components/account/account.component';
+import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
       {path: 'profile', component: ProfileComponent},
       {path: 'account', component: AccountComponent}
     ]
-  }
+  },
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

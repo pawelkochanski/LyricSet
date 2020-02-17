@@ -31,6 +31,9 @@ $foreground: map-get($theme, foreground);
   color: mat-color($accent)!important;
 }
 
+.cursor-pointer{
+  background-color: mat-color($accent, lighter);
+}
 
 
 
