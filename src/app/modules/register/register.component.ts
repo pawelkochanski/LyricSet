@@ -4,6 +4,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {specialSignValidator} from './specialSignValidator';
 import {passwordMatchValidator} from './passwordMatchValidator';
+import { AuthService } from 'app/core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private readonly router: Router,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -27,6 +29,29 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6), specialSignValidator()]],
       repPassword: ['', passwordMatchValidator('password')]
     });
+
+  }
+
+  onUsernameInput() {
+    if (this.f.username.valid && this.f.username.dirty) {
+      this.authService.checkUsername(this.f.username.value)
+        .subscribe(response => {},
+          error => {
+            console.log(error);
+            this.f.username.setErrors({notUnique: true});
+          });
+        }
+  }
+
+  onEmailInput() {
+    if (this.f.email.valid && this.f.email.dirty) {
+      this.authService.checkEmail(this.f.email.value)
+        .subscribe(response => {},
+          error => {
+            console.log(error);
+            this.f.email.setErrors({notUnique: true});
+          });
+        }
   }
 
   get f() {
@@ -40,12 +65,14 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    const {username, email, password, repPassword} = this.registerForm.value;
-    this.http.post(
-      'http://localhost:4200/api/users/register',
-      {
-        username, email, password
-      }
-    ).subscribe(response => {console.log(response); });
+    const userData: {username, email, password} = this.registerForm.value;
+    this.authService.register(userData)
+      .subscribe(response => {
+        console.log(response);
+        this.router.navigate(['/login']);
+      },
+      error => {
+        console.log(error);
+      });
   }
 }

@@ -1,4 +1,5 @@
-import {HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
@@ -36,7 +37,7 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
     PasswordDialogComponent,
     AddSetDialogComponent
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}],
   bootstrap: [AppComponent]
 })
 

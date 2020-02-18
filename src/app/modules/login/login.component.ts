@@ -1,3 +1,4 @@
+import { AuthService } from 'app/core/services/auth.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -10,9 +11,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  submitted = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -28,12 +29,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submitted = true;
 
     if (this.loginForm.invalid) {
       return;
     }
 
-    alert('SUCCES!! :-)');
+    this.authService.login(this.loginForm.value)
+      .subscribe(response => {
+        console.log(response);
+        /// ...handle response
+      },
+      error => {
+        if (error.status === 400) {
+          this.loginForm.setErrors({badCredentials : true});
+          this.loginForm.reset();
+        }
+      });
   }
 }

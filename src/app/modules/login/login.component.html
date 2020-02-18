@@ -1,7 +1,9 @@
 <div class="main-container">
   <mat-card>
     <mat-card-title>Log In</mat-card-title>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="error-container">
+      <mat-error *ngIf="loginForm.errors?.badCredentials">Incorrect ussername or password!</mat-error>
+    </div> <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="outline">
         <mat-label>Username</mat-label>
         <input formControlName="username" matInput>
@@ -10,7 +12,8 @@
         <mat-label>Password</mat-label>
         <input formControlName="password" matInput>
       </mat-form-field>
-        <button type="submit" color="accent" mat-raised-button>Submit</button>
+      <button type="submit" color="accent" mat-raised-button>Submit</button>
     </form>
+
   </mat-card>
 </div>
