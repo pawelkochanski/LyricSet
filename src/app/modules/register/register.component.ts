@@ -1,11 +1,9 @@
-import { UserClient, RegisterVm, ApiException, UserVm } from './../../shared/lyricset.api';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {specialSignValidator} from './specialSignValidator';
 import {passwordMatchValidator} from './passwordMatchValidator';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -18,8 +16,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
   constructor(private fb: FormBuilder,
-              private readonly userClient: UserClient,
-              private readonly router: Router) {
+              private readonly router: Router,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -42,13 +40,12 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
-    const registerVm = new RegisterVm(this.registerForm.value);
-    this.userClient.register(registerVm)
-      .pipe(catchError((err: ApiException) => throwError(err)))
-      .subscribe((user: UserVm) => {
-        console.log(user);
-        this.router.navigate(['/login']);
-      }, (err: ApiException) => console.log(err));
-    }
+    const {username, email, password, repPassword} = this.registerForm.value;
+    this.http.post(
+      'http://localhost:4200/api/users/register',
+      {
+        username, email, password
+      }
+    ).subscribe(response => {console.log(response); });
+  }
 }

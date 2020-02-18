@@ -1,3 +1,4 @@
+import {HttpClientModule } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
@@ -29,6 +30,7 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
     LoginModule,
     SettingsModule,
     PageNotFoundModule,
+    HttpClientModule
   ],
   entryComponents: [
     PasswordDialogComponent,
@@ -39,4 +41,8 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
 })
 
 export class AppModule {
+}
+
+export function baseUrl(): string {
+  return window.location.origin;
 }
