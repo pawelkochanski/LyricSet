@@ -1,6 +1,7 @@
+import { ErrorHandlerService } from './../services/error-handler.service';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, empty } from 'rxjs';
 
@@ -9,25 +10,17 @@ import { Observable, throwError, empty } from 'rxjs';
 })
 export class ErrorInterceptorService implements HttpInterceptor {
 
-  constructor(private router: Router) { }
+
+
+  constructor(private router: Router,
+              private errorhandler: ErrorHandlerService) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
-    return next.handle(req).pipe(
-      catchError(this.handleError)
-    );
+    return next.handle(req).pipe(catchError(this.handleError));
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
-    switch (errorResponse.status) {
-      case 500:
-      case 504:
-        this.router.navigate(['server-error']);
-        return empty();
-        break;
-      case 501:
-        this.router.navigate(['login']);
-    }
 
-    return throwError(errorResponse);
+    return this.errorhandler.handleError(errorResponse);
   }
 }
