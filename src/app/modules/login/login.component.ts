@@ -1,6 +1,8 @@
-import { AuthService } from 'app/core/services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/core/authentication/auth.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -35,15 +38,21 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(this.loginForm.value)
-      .subscribe(response => {
-        console.log(response);
-        /// ...handle response
-      },
+      .subscribe(response => {},
       error => {
-        if (error.status === 400) {
-          this.loginForm.setErrors({badCredentials : true});
-          this.loginForm.reset();
-        }
+        this.handleErrors(error);
       });
+  }
+
+  private handleErrors(error: string) {
+    switch (error) {
+      case 'BAD_CREDENTIALS':
+        this.loginForm.reset();
+        this.loginForm.setErrors({badCredentials : true});
+        break;
+      case 'SERVER_ERROR':
+        this.router.navigate(['server-error']);
+    }
+
   }
 }

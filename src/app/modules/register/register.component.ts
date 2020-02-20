@@ -4,7 +4,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {specialSignValidator} from './specialSignValidator';
 import {passwordMatchValidator} from './passwordMatchValidator';
-import { AuthService } from 'app/core/services/auth.service';
+import { AuthService } from 'app/core/authentication/auth.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  usernames: string[];
+  emails: string[];
+  serverError = false;
 
   constructor(private fb: FormBuilder,
               private readonly router: Router,
@@ -30,28 +34,43 @@ export class RegisterComponent implements OnInit {
       repPassword: ['', passwordMatchValidator('password')]
     });
 
+    this.authService.getUsernames()
+        .subscribe(usernames => {
+          this.usernames = usernames;
+        },
+        error => {
+          this.router.navigate(['server-error']);
+        });
+    this.authService.getEmails()
+        .subscribe(emails => {
+          this.emails = emails;
+        },
+          error => {
+            this.router.navigate(['server-error']);
+          });
   }
 
+
   onUsernameInput() {
-    if (this.f.username.valid && this.f.username.dirty) {
-      this.authService.checkUsername(this.f.username.value)
-        .subscribe(response => {},
-          error => {
-            console.log(error);
-            this.f.username.setErrors({notUnique: true});
-          });
-        }
+    const control = this.f.username;
+    if (control.valid && control.dirty) {
+      const value = control.value;
+      if (this.usernames.includes(value)) {
+        control.setErrors({notUnique: true});
+      }
+    }
+
   }
 
   onEmailInput() {
-    if (this.f.email.valid && this.f.email.dirty) {
-      this.authService.checkEmail(this.f.email.value)
-        .subscribe(response => {},
-          error => {
-            console.log(error);
-            this.f.email.setErrors({notUnique: true});
-          });
-        }
+    const control = this.f.email;
+    if (control.valid && control.dirty) {
+      const value = control.value;
+      if (this.emails.includes(value)) {
+        control.setErrors({notUnique: true});
+      }
+    }
+
   }
 
   get f() {
@@ -72,7 +91,8 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
-        console.log(error);
+        this.router.navigate(['server-error']);
       });
   }
+
 }

@@ -1,3 +1,4 @@
+import { ServerErrorModule } from './modules/server-error/server-error.module';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
@@ -31,7 +32,8 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
     LoginModule,
     SettingsModule,
     PageNotFoundModule,
-    HttpClientModule
+    HttpClientModule,
+    ServerErrorModule
   ],
   entryComponents: [
     PasswordDialogComponent,

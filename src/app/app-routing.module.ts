@@ -1,3 +1,4 @@
+import { ServerErrorComponent } from './modules/server-error/server-error.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LibraryComponent} from './modules/library/library.component';
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
       {path: 'account', component: AccountComponent}
     ]
   },
+  {path: 'server-error', component: ServerErrorComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 
