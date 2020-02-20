@@ -14,6 +14,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
 
   constructor(private router: Router,
               private errorhandler: ErrorHandlerService) { }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
 
     return next.handle(req).pipe(catchError(this.handleError));
@@ -21,6 +22,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
 
   private handleError(errorResponse: HttpErrorResponse) {
 
-    return this.errorhandler.handleError(errorResponse);
+    this.router.navigateByUrl('/register');
+    return throwError(errorResponse);
   }
 }

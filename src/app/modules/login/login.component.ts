@@ -47,13 +47,14 @@ export class LoginComponent implements OnInit {
   }
 
   private handleErrors(error: string) {
+    console.log(error);
     switch (error) {
       case 'BAD_CREDENTIALS':
         this.loginForm.reset();
         this.loginForm.setErrors({badCredentials : true});
         break;
       case 'SERVER_ERROR':
-        //this.router.navigate(['server-error']);
+        // this.router.navigate(['server-error']);
     }
     this.isLoading = false;
   }
