@@ -1,20 +1,22 @@
+import { Router } from '@angular/router';
 import { Roles } from './../../shared/enums/roles';
 import { LoginResponse } from './../../shared/interfaces/loginResponse';
 import { User } from './../../shared/interfaces/user';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { map, tap, catchError } from 'rxjs/operators';
-import { Observable, Subject, throwError } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private readonly router: Router) { }
 
 
   public register(registerData: {username: string, email: string, password: string}) {
@@ -35,10 +37,14 @@ export class AuthService {
         resData.user.email,
         resData.user.id,
         resData.user.role,
-        resData.token,
-        resData.exp)
-        ;
+        resData.token);
     }));
+  }
+
+  public logout() {
+    this.user.next(null);
+    localStorage.clear();
+    this.router.navigate(['home']);
   }
 
   public getUsernames() {
@@ -61,21 +67,44 @@ export class AuthService {
 
   }
 
-  private handleAuthentication(username: string, email: string, id: string , role: Roles, token: string, tokenExpirationDate: Date ) {
+  private handleAuthentication(username: string, email: string, id: string , role: Roles, token: string) {
     const user = new User(id,
       username,
       email,
       role,
-      token,
-      tokenExpirationDate);
+      token);
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  autoLogin() {
+
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.id,
+      userData.username,
+      userData.email,
+      userData.role,
+      userData._token);
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
+
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    if (errorRes.status === 400) {
-      return throwError('BAD_CREDENTIALS');
+    switch (errorRes.status) {
+      case 400:
+        return throwError('BAD_CREDENTIALS');
+        break;
+      default:
+        return throwError('SERVER_ERROR');
     }
-    return throwError('SERVER_ERROR');
   }
+
+
 
 }

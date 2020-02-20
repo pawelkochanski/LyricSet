@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {LoginComponent} from './login.component';
 import {AngularMaterialModule} from '../../shared/angular-material.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 
 
@@ -12,7 +13,8 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class LoginModule { }

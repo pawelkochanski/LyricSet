@@ -14,6 +14,8 @@
       </mat-form-field>
       <button type="submit" color="accent" mat-raised-button>Submit</button>
     </form>
-
+    <a [routerLink]="['/register']">Don't have an account? Sign up here!</a>
   </mat-card>
+
+    <div *ngIf="isLoading" else class="lds-facebook"><div></div><div></div><div></div></div>
 </div>

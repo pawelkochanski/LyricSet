@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isLoading = false;
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
@@ -32,13 +33,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     if (this.loginForm.invalid) {
       return;
     }
-
+    this.isLoading = true;
     this.authService.login(this.loginForm.value)
-      .subscribe(response => {},
+      .subscribe(response => {
+        this.router.navigate(['library']);
+      },
       error => {
         this.handleErrors(error);
       });
@@ -51,8 +53,8 @@ export class LoginComponent implements OnInit {
         this.loginForm.setErrors({badCredentials : true});
         break;
       case 'SERVER_ERROR':
-        this.router.navigate(['server-error']);
+        //this.router.navigate(['server-error']);
     }
-
+    this.isLoading = false;
   }
 }

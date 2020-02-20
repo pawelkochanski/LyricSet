@@ -1,3 +1,4 @@
+import { AuthGuard } from './core/guards/auth.guard';
 import { ServerErrorComponent } from './modules/server-error/server-error.component';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
@@ -15,7 +16,7 @@ import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.c
 
 const appRoutes: Routes = [
   {
-    path: 'library', component: LibraryComponent, children: [
+    path: 'library', canActivate: [AuthGuard], component: LibraryComponent, children: [
       {path: ':setindex', component: TrackListComponent},
       {path: ':setindex/:songindex', component: SongComponent}
     ]
@@ -25,7 +26,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {
-    path: 'settings', component: SettingsComponent, children: [
+    path: 'settings', canActivate: [AuthGuard], component: SettingsComponent, children: [
       {path: '', redirectTo: 'profile', pathMatch: 'full'},
       {path: 'profile', component: ProfileComponent},
       {path: 'account', component: AccountComponent}
