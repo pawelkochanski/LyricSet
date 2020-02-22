@@ -1,4 +1,3 @@
-import { ErrorInterceptorService } from './core/interceptors/error-interceptor.service';
 import { ServerErrorModule } from './modules/server-error/server-error.module';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -16,6 +15,7 @@ import { SettingsModule } from './modules/settings/settings.module';
 import { PasswordDialogComponent } from './modules/settings/components/password-dialog/password-dialog.component';
 import { AddSetDialogComponent } from './modules/library/components/add-set-dialog/add-set-dialog.component';
 import { PageNotFoundModule } from './modules/page-not-found/page-not-found.module';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -34,14 +34,14 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
     SettingsModule,
     PageNotFoundModule,
     HttpClientModule,
-    ServerErrorModule
+    ServerErrorModule,
+    ToastrModule.forRoot()
   ],
   entryComponents: [
     PasswordDialogComponent,
     AddSetDialogComponent
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })

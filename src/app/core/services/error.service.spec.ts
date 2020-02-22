@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { ErrorHandlerService } from './error-handler.service';
+import { ErrorService } from './error.service';
 
 describe('Service: ErrorHandler', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ErrorHandlerService]
+      providers: [ErrorService]
     });
   });
 
-  it('should ...', inject([ErrorHandlerService], (service: ErrorHandlerService) => {
+  it('should ...', inject([ErrorService], (service: ErrorService) => {
     expect(service).toBeTruthy();
   }));
 });

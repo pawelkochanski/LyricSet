@@ -1,17 +1,17 @@
 <div class="main-container">
-  <mat-card *ngIf="usernames && emails && !serverError; else loading">
+  <mat-card>
       <mat-card-title>Register</mat-card-title>
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
-          <input formControlName="username" matInput (input) = "onUsernameInput()">
+          <input formControlName="username" matInput >
           <mat-error *ngIf="f.username.errors?.required">Username is required!</mat-error>
           <mat-error *ngIf="f.username.errors?.minlength">Username must be at least 3 characters!</mat-error>
           <mat-error *ngIf="f.username.errors?.notUnique">Username already exists!</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
-          <input formControlName="email" matInput (input) = "onEmailInput()">
+          <input formControlName="email" matInput>
           <mat-error *ngIf="f.email.errors?.required">Email is required!</mat-error>
           <mat-error *ngIf="f.email.errors?.email">This isn't a correct E-mail!</mat-error>
           <mat-error *ngIf="f.email.errors?.notUnique">E-mail already exists!</mat-error>
@@ -31,7 +31,4 @@
       </form>
       <a [routerLink]="['/login']">Already have an account? Log in here!</a>
   </mat-card>
-  <ng-template #loading>
-    <div else class="lds-facebook"><div></div><div></div><div></div></div>
-  </ng-template>
 </div>

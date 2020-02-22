@@ -23,15 +23,15 @@ export class AuthService {
     return this.http.post(
       environment.apiUrl + 'users/register',
       registerData,
-    ).pipe(catchError(this.handleError));
+    );
 
   }
   public login(loginData: {username: string, password: string}) {
     return this.http.post<LoginResponse>(
       environment.apiUrl + 'users/login',
       loginData
-    ).pipe(catchError(this.handleError),
-    tap(resData => {
+    ).pipe(
+      tap(resData => {
       this.handleAuthentication(
         resData.user.username,
         resData.user.email,
@@ -93,16 +93,6 @@ export class AuthService {
       this.user.next(loadedUser);
     }
 
-  }
-
-  private handleError(errorRes: HttpErrorResponse) {
-    switch (errorRes.status) {
-      case 400:
-        return throwError('BAD_CREDENTIALS');
-        break;
-      default:
-        return throwError('SERVER_ERROR');
-    }
   }
 
 
