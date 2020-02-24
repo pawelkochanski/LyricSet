@@ -5,6 +5,9 @@ export class User {
                 public username: string,
                 public email: string,
                 public role: Roles,
+                public displayname: string,
+                public bio: string,
+                public url: string,
                 private _token: string) {}
 
     get token() {

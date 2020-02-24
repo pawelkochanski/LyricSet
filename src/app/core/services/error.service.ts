@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { empty, throwError } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, Toast } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ErrorService {
 
 constructor(private readonly router: Router,
-            private readonly authService: AuthService) { }
+            private readonly authService: AuthService,
+            private readonly toastr: ToastrService) { }
 
 handleError(errorResponse: HttpErrorResponse): Errors {
   console.log(errorResponse);
@@ -23,10 +24,12 @@ handleError(errorResponse: HttpErrorResponse): Errors {
   switch (errorResponse.status) {
   case 500:
   case 504:
+    this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error', {timeOut: 7000});
     return Errors.SERVER_ERROR;
     break;
   case 401:
     this.authService.logout();
+    this.toastr.error('Looks like your session has expired, try to login again.', 'Unauthorized', {timeOut: 7000});
     this.router.navigate(['login']);
     return Errors.UNAUTHORIZED;
     break;

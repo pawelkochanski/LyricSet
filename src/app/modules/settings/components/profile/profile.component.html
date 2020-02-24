@@ -2,20 +2,23 @@
 <mat-divider></mat-divider>
 <div class="split-container">
   <div class="splitted-left">
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
       <label>Display Name:</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <input matInput placeholder="Username">
+        <input matInput [placeholder]="user.displayname" formControlName="displayname">
+        <mat-error *ngIf="f.displayname.errors?.required">Username is required!</mat-error>
+        <mat-error *ngIf="f.displayname.errors?.minlength">Username must be at least 3 characters!</mat-error>
         <mat-hint>This is the name that is being shown to others!</mat-hint>
       </mat-form-field>
       <label>Bio:</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <textarea matInput></textarea>
+        <textarea matInput formControlName="bio" [placeholder]="user.bio"></textarea>
         <mat-hint>Tell the world something about you :)</mat-hint>
       </mat-form-field>
       <label>URL</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <input matInput>
+        <input matInput type="url" formControlName="URL" [placeholder]="user.url">
+        <mat-error *ngIf="f.URL.errors?.pattern">This must be a valid url!</mat-error>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">Update</button>
     </form>

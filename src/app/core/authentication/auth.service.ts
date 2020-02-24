@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Roles } from './../../shared/enums/roles';
 import { LoginResponse } from './../../shared/interfaces/loginResponse';
@@ -5,7 +6,7 @@ import { User } from './../../shared/interfaces/user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map, tap, catchError, exhaustMap, take } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -16,7 +17,8 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient,
-              private readonly router: Router) { }
+              private readonly router: Router,
+              private readonly toastr: ToastrService) { }
 
 
   public register(registerData: {username: string, email: string, password: string}) {
@@ -37,14 +39,18 @@ export class AuthService {
         resData.user.email,
         resData.user.id,
         resData.user.role,
+        resData.user.displayname,
+        resData.user.bio,
+        resData.user.url,
         resData.token);
     }));
   }
 
   public logout() {
     this.user.next(null);
-    localStorage.clear();
-    this.router.navigate(['home']);
+    localStorage.removeItem('userData');
+    this.toastr.success('You have been logged out!');
+    this.router.navigate(['login']);
   }
 
   public getUsernames() {
@@ -67,12 +73,28 @@ export class AuthService {
 
   }
 
-  private handleAuthentication(username: string, email: string, id: string , role: Roles, token: string) {
+  public handleAuthentication(
+    username: string,
+    email: string,
+    id: string ,
+    role: Roles,
+    displayname: string,
+    bio: string,
+    url: string,
+    token: string) {
     const user = new User(id,
       username,
       email,
       role,
+      displayname,
+      bio,
+      url,
       token);
+    this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user));
+  }
+
+  public relogin(user: User) {
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
   }
@@ -88,6 +110,9 @@ export class AuthService {
       userData.username,
       userData.email,
       userData.role,
+      userData.displayname,
+      userData.bio,
+      userData.url,
       userData._token);
     if (loadedUser.token) {
       this.user.next(loadedUser);

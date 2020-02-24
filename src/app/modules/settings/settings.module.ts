@@ -8,6 +8,7 @@ import {FormsModule} from '@angular/forms';
 import {MatExpansionModule} from '@angular/material';
 import { AccountComponent } from './components/account/account.component';
 import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -19,7 +20,8 @@ import { PasswordDialogComponent } from './components/password-dialog/password-d
     AngularMaterialModule,
     RouterModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    ReactiveFormsModule
   ]
 })
 export class SettingsModule { }
