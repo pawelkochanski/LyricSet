@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.authService.login(this.loginForm.value)
       .subscribe(response => {
-        this.toastr.success(`Hi ${response.user.username}!`, 'Succesfuly logged in :)');
+        this.toastr.success('Succesfuly logged in :)', `Hi ${response.user.username}!`);
         this.router.navigate(['library']);
       },
       error => {

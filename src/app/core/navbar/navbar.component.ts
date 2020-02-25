@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/core/authentication/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -12,7 +13,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSub: Subscription;
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService,
+              private readonly toastr: ToastrService) { }
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
@@ -27,6 +29,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout();
+    this.toastr.success('You have been sucessfully logged out!');
   }
 
 }

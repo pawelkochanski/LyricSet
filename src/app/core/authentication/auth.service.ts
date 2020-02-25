@@ -50,7 +50,6 @@ export class AuthService {
   public logout() {
     this.user.next(null);
     localStorage.removeItem('userData');
-    this.toastr.success('You have been logged out!');
     this.router.navigate(['login']);
   }
 
@@ -125,7 +124,11 @@ export class AuthService {
 
   }
 
-
+  changePassword(paswordData: {password: string, newpassword: string}) {
+    return this.http.put(
+      environment.apiUrl + 'users/password',
+      paswordData);
+  }
 
 
 }
