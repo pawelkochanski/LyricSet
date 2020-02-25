@@ -28,14 +28,13 @@
     <div class="button-holder">
       <label>Profile picture:</label>
     </div>
-    <img src="http://cdn.onlinewebfonts.com/svg/img_266351.png">
+    <img [src] = "avatarUrl"(error)="onImgError($event)">
     <div class="button-holder">
       <button mat-raised-button [matMenuTriggerFor]="appMenu"><mat-icon>edit</mat-icon></button>
       <mat-menu #appMenu="matMenu">
         <form>
-          <label for="upload-photo" mat-menu-item>Upload Photo</label>
-          <input type="file" name="photo" id="upload-photo"/>
-          <label mat-menu-item>Remove Photo</label>
+          <label mat-menu-item (click) = "openDialog()">Upload Photo</label>
+          <label mat-menu-item (click) = "onRemovePhoto()">Remove Photo</label>
         </form>
       </mat-menu>
 

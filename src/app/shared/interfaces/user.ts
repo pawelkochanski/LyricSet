@@ -8,6 +8,7 @@ export class User {
                 public displayname: string,
                 public bio: string,
                 public url: string,
+                public avatarId: string,
                 private _token: string) {}
 
     get token() {

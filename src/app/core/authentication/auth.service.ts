@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Roles } from './../../shared/enums/roles';
 import { LoginResponse } from './../../shared/interfaces/loginResponse';
 import { User } from './../../shared/interfaces/user';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { map, tap, catchError, exhaustMap, take } from 'rxjs/operators';
@@ -42,6 +42,7 @@ export class AuthService {
         resData.user.displayname,
         resData.user.bio,
         resData.user.url,
+        resData.user.avatarId,
         resData.token);
     }));
   }
@@ -81,6 +82,7 @@ export class AuthService {
     displayname: string,
     bio: string,
     url: string,
+    avatarId: string,
     token: string) {
     const user = new User(id,
       username,
@@ -89,6 +91,7 @@ export class AuthService {
       displayname,
       bio,
       url,
+      avatarId,
       token);
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
@@ -97,6 +100,7 @@ export class AuthService {
   public relogin(user: User) {
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
+    this.toastr.success('Your settings have been updated!');
   }
 
   autoLogin() {
@@ -113,12 +117,14 @@ export class AuthService {
       userData.displayname,
       userData.bio,
       userData.url,
+      userData.avatarId,
       userData._token);
     if (loadedUser.token) {
       this.user.next(loadedUser);
     }
 
   }
+
 
 
 
