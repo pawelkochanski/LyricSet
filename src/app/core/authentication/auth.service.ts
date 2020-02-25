@@ -130,5 +130,12 @@ export class AuthService {
       paswordData);
   }
 
+  changeUsername(usernameData: {username: string, password: string}){
+    return this.http.put(
+      environment.apiUrl + 'users/username',
+      usernameData
+    );
+  }
+
 
 }

@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Change username!</h1>
+<div mat-dialog-content>
+  <form [formGroup]="usernameForm" id="psForm">
+    <mat-form-field appearance="outline">
+      <input matInput placeholder="Enter new username" formControlName="username">
+      <mat-error *ngIf="f.username.errors?.required">Username is required!</mat-error>
+      <mat-error *ngIf="f.username.errors?.minLength">Must be at lest 6 characters!</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input matInput type="password" placeholder="Password" formControlName="password">
+      <mat-error *ngIf="f.password.errors?.badCredentials">Invalid password!</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onSendClick()" form="psForm" cdkFocusInitial [disabled]="!usernameForm.valid">Send</button>
+</div>

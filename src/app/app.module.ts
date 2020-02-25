@@ -18,6 +18,7 @@ import { AddSetDialogComponent } from './modules/library/components/add-set-dial
 import { PageNotFoundModule } from './modules/page-not-found/page-not-found.module';
 import { ToastrModule } from 'ngx-toastr';
 import { CropperComponent } from './modules/cropper/cropper.component';
+import { UsernameDialogComponent } from './modules/settings/components/username-dialog/username-dialog.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { CropperComponent } from './modules/cropper/cropper.component';
   entryComponents: [
     PasswordDialogComponent,
     AddSetDialogComponent,
-    CropperComponent
+    CropperComponent,
+    UsernameDialogComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],

@@ -9,12 +9,13 @@ import {MatExpansionModule} from '@angular/material';
 import { AccountComponent } from './components/account/account.component';
 import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { UsernameDialogComponent } from './components/username-dialog/username-dialog.component';
 
 
 
 
 @NgModule({
-  declarations: [SettingsComponent, ProfileComponent, AccountComponent, PasswordDialogComponent],
+  declarations: [SettingsComponent, ProfileComponent, AccountComponent, PasswordDialogComponent, UsernameDialogComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,

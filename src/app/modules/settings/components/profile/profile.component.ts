@@ -92,6 +92,7 @@ export class ProfileComponent implements OnInit {
   onRemovePhoto() {
     this.settingsService.removeAvatar(this.user.avatarId)
     .subscribe(response => {
+      console.log(response);
       this.user.avatarId = null;
       this.authService.relogin(this.user);
     });

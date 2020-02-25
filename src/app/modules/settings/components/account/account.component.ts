@@ -1,3 +1,4 @@
+import { UsernameDialogComponent } from './../username-dialog/username-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from './../../../../core/services/error.service';
 import { AuthService } from './../../../../core/authentication/auth.service';
@@ -18,7 +19,7 @@ export class AccountComponent implements OnInit {
               private readonly toastr: ToastrService) {
   }
 
-  openDialog(): void {
+  openPasswordDialog(): void {
     const dialogRef = this.dialog.open(PasswordDialogComponent, {
       width: '300px'
     });
@@ -32,6 +33,12 @@ export class AccountComponent implements OnInit {
         });
       }
 
+    });
+  }
+
+  openUsernameDialog() {
+    const dialogRef = this.dialog.open(UsernameDialogComponent, {
+      width: '300px'
     });
   }
 

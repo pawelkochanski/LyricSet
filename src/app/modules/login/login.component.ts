@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       case Errors.PASSWORD_REQUIRED:
       case Errors.USERNAME_REQUIRED:
         this.loginForm.reset();
-        this.loginForm.setErrors({badCredentials : true});
+        this.toastr.error('Seems like you entered invalid username or password :/');
     }
     this.isLoading = false;
   }
