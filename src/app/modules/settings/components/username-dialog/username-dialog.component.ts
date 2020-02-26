@@ -4,6 +4,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Errors } from 'app/shared/enums/errors';
+import { ToastrService } from 'ngx-toastr';
 
 export interface usernameData {
   username: string;
@@ -24,7 +25,8 @@ export class UsernameDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: usernameData,
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly errorService: ErrorService) {}
+    private readonly errorService: ErrorService,
+    private readonly toastr: ToastrService) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -38,6 +40,7 @@ export class UsernameDialogComponent implements OnInit {
         password: this.f.password.value}
         ).subscribe(resp => {
           this.dialogRef.close();
+          this.toastr.success('Your username has been changed!');
         }, err => {
           const message = this.errorService.handleError(err);
           this.handleErrors(message);
