@@ -12,6 +12,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SetHeaderComponent } from './components/set-header/set-header.component';
 import {FormsModule} from '@angular/forms';
 import { AddSetDialogComponent } from './components/add-set-dialog/add-set-dialog.component';
+import { MysetsService } from 'app/core/services/mysets.service';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddSetDialogComponent } from './components/add-set-dialog/add-set-dialo
         RouterModule,
         DragDropModule,
         FormsModule,
-    ]
+    ],
+    providers: [MysetsService]
 })
 export class LibraryModule {
 }

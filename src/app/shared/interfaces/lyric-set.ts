@@ -5,4 +5,5 @@ export interface LyricSet {
   description: string;
   image: string;
   tracklist: Track[];
+  id: string;
 }

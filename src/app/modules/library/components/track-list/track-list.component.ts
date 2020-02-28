@@ -1,7 +1,9 @@
+import { LyricSet } from './../../../../shared/interfaces/lyric-set';
 import {Component, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-track-list',
@@ -13,17 +15,21 @@ export class TrackListComponent implements OnInit {
   constructor(private readonly mysetsService: MysetsService, private route: ActivatedRoute) {
   }
 
+  activesetSub: Subscription;
+  set: LyricSet;
   ngOnInit() {
+    this.activesetSub = this.mysetsService.activeSet.subscribe(set => {this.set = set; });
     this.route.params.subscribe(
       (params: Params) => {
-        this.mysetsService.setActiveSet(this.mysetsService.mysetlist[params.setindex]);
+        console.log(this.mysetsService.getSet(params.setid));
+        this.mysetsService.setActiveSet(this.mysetsService.getSet(params.setid));
         this.mysetsService.setEditMode(false);
       }
     );
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.mysetsService.activeSet.tracklist, event.previousIndex, event.currentIndex);
-    console.log(this.mysetsService.activeSet.tracklist);
+    moveItemInArray(this.set.tracklist, event.previousIndex, event.currentIndex);
+    console.log(this.set.tracklist);
   }
 }

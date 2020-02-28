@@ -2,9 +2,9 @@
   <mat-card-title-group>
     <div *ngIf="!mySetsService.isEditMode; else temp">
       <mat-card-title class="text-highlight">
-        {{this.mySetsService.activeSet.name}}</mat-card-title>
+        {{this.set?.name}}</mat-card-title>
       <mat-card-subtitle>
-        <textarea matInput disabled rows="2" cols="35">{{this.mySetsService.activeSet.description}}</textarea>
+        <textarea matInput disabled rows="2" cols="35">{{this.set?.description}}</textarea>
       </mat-card-subtitle>
     </div>
     <ng-template #temp>
@@ -38,7 +38,7 @@
 
     <img mat-card-md-image alt=""
          (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
-         [src]="this.mySetsService.activeSet.image"/>
+         [src]="this.set?.image"/>
   </div>
 
 </mat-card>

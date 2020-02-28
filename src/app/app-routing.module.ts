@@ -17,8 +17,8 @@ import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.c
 const appRoutes: Routes = [
   {
     path: 'library', canActivate: [AuthGuard], component: LibraryComponent, children: [
-      {path: ':setindex', component: TrackListComponent},
-      {path: ':setindex/:songindex', component: SongComponent}
+      {path: ':setid', component: TrackListComponent},
+      {path: ':setid/:songid', component: SongComponent}
     ]
   },
   {path: 'home', component: HomeComponent},
