@@ -48,7 +48,14 @@ export class SetHeaderComponent implements OnInit {
 
   onRemoveSet() {
     this.mySetsService.removeSet(this.set.id).subscribe(
-      response => {this.router.navigate(['/library']); },
+      response => {
+        this.mySetsService.getMySetList().subscribe(
+          response => {
+            this.mySetsService.setMySetList(response);
+          },
+          error => {this.errorService.handleError(error); }
+        );
+        this.router.navigate(['/library']); },
       error => {this.errorService.handleError(error); }
     );
   }

@@ -31,6 +31,10 @@ export class MysetsService {
     );
   }
 
+  setMySetList(setlist: LyricSet[]) {
+    this.mysetlist = setlist;
+  }
+
   removeSet(setId: string) {
     return this.http.delete(environment.apiUrl + 'lyricsets/user/' + setId
     );

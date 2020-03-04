@@ -16,8 +16,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.mysetsService.getMySetList().subscribe(response => {
-    console.log(response);
-    this.mysetsService.mysetlist = response;
+    this.mysetsService.setMySetList(response);
     this.isLoading = false;
     }, error => {
       this.errorService.handleError(error);

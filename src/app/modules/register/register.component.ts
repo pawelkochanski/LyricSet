@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { ErrorService } from './../../core/services/error.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -22,7 +23,8 @@ export class RegisterComponent implements OnInit {
               private readonly router: Router,
               private http: HttpClient,
               private authService: AuthService,
-              private errorService: ErrorService) {
+              private errorService: ErrorService,
+              private readonly toast: ToastrService) {
   }
 
   ngOnInit() {
@@ -50,6 +52,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(userData)
       .subscribe(response => {
         console.log(response);
+        this.toast.success('Your accoun has been created. You can now log in.');
         this.router.navigate(['/login']);
       },
       error => {
