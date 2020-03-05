@@ -1,19 +1,19 @@
 <div class="main-container">
-  <mat-toolbar><h1>My Library</h1></mat-toolbar>
-  <div class="loading" *ngIf="isLoading else loaded" >
-    <div class="lds-facebook"><div></div><div></div><div></div></div>
-  </div>
-  <ng-template #loaded>
-    <mat-sidenav-container>
-      <mat-sidenav mode="side" opened>
-        <app-set-list></app-set-list>
-      </mat-sidenav>
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </ng-template>
-  
+  <mat-toolbar>
+    <h1>My Library</h1>
+    <div class="separator"></div>
+    <div class="loading loading-header" *ngIf="mysetsService.isLoading">
+      <div class="lds-facebook"><div></div><div></div><div></div></div>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" opened>
+      <app-set-list></app-set-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
 
 

@@ -15,9 +15,9 @@ export class MysetsService {
   constructor(private readonly http: HttpClient, private readonly errorService: ErrorService) {
 
   }
-
+  isLoading = false;
   isEditMode = false;
-  activeSet = new BehaviorSubject<LyricSet>(null);
+  activeSet: LyricSet = null;
 
   mysetlist: LyricSet[] = [];
 
@@ -41,7 +41,7 @@ export class MysetsService {
   }
 
   setActiveSet(activeSet: LyricSet) {
-    this.activeSet.next(activeSet);
+    this.activeSet = activeSet;
   }
 
   getSet(setid: string) {
@@ -52,11 +52,28 @@ export class MysetsService {
     this.isEditMode = mode;
   }
 
-  addSet(result: string): void {
-      this.http.post(environment.apiUrl + 'lyricsets',
-      {name : result}).subscribe(
-        response => {}, error => {this.errorService.handleError(error); }
-      );
-      this.getMySetList();
+  addSet(result: string) {
+    return this.http.post(environment.apiUrl + 'lyricsets',
+      {name : result});
+  }
+
+  updateActiveSet(name: string, desc: string) {
+    if (name) {
+      this.activeSet.name = name;
+    }
+    if (desc) {
+      this.activeSet.description = desc;
+    }
+    return this.http.put(environment.apiUrl + 'lyricsets/' + this.activeSet.id,
+    {name, description: desc});
+  }
+
+  refreshSetlist() {
+    this.isLoading = true;
+    this.getMySetList().subscribe(
+      setlist => {this.setMySetList(setlist);
+                  this.isLoading = false; },
+      error => {this.errorService.handleError(error); }
+    );
   }
 }

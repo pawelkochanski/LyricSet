@@ -12,15 +12,9 @@ export class LibraryComponent implements OnInit, OnDestroy {
               private readonly errorService: ErrorService) {
   }
 
-  isLoading = true;
 
   ngOnInit() {
-    this.mysetsService.getMySetList().subscribe(response => {
-    this.mysetsService.setMySetList(response);
-    this.isLoading = false;
-    }, error => {
-      this.errorService.handleError(error);
-    });
+    this.mysetsService.refreshSetlist();
   }
 
   ngOnDestroy() {

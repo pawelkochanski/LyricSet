@@ -2,9 +2,9 @@
   <mat-card-title-group>
     <div *ngIf="!mySetsService.isEditMode; else temp">
       <mat-card-title class="text-highlight">
-        {{this.set?.name}}</mat-card-title>
+        {{mySetsService.activeSet.name}}</mat-card-title>
       <mat-card-subtitle>
-        <textarea matInput disabled rows="2" cols="35">{{this.set?.description}}</textarea>
+        <textarea matInput disabled rows="2" cols="35">{{mySetsService.activeSet.description}}</textarea>
       </mat-card-subtitle>
     </div>
     <ng-template #temp>
@@ -22,7 +22,7 @@
       <button mat-button [routerLink]="[0]" [queryParams]="{playMode: 1}">
         <mat-icon>play_circle_outline</mat-icon>
       </button>
-      <button mat-button (click)="changeMode()" [ngClass]="this.mySetsService.isEditMode ? 'text-highlight' : ''">
+      <button mat-button (click)="changeMode()" [ngClass]="mySetsService.isEditMode ? 'text-highlight' : ''">
         <mat-icon>edit</mat-icon>
       </button>
       <button mat-raised-button *ngIf="mySetsService.isEditMode" (click)="onRemoveSet()" color="warn">
@@ -38,7 +38,7 @@
 
     <img mat-card-md-image alt=""
          (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
-         [src]="this.set?.image"/>
+         [src]="mySetsService.activeSet.image"/>
   </div>
 
 </mat-card>

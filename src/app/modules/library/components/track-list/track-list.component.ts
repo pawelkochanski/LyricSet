@@ -21,7 +21,6 @@ export class TrackListComponent implements OnInit {
   activesetSub: Subscription;
   set: LyricSet;
   ngOnInit() {
-    this.activesetSub = this.mysetsService.activeSet.subscribe(set => {this.set = set; });
     this.route.params.subscribe(
       (params: Params) => {
         if (!this.mysetsService.mysetlist.find(set => set.id === params.setid)) {

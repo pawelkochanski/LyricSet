@@ -1,9 +1,9 @@
+import { MysetsService } from './../../../../core/services/mysets.service';
 import { ErrorService } from './../../../../core/services/error.service';
-import { MysetsService } from 'app/core/services/mysets.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { LyricSet } from './../../../../shared/interfaces/lyric-set';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-set-header',
@@ -15,16 +15,13 @@ export class SetHeaderComponent implements OnInit {
   @ViewChild('title', {static: false}) titleinput: ElementRef;
   @ViewChild('description', {static: false}) descinput: ElementRef;
 
-  set: LyricSet;
-  activesetSub: Subscription;
-
   constructor(private readonly mySetsService: MysetsService,
               private router: Router,
-              private readonly errorService: ErrorService) {
+              private readonly errorService: ErrorService,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.activesetSub = this.mySetsService.activeSet.subscribe(set => {this.set = set; });
   }
 
   changeMode() {
@@ -32,14 +29,14 @@ export class SetHeaderComponent implements OnInit {
       const name = this.titleinput.nativeElement.value;
       const desc = this.descinput.nativeElement.value;
       let changedFlag = false;
-
-      if (name) {
-        this.set.name = name;
+      if (name && this.mySetsService.activeSet.name !== name) {
         changedFlag = true;
       }
-      if (desc) {
+      if (desc && this.mySetsService.activeSet.description !== desc) {
         changedFlag = true;
-        this.set.description = desc;
+      }
+      if(changedFlag){
+        this.mySetsService.updateActiveSet(name, desc);
       }
 
     }
@@ -47,15 +44,11 @@ export class SetHeaderComponent implements OnInit {
   }
 
   onRemoveSet() {
-    this.mySetsService.removeSet(this.set.id).subscribe(
+    this.mySetsService.removeSet(this.mySetsService.activeSet.id).subscribe(
       response => {
-        this.mySetsService.getMySetList().subscribe(
-          response => {
-            this.mySetsService.setMySetList(response);
-          },
-          error => {this.errorService.handleError(error); }
-        );
-        this.router.navigate(['/library']); },
+        this.mySetsService.refreshSetlist();
+        this.mySetsService.activeSet = null;
+       },
       error => {this.errorService.handleError(error); }
     );
   }

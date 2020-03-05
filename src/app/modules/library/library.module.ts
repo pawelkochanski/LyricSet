@@ -10,10 +10,9 @@ import {LibraryComponent} from './library.component';
 import {RouterModule} from '@angular/router';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SetHeaderComponent } from './components/set-header/set-header.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddSetDialogComponent } from './components/add-set-dialog/add-set-dialog.component';
 import { MysetsService } from 'app/core/services/mysets.service';
-
 
 @NgModule({
   declarations: [
@@ -34,6 +33,7 @@ import { MysetsService } from 'app/core/services/mysets.service';
         RouterModule,
         DragDropModule,
         FormsModule,
+        ReactiveFormsModule
     ],
     providers: [MysetsService]
 })

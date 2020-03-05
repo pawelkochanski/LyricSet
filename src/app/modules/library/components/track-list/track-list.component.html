@@ -1,16 +1,18 @@
-<app-set-header></app-set-header>
-<div *ngIf="set">
-  <div *ngIf="this.mysetsService.isEditMode; else fixedList" class="track-list" cdkDropList (cdkDropListDropped)="drop($event)">
-    <div cdkDrag class="track-holder" *ngFor="let track of set.tracklist">
-      <app-track-list-item [track]="track"></app-track-list-item>
-    </div>
-  </div>
-  <ng-template #fixedList>
-    <div class="track-list">
-      <div class="track-holder" *ngFor="let track of set.tracklist">
+<div *ngIf="mysetsService.activeSet">
+  <app-set-header></app-set-header>
+  <div *ngIf="set">
+    <div *ngIf="mysetsService.isEditMode; else fixedList" class="track-list" cdkDropList (cdkDropListDropped)="drop($event)">
+      <div cdkDrag class="track-holder" *ngFor="let track of mysetsService.activeSet.tracklist">
         <app-track-list-item [track]="track"></app-track-list-item>
       </div>
     </div>
-  </ng-template>
+    <ng-template #fixedList>
+      <div class="track-list">
+        <div class="track-holder" *ngFor="let track of set.tracklist">
+          <app-track-list-item [track]="track"></app-track-list-item>
+        </div>
+      </div>
+    </ng-template>
+  </div>
 </div>
 

@@ -17,7 +17,6 @@ export class SetListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.mySetList = this.mysetsService.mysetlist;
   }
 
   openDialog(): void {
@@ -26,10 +25,7 @@ export class SetListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      if (result) {
-        this.mysetsService.addSet(result);
-      }
+      this.mysetsService.refreshSetlist();
     });
   }
 
