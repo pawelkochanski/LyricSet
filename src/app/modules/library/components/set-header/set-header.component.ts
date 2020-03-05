@@ -26,17 +26,26 @@ export class SetHeaderComponent implements OnInit {
 
   changeMode() {
     if (this.mySetsService.isEditMode) {
-      const name = this.titleinput.nativeElement.value;
-      const desc = this.descinput.nativeElement.value;
+      let name = this.mySetsService.activeSet.name;
+      let desc = this.mySetsService.activeSet.description;
+      const tracklist = this.mySetsService.activeSet.tracklist;
       let changedFlag = false;
-      if (name && this.mySetsService.activeSet.name !== name) {
+      const nameInput = this.titleinput.nativeElement.value;
+      const descInput = this.descinput.nativeElement.value;
+      // tslint:disable-next-line: no-debugger
+      debugger;
+      if (nameInput !== '' && nameInput !== name) {
         changedFlag = true;
+        name = nameInput;
       }
-      if (desc && this.mySetsService.activeSet.description !== desc) {
+      if (descInput !== '' && descInput !== desc) {
         changedFlag = true;
+        desc = descInput;
       }
-      if(changedFlag){
-        this.mySetsService.updateActiveSet(name, desc);
+      if (changedFlag) {
+        this.mySetsService.updateActiveSet(name, desc, tracklist)
+        .subscribe(response => { },
+          error => {this.errorService.handleError(error); });
       }
 
     }
@@ -44,10 +53,13 @@ export class SetHeaderComponent implements OnInit {
   }
 
   onRemoveSet() {
+    this.mySetsService.isLoading = true;
     this.mySetsService.removeSet(this.mySetsService.activeSet.id).subscribe(
       response => {
+        this.mySetsService.isLoading = false;
         this.mySetsService.refreshSetlist();
         this.mySetsService.activeSet = null;
+        this.router.navigate(['library']);
        },
       error => {this.errorService.handleError(error); }
     );

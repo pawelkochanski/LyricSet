@@ -5,6 +5,7 @@
     <mat-label>Name your set</mat-label>
     <input formControlName="name" matInput>
     <mat-error *ngIf="f.name.errors?.required">Name is required!</mat-error>
+    <mat-error *ngIf="f.name.errors?.maxlength">Maximum allowed length is 15 characters!</mat-error>
   </mat-form-field>
 </form>
 </div>

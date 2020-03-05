@@ -57,7 +57,7 @@ export class MysetsService {
       {name : result});
   }
 
-  updateActiveSet(name: string, desc: string) {
+  updateActiveSet(name: string, desc: string, tracklist: Track[]) {
     if (name) {
       this.activeSet.name = name;
     }
@@ -65,7 +65,7 @@ export class MysetsService {
       this.activeSet.description = desc;
     }
     return this.http.put(environment.apiUrl + 'lyricsets/' + this.activeSet.id,
-    {name, description: desc});
+    {name, description: desc, tracklist});
   }
 
   refreshSetlist() {

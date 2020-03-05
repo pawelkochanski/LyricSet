@@ -17,6 +17,6 @@ export class TrackListItemComponent implements OnInit {
   }
 
   OnRemoveClick() {
-    this.mysetsService.activeSet.tracklist.splice(this.mysetsService.getTrackIndex(this.track), 1);
+    //this.mysetsService.activeSet.tracklist.splice(this.mysetsService.getTrackIndex(this.track), 1);
   }
 }

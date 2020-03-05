@@ -1,4 +1,4 @@
-<div *ngIf="mysetsService.activeSet">
+<div *ngIf="!mysetsService.isLoading else loading" >
   <app-set-header></app-set-header>
   <div *ngIf="set">
     <div *ngIf="mysetsService.isEditMode; else fixedList" class="track-list" cdkDropList (cdkDropListDropped)="drop($event)">
@@ -15,4 +15,9 @@
     </ng-template>
   </div>
 </div>
+<ng-template #loading>
+  <div class="loading">
+    <div class="lds-facebook"><div></div><div></div><div></div></div>
+  </div>
+</ng-template>
 

@@ -1,19 +1,15 @@
 <div class="main-container">
   <mat-toolbar>
     <h1>My Library</h1>
-    <div class="separator"></div>
-    <div class="loading loading-header" *ngIf="mysetsService.isLoading">
-      <div class="lds-facebook"><div></div><div></div><div></div></div>
-    </div>
   </mat-toolbar>
-  <mat-sidenav-container>
-    <mat-sidenav mode="side" opened>
+  <mat-drawer-container autosize>
+    <mat-drawer mode="side" opened>
       <app-set-list></app-set-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
+    </mat-drawer>
+    <mat-drawer-content>
       <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>
 
 

@@ -20,7 +20,7 @@ export class SongComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.mysetsService.setActiveSet(this.mysetsService.mysetlist[params.setindex]);
-        this.track = this.set.tracklist[params.songindex];
+        // this.track = this.set.tracklist[params.songindex];
       }
     );
     this.route.queryParams.subscribe((params: Params) => {
@@ -29,20 +29,20 @@ export class SongComponent implements OnInit {
     });
   }
 
-  checkIfTrackIsLast(): boolean {
-    return this.mysetsService.getTrackIndex(this.track) === this.mysetsService.activeSet.tracklist.length - 1;
+  checkIfTrackIsLast() {
+    // return this.mysetsService.getTrackIndex(this.track) === this.mysetsService.activeSet.tracklist.length - 1;
   }
 
-  checkIfTrackIsFirst(): boolean {
-    return this.mysetsService.getTrackIndex(this.track) === 0;
+  checkIfTrackIsFirst()  {
+    // return this.mysetsService.getTrackIndex(this.track) === 0;
   }
 
   getNextSongIndex() {
-    return this.mysetsService.getTrackIndex(this.track) + 1;
+    // return this.mysetsService.getTrackIndex(this.track) + 1;
   }
 
   getPreviousSongIndex() {
-    return this.mysetsService.getTrackIndex(this.track) - 1;
+    // return this.mysetsService.getTrackIndex(this.track) - 1;
   }
 
 }
