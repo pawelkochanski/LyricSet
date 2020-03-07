@@ -1,4 +1,4 @@
-import { CropperModule } from './modules/cropper/cropper.module';
+import { CropperModule } from './shared/components/cropper/cropper.module';
 import { ServerErrorModule } from './modules/server-error/server-error.module';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,7 +17,7 @@ import { PasswordDialogComponent } from './modules/settings/components/password-
 import { AddSetDialogComponent } from './modules/library/components/add-set-dialog/add-set-dialog.component';
 import { PageNotFoundModule } from './modules/page-not-found/page-not-found.module';
 import { ToastrModule } from 'ngx-toastr';
-import { CropperComponent } from './modules/cropper/cropper.component';
+import { CropperComponent } from './shared/components/cropper/cropper.component';
 import { UsernameDialogComponent } from './modules/settings/components/username-dialog/username-dialog.component';
 
 

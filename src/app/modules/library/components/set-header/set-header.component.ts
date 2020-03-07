@@ -3,7 +3,7 @@ import {ErrorService} from '../../../../core/services/error.service';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {environment} from '../../../../../environments/environment';
-import {CropperComponent} from '../../../cropper/cropper.component';
+import {CropperComponent} from '../../../../shared/components/cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({

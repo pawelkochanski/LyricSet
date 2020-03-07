@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
-import {CropperComponent} from 'app/modules/cropper/cropper.component';
+import {CropperComponent} from 'app/shared/components/cropper/cropper.component';
 import {environment} from 'environments/environment';
 import {MysetsService} from '../../../../core/services/mysets.service';
 
