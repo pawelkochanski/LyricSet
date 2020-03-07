@@ -1,13 +1,17 @@
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { Roles } from './../../shared/enums/roles';
-import { LoginResponse } from './../../shared/interfaces/loginResponse';
-import { User } from './../../shared/interfaces/user';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-import { map, tap, catchError, exhaustMap, take } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {Roles} from '../../shared/enums/roles';
+import {LoginResponse} from '../../shared/interfaces/loginResponse';
+import {User} from '../../shared/interfaces/user';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from 'environments/environment';
+import {tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {PasswordData} from '../../shared/interfaces/passwordData';
+import {UsernameData} from '../../shared/interfaces/usernameData';
+import {LoginData} from '../../shared/interfaces/loginData';
+import {RegisterData} from '../../shared/interfaces/registerData';
 
 @Injectable({
   providedIn: 'root'
@@ -18,71 +22,54 @@ export class AuthService {
 
   constructor(private http: HttpClient,
               private readonly router: Router,
-              private readonly toastr: ToastrService) { }
+              private readonly toastr: ToastrService) {
+  }
 
 
-  public register(registerData: {username: string, email: string, password: string}) {
+  public register(registerData: RegisterData): Observable<any> {
     return this.http.post(
       environment.apiUrl + 'users/register',
       registerData,
     );
 
   }
-  public login(loginData: {username: string, password: string}) {
+
+  public login(loginData: LoginData): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
       environment.apiUrl + 'users/login',
       loginData
     ).pipe(
       tap(resData => {
-      this.handleAuthentication(
-        resData.user.username,
-        resData.user.email,
-        resData.user.id,
-        resData.user.role,
-        resData.user.displayname,
-        resData.user.bio,
-        resData.user.url,
-        resData.user.avatarId,
-        resData.token);
-    }));
+        this.handleAuthentication(
+          resData.user.username,
+          resData.user.email,
+          resData.user.id,
+          resData.user.role,
+          resData.user.displayname,
+          resData.user.bio,
+          resData.user.url,
+          resData.user.avatarId,
+          resData.token);
+      }));
   }
 
-  public logout() {
+  public logout(): void {
     this.user.next(null);
     localStorage.removeItem('userData');
     this.router.navigate(['login']);
   }
 
-  public getUsernames() {
-    return this.http.get(
-      environment.apiUrl + 'users/usernames'
-    )
-    .pipe(
-      map((responseData: {usernames: string[]}) => {
-        return responseData.usernames;
-      }));
-  }
-
-  public getEmails() {
-    return this.http.get(
-      environment.apiUrl + 'users/emails'
-    ).pipe(
-      map((responseData: {emails: string[]}) => {
-        return responseData.emails;
-      }));
-
-  }
 
   public handleAuthentication(
     username: string,
     email: string,
-    id: string ,
+    id: string,
     role: Roles,
     displayname: string,
     bio: string,
     url: string,
     avatarId: string,
-    token: string) {
+    token: string): void {
     const user = new User(id,
       username,
       email,
@@ -96,13 +83,13 @@ export class AuthService {
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
-  public relogin(user: User) {
+  public relogin(user: User): void {
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
     this.toastr.success('Your settings have been updated!');
   }
 
-  autoLogin() {
+  autoLogin(): void {
 
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
@@ -124,13 +111,13 @@ export class AuthService {
 
   }
 
-  changePassword(paswordData: {password: string, newpassword: string}) {
+  changePassword(paswordData: PasswordData): Observable<any> {
     return this.http.put(
       environment.apiUrl + 'users/password',
       paswordData);
   }
 
-  changeUsername(usernameData: {username: string, password: string}){
+  changeUsername(usernameData: UsernameData): Observable<any> {
     return this.http.put(
       environment.apiUrl + 'users/username',
       usernameData

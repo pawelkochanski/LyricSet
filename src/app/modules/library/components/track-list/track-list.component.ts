@@ -1,10 +1,8 @@
-import { ToastrService } from 'ngx-toastr';
-import { LyricSet } from './../../../../shared/interfaces/lyric-set';
+import {LyricSet} from '../../../../shared/interfaces/lyric-set';
 import {Component, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-track-list',
@@ -13,13 +11,13 @@ import { Subscription } from 'rxjs';
 })
 export class TrackListComponent implements OnInit {
 
+  set: LyricSet;
+
   constructor(private readonly mysetsService: MysetsService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
-  activesetSub: Subscription;
-  set: LyricSet;
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {

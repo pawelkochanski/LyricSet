@@ -1,41 +1,39 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from 'environments/environment';
-import { User } from 'app/shared/interfaces/user';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'environments/environment';
+import {Settings} from '../../shared/interfaces/settings';
+import {Observable} from 'rxjs';
+import {ImagesData} from '../../shared/interfaces/imageData';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-constructor(private http: HttpClient,
-            private readonly router: Router) { }
+  constructor(private http: HttpClient) {
+  }
 
-public updateProfile(displayname: string, bio: string, url: string) {
-  if (displayname || bio || url) {
-    return this.http.put<User>(
+  public updateProfile(data: Settings): Observable<Settings> {
+    return this.http.put<Settings>(
       environment.apiUrl + 'users',
-      {displayname, bio, url},
+      data
     );
   }
-  return null;
 
-}
-
-public updateAvatar(avatar: any) {
-  console.log(avatar);
-  const formData = new FormData();
-  formData.append('file', avatar, avatar.filename);
-  if (avatar) {
-    return this.http.post<{avatarId: string}>(
-      environment.apiUrl + 'avatars',
-      formData);
+  public updateAvatar(avatar: any): Observable<ImagesData> {
+    console.log(avatar);
+    const formData = new FormData();
+    formData.append('file', avatar, avatar.filename);
+    if (avatar) {
+      return this.http.post<ImagesData>(
+        environment.apiUrl + 'images/avatar',
+        formData);
+    }
+    return null;
   }
-}
 
-public removeAvatar(avatarId: string) {
-  return this.http.delete(environment.apiUrl + 'avatars/' + avatarId);
-}
+  public removeAvatar(avatarId: string): Observable<any> {
+    return this.http.delete(environment.apiUrl + 'images/' + avatarId);
+  }
 
 }

@@ -2,7 +2,7 @@
   [routerLink]="[set.id]"
   [routerLinkActive]="['text-highlight']">
   <img alt="" matListAvatar
-       [src]="set.image"
+       [src]="mysetsService.getImageUrl(set.imageId)"
        (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'">
   <h1 matLine>{{set?.name}}</h1>
 </mat-list-item>

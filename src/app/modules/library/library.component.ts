@@ -1,4 +1,3 @@
-import { ErrorService } from './../../core/services/error.service';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MysetsService} from '../../core/services/mysets.service';
 
@@ -8,8 +7,7 @@ import {MysetsService} from '../../core/services/mysets.service';
   styleUrls: ['./library.component.scss']
 })
 export class LibraryComponent implements OnInit, OnDestroy {
-  constructor(private readonly mysetsService: MysetsService,
-              private readonly errorService: ErrorService) {
+  constructor(private readonly mysetsService: MysetsService) {
   }
 
 

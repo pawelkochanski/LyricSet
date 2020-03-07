@@ -1,7 +1,7 @@
 mat-card{
   display: flex;
   justify-content: space-between;
-  height: 120px;
+  height: 140px;
 }
 mat-card-title-group{
   display:flex;
@@ -19,11 +19,16 @@ textarea{
 }
 .img-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .img-buttons-container{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+img{
+  border-radius:5%;
 }
 

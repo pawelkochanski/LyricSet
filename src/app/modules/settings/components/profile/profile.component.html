@@ -5,20 +5,27 @@
     <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
       <label>Display Name:</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <input matInput [placeholder]="user.displayname" formControlName="displayname">
-        <mat-error *ngIf="f.displayname.errors?.required">Username is required!</mat-error>
-        <mat-error *ngIf="f.displayname.errors?.minlength">Username must be at least 3 characters!</mat-error>
+        <label>
+          <input matInput [placeholder]="user.displayname" formControlName="displayname">
+        </label>
+        <mat-error *ngIf="formControls.displayname.errors?.required">Username is required!</mat-error>
+        <mat-error *ngIf="formControls.displayname.errors?.minlength">Username must be at least 3 characters!
+        </mat-error>
         <mat-hint>This is the name that is being shown to others!</mat-hint>
       </mat-form-field>
       <label>Bio:</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <textarea matInput formControlName="bio" [placeholder]="user.bio"></textarea>
+        <label>
+          <textarea matInput formControlName="bio" [placeholder]="user.bio"></textarea>
+        </label>
         <mat-hint>Tell the world something about you :)</mat-hint>
       </mat-form-field>
-      <label>URL</label>
+      <label>URL:</label>
       <mat-form-field floatLabel="never" appearance="outline">
-        <input matInput type="url" formControlName="URL" [placeholder]="user.url">
-        <mat-error *ngIf="f.URL.errors?.pattern">This must be a valid url!</mat-error>
+        <label>
+          <input matInput type="url" formControlName="URL" [placeholder]="user.url">
+        </label>
+        <mat-error *ngIf="formControls.URL.errors?.pattern">This must be a valid url!</mat-error>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">Update</button>
     </form>
@@ -28,13 +35,15 @@
     <div class="button-holder">
       <label>Profile picture:</label>
     </div>
-    <img [src] = "avatarUrl"(error)="onImgError($event)">
+    <img [src]="mysetsService.getImageUrl(user.avatarId)" (error)="onImgError($event)" alt="">
     <div class="button-holder">
-      <button mat-raised-button [matMenuTriggerFor]="appMenu"><mat-icon>edit</mat-icon></button>
+      <button mat-raised-button [matMenuTriggerFor]="appMenu">
+        <mat-icon>edit</mat-icon>
+      </button>
       <mat-menu #appMenu="matMenu">
         <form>
-          <label mat-menu-item (click) = "openDialog()">Upload Photo</label>
-          <label mat-menu-item (click) = "onRemovePhoto()">Remove Photo</label>
+          <label mat-menu-item (click)="openDialog()">Upload Photo</label>
+          <label mat-menu-item (click)="onRemovePhoto()">Remove Photo</label>
         </form>
       </mat-menu>
 
