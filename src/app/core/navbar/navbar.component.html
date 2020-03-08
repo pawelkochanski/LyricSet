@@ -1,27 +1,34 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
   <button mat-button class="brand" [routerLink]="['home']"><mat-icon>queue_music</mat-icon>LyricSet</button>
-  <button 
+  <button
   *ngIf="isAuthenticated"
   mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
   <div class="separator"></div>
-  <mat-form-field floatLabel="never" color="accent">
-    <input matInput type="search" placeholder="Find your song.." >
+  <mat-form-field floatLabel="never" [matMenuTriggerFor]="search">
+    <input matInput type="search" placeholder="Find your song..">
   </mat-form-field>
+  <mat-menu #search xPosition="before">
+    <ul style="width: 200px">
+      <li>1</li>
+      <li>1</li>
+      <li>1</li>
+    </ul>
+  </mat-menu>
   <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
   <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
   <mat-menu #appMenu="matMenu">
     <ng-container *ngIf="isAuthenticated; else not">
       <button
       mat-menu-item [routerLink]="['settings']">Settings</button>
-      <button 
+      <button
       mat-menu-item (click)="onLogout()">Logout</button>
     </ng-container>
-    <ng-template #not> 
+    <ng-template #not>
       <button
       mat-menu-item [routerLink]="['login']">Log In</button>
-      <button 
+      <button
       mat-menu-item [routerLink]="['register']">Register</button>
     </ng-template>
-   
+
   </mat-menu>
 </mat-toolbar>

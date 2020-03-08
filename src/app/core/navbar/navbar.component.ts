@@ -1,8 +1,9 @@
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
-import { AuthService } from 'app/core/authentication/auth.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {AuthService} from 'app/core/authentication/auth.service';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,12 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
+  @ViewChild('searchTrigger', {static: true}) public menuTrigger: MatMenuTrigger;
   private userSub: Subscription;
 
   constructor(private readonly authService: AuthService,
-              private readonly toastr: ToastrService) { }
+              private readonly toastr: ToastrService) {
+  }
 
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
