@@ -1,0 +1,12 @@
+<div class="search-container">
+  <input
+    [(ngModel)]="userQuestion"
+    (ngModelChange)="userQuestionUpdate.next($event)"
+    [matAutocomplete]="auto"
+    class="search mat-body"
+    type="search"
+    placeholder="Find your song..">
+  <mat-autocomplete  [displayWith]="300" #auto="matAutocomplete" class="autocomplete" >
+    <mat-option *ngFor="let message of consoleMessages">{{message}}</mat-option>
+  </mat-autocomplete>
+</div>

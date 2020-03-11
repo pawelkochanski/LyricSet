@@ -62,7 +62,7 @@ $foreground: map-get($theme, foreground);
 }
 .lds-facebook div:nth-child(3) {
   left: 56px;
-  animation-delay: 0;
+  animation-delay: 0s;
 }
 @keyframes lds-facebook {
   0% {
@@ -73,4 +73,20 @@ $foreground: map-get($theme, foreground);
     top: 24px;
     height: 32px;
   }
+}
+.search{
+  border-radius: 2px;
+  border: none;
+  outline: 0;
+  width: 300px;
+  transition-timing-function: linear;
+  transition-duration: 0.2s;
+  transition-property: box-shadow;
+  padding: 10px;
+  box-shadow: 0 mat-color($accent);
+  margin: 0.5em;
+}
+
+.search:focus{
+  box-shadow: 0 0 0 2px mat-color($accent);
 }

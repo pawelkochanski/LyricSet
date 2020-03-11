@@ -4,16 +4,7 @@
   *ngIf="isAuthenticated"
   mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
   <div class="separator"></div>
-  <mat-form-field floatLabel="never" [matMenuTriggerFor]="search">
-    <input matInput type="search" placeholder="Find your song..">
-  </mat-form-field>
-  <mat-menu #search xPosition="before">
-    <ul style="width: 200px">
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-    </ul>
-  </mat-menu>
+  <app-search-bar></app-search-bar>
   <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
   <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
   <mat-menu #appMenu="matMenu">

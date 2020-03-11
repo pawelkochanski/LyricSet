@@ -11,7 +11,8 @@ import {
   MatToolbarModule,
   MatMenuModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule, MatAutocompleteModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,7 +38,9 @@ import {MatDialog} from '@angular/material/dialog';
     MatToolbarModule,
     MatMenuModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ]
 })
 export class AngularMaterialModule {

@@ -4,10 +4,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {AngularMaterialModule} from '../shared/angular-material.module';
 import {RouterModule} from '@angular/router';
 import {HomeModule} from '../modules/home/home.module';
-import { ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, SearchBarComponent],
   exports: [
     NavbarComponent
   ],
@@ -16,7 +17,8 @@ import { ReactiveFormsModule} from '@angular/forms';
     CommonModule,
     AngularMaterialModule,
     RouterModule,
-    HomeModule
+    HomeModule,
+    FormsModule
   ]
 })
 export class CoreModule { }
