@@ -5,7 +5,6 @@
   mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
   <div class="separator"></div>
   <app-search-bar></app-search-bar>
-  <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
   <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
   <mat-menu #appMenu="matMenu">
     <ng-container *ngIf="isAuthenticated; else not">

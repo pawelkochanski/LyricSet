@@ -5,8 +5,37 @@
     [matAutocomplete]="auto"
     class="search mat-body"
     type="search"
-    placeholder="Find your song..">
-  <mat-autocomplete  [displayWith]="300" #auto="matAutocomplete" class="autocomplete" >
-    <mat-option *ngFor="let message of consoleMessages">{{message}}</mat-option>
+    placeholder="Search for songs..."
+    (focusout)="onInputFocusOut()"
+  >
+
+  <mat-autocomplete  #auto="matAutocomplete" class="autocomplete" >
+    <mat-option class="is-loading" *ngIf="isLoading && userQuestion">
+      <mat-spinner diameter="30" color="accent"></mat-spinner>
+    </mat-option>
+
+    <mat-option *ngIf="noResult && userQuestion" disabled>
+      No results found.
+    </mat-option>
+
+    <mat-option class="divid" *ngIf="byTitleSearchResult.length !== 0" disabled>
+      <p> ------------ By title</p>
+    </mat-option>
+
+    <mat-option *ngFor="let track of byTitleSearchResult">
+      <mat-icon>music_note</mat-icon>
+      {{track.artist_name + ' - ' + track.track_name}}
+    </mat-option>
+
+    <mat-option class="divid" *ngIf=" byArtistSearchResult.length !== 0" disabled>
+      <p>------------ By artist<p>
+    </mat-option>
+
+    <mat-option *ngFor="let track of byArtistSearchResult ">
+      <mat-icon>music_note</mat-icon>
+      {{track.artist_name + ' - ' + track.track_name}}
+    </mat-option>
+
   </mat-autocomplete>
+  <button mat-icon-button type="submit"><mat-icon>search</mat-icon></button>
 </div>

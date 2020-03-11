@@ -12,7 +12,9 @@ import {
   MatMenuModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatSelectModule, MatAutocompleteModule
+  MatSelectModule,
+  MatAutocompleteModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -40,7 +42,8 @@ import {MatDialog} from '@angular/material/dialog';
     BrowserAnimationsModule,
     MatDialogModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AngularMaterialModule {

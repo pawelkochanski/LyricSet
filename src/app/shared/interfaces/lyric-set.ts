@@ -1,4 +1,4 @@
-import {Track} from './track';
+import {Track} from './search-track-response';
 
 export interface LyricSet {
   name: string;

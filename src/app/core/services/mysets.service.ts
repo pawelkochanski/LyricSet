@@ -1,14 +1,16 @@
 import {LyricSet} from '../../shared/interfaces/lyric-set';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {ErrorService} from './error.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 /*
  import {testList} from '../../shared/constants';
 */
-import {Track} from '../../shared/interfaces/track';
+import {SearchBarResponse, SerachTrackResponse} from '../../shared/interfaces/search-track-response';
 import {environment} from 'environments/environment';
 import {ImagesData} from '../../shared/interfaces/imageData';
+import {map} from 'rxjs/operators';
+import {resolvePtr} from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +58,7 @@ export class MysetsService {
       {name: result});
   }
 
-  updateActiveSet(name: string, desc: string, tracklist: Track[]): Observable<any> {
+  updateActiveSet(name: string, desc: string, tracklist: SerachTrackResponse[]): Observable<any> {
     if (name) {
       this.activeSet.name = name;
     }
@@ -101,5 +103,28 @@ export class MysetsService {
     const params = new HttpParams().set('setId', setId);
     return this.http.delete(environment.apiUrl + 'images/' + imageId,
       {params});
+  }
+
+  public quickSearch(query: string, pagesize: number, page: number): Observable<SearchBarResponse> {
+
+    const byTitle = this.http.get<SerachTrackResponse>(environment.apiUrl + 'track/search/title', {
+      params: new HttpParams()
+        .append('track', query)
+        .append('page_size', `${pagesize}`)
+        .append('page', `${page}`)
+    });
+    const byArtist = this.http.get<SerachTrackResponse>(environment.apiUrl + 'track/search/artist', {
+      params: new HttpParams()
+        .append('track', query)
+        .append('page_size', `${pagesize}`)
+        .append('page', `${page}`)
+    });
+    return forkJoin([byTitle, byArtist])
+      .pipe(map(responses => {
+       return {
+         byTitle: responses[0],
+         byArtist: responses[1]
+       };
+      }));
   }
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {Track} from '../../../../shared/interfaces/track';
+import {Track} from '../../../../shared/interfaces/search-track-response';
 import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({

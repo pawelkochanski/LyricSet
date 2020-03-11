@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {Track} from '../../../../shared/interfaces/track';
+import {Track} from '../../../../shared/interfaces/search-track-response';
 
 @Component({
   selector: 'app-track-list-item',
@@ -17,6 +17,6 @@ export class TrackListItemComponent implements OnInit {
   }
 
   OnRemoveClick() {
-    //this.mysetsService.activeSet.tracklist.splice(this.mysetsService.getTrackIndex(this.track), 1);
+    // this.mysetsService.activeSet.tracklist.splice(this.mysetsService.getTrackIndex(this.track), 1);
   }
 }
