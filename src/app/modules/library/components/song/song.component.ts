@@ -19,8 +19,7 @@ export class SongComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.mysetsService.setActiveSet(this.mysetsService.mysetlist[params.setindex]);
-        // this.track = this.set.tracklist[params.songindex];
+        this.track = this.set.tracklist[params.songindex];
       }
     );
     this.route.queryParams.subscribe((params: Params) => {

@@ -23,7 +23,6 @@ export class ErrorService {
       case 500:
       case 504:
         this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error', {timeOut: 7000});
-        this.authService.logout();
         return Errors.SERVER_ERROR;
       case 401:
         if (message === 'session expired') {

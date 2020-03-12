@@ -21,6 +21,7 @@ const appRoutes: Routes = [
       {path: ':setid/:songid', component: SongComponent}
     ]
   },
+  {path: 'song/:songid', component: SongComponent},
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
