@@ -78,10 +78,10 @@ $foreground: map-get($theme, foreground);
   border-radius: 2px;
   border: none;
   outline: 0;
-  width: 300px;
+  width: 400px;
   transition-timing-function: linear;
   transition-duration: 0.2s;
-  transition-property: box-shadow, width;
+  transition-property: box-shadow;
   padding: 8px;
   box-shadow: 0 mat-color($accent);
   margin: 0.5em;
@@ -89,5 +89,4 @@ $foreground: map-get($theme, foreground);
 
 .search:focus{
   box-shadow: 0 0 0 2px mat-color($accent);
-  width: 500px;
 }

@@ -4,22 +4,16 @@
       <mat-card-title class="text-highlight">
         {{mySetsService.activeSet.name}}</mat-card-title>
       <mat-card-subtitle>
-        <label>
-          <textarea matInput disabled rows="2" cols="35">{{mySetsService.activeSet.description}}</textarea>
-        </label>
+          {{mySetsService.activeSet.description}}
       </mat-card-subtitle>
     </div>
     <ng-template #temp>
       <div class="edit-title">
         <mat-card-title>
-          <label>
-            <input  maxlength="15" #title matInput placeholder="Edit me!">
-          </label>
+          <input matInput maxlength="15" class="mat-title" #title placeholder="Edit me!">
         </mat-card-title>
         <mat-card-subtitle>
-          <label>
-            <textarea #description matInput rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
-          </label>
+          <textarea class="mat-body" #description rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
         </mat-card-subtitle>
       </div>
     </ng-template>

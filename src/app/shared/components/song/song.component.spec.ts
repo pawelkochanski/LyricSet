@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SongComponent } from './song.component';
-import {AngularMaterialModule} from '../../../../shared/angular-material.module';
+import {AngularMaterialModule} from '../../angular-material.module';
 
 describe('SongComponent', () => {
   let component: SongComponent;

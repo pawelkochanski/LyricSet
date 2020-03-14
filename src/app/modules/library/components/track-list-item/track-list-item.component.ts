@@ -8,7 +8,7 @@ import {TrackResponse} from '../../../../shared/interfaces/search-track-response
   styleUrls: ['./track-list-item.component.scss']
 })
 export class TrackListItemComponent implements OnInit {
-  @Input() track: Track;
+  @Input() track: TrackResponse;
 
   constructor(private readonly mysetsService: MysetsService) {
   }

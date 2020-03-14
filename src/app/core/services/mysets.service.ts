@@ -3,14 +3,13 @@ import {forkJoin, Observable} from 'rxjs';
 import {ErrorService} from './error.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-/*
- import {testList} from '../../shared/constants';
-*/
-import {SearchBarResponse, SerachTrackResponse} from '../../shared/interfaces/search-track-response';
-import {environment} from 'environments/environment';
+import {SearchBarResponse, SerachTrackResponse, TrackResponse} from '../../shared/interfaces/search-track-response';
 import {ImagesData} from '../../shared/interfaces/imageData';
 import {map} from 'rxjs/operators';
-import {resolvePtr} from 'dns';
+import {AppSettings} from '../../shared/constants';
+import {LyricsResponse} from '../../shared/interfaces/lyrics-response';
+import {Track} from '../../shared/interfaces/track';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +21,15 @@ export class MysetsService {
   activeSet: LyricSet = null;
   mysetlist: LyricSet[] = [];
 
-  constructor(private readonly http: HttpClient, private readonly errorService: ErrorService) {
+  constructor(private readonly http: HttpClient,
+              private readonly errorService: ErrorService,
+              private readonly toastr: ToastrService) {
 
   }
 
   getMySetList(): Observable<any> {
     return this.http.get<LyricSet[]>(
-      environment.apiUrl + 'lyricsets',
+      AppSettings.apiUrl + 'lyricsets',
     );
   }
 
@@ -37,7 +38,7 @@ export class MysetsService {
   }
 
   removeSet(setId: string): Observable<any> {
-    return this.http.delete(environment.apiUrl + 'lyricsets/user/' + setId
+    return this.http.delete(AppSettings.apiUrl + 'lyricsets/user/' + setId
     );
   }
 
@@ -54,7 +55,7 @@ export class MysetsService {
   }
 
   addSet(result: string): Observable<any> {
-    return this.http.post(environment.apiUrl + 'lyricsets',
+    return this.http.post(AppSettings.apiUrl + 'lyricsets',
       {name: result});
   }
 
@@ -65,8 +66,16 @@ export class MysetsService {
     if (desc) {
       this.activeSet.description = desc;
     }
-    return this.http.put(environment.apiUrl + 'lyricsets/' + this.activeSet.id,
-      {name, description: desc, tracklist});
+    return this.updateSet(this.activeSet);
+  }
+
+  updateSet(set: LyricSet) {
+    return this.http.put(AppSettings.apiUrl + 'lyricsets/' + set.id,
+      {
+        name: set.name,
+        description: set.description,
+        tracklist: set.tracklist
+      });
   }
 
   refreshSetlist(): void {
@@ -83,7 +92,7 @@ export class MysetsService {
   }
 
   getImageUrl(imageId: string): string {
-    return environment.apiUrl + 'images/' + imageId;
+    return AppSettings.apiUrl + 'images/' + imageId;
   }
 
 
@@ -93,7 +102,7 @@ export class MysetsService {
     formData.append('file', image, image.filename);
     if (image) {
       return this.http.post<ImagesData>(
-        environment.apiUrl + 'images/set/' + setid,
+        AppSettings.apiUrl + 'images/set/' + setid,
         formData);
     }
     return null;
@@ -101,19 +110,19 @@ export class MysetsService {
 
   public removeImageSet(imageId: string, setId): Observable<any> {
     const params = new HttpParams().set('setId', setId);
-    return this.http.delete(environment.apiUrl + 'images/' + imageId,
+    return this.http.delete(AppSettings.apiUrl + 'images/' + imageId,
       {params});
   }
 
   public quickSearch(query: string, pagesize: number, page: number): Observable<SearchBarResponse> {
 
-    const byTitle = this.http.get<SerachTrackResponse>(environment.apiUrl + 'track/search/title', {
+    const byTitle = this.http.get<SerachTrackResponse>(AppSettings.apiUrl + 'track/search/title', {
       params: new HttpParams()
         .append('track', query)
         .append('page_size', `${pagesize}`)
         .append('page', `${page}`)
     });
-    const byArtist = this.http.get<SerachTrackResponse>(environment.apiUrl + 'track/search/artist', {
+    const byArtist = this.http.get<SerachTrackResponse>(AppSettings.apiUrl + 'track/search/artist', {
       params: new HttpParams()
         .append('track', query)
         .append('page_size', `${pagesize}`)
@@ -121,10 +130,41 @@ export class MysetsService {
     });
     return forkJoin([byTitle, byArtist])
       .pipe(map(responses => {
-       return {
-         byTitle: responses[0],
-         byArtist: responses[1]
-       };
+        return {
+          byTitle: responses[0],
+          byArtist: responses[1]
+        };
       }));
+  }
+
+  getTrack(trackId: string): Observable<TrackResponse> {
+    return this.http.get<TrackResponse>(AppSettings.apiUrl + `track/${trackId}`);
+  }
+
+  getTrackLyrics(trackId: string): Observable<LyricsResponse> {
+    return this.http.get<LyricsResponse>(AppSettings.apiUrl + `track/lyrics/${trackId}`);
+  }
+
+  updateSets(sets: LyricSet[], track: Track): void {
+    console.log(sets);
+    console.log(track);
+    this.isLoading = true;
+
+    let updated = 0;
+
+    for (const set of sets) {
+      set.tracklist.push(track);
+      this.updateSet(set).subscribe(
+        response => {
+          updated++;
+          if (updated === sets.length) {
+            this.toastr.success('All sets successfully updated!');
+          }
+        },
+        error => {
+          this.errorService.handleError(error);
+        }
+      );
+    }
   }
 }

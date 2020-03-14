@@ -19,6 +19,8 @@ import { PageNotFoundModule } from './modules/page-not-found/page-not-found.modu
 import { ToastrModule } from 'ngx-toastr';
 import { CropperComponent } from './shared/components/cropper/cropper.component';
 import { UsernameDialogComponent } from './modules/settings/components/username-dialog/username-dialog.component';
+import {SharedModule} from './shared/shared.module';
+import {AddSongDialogComponent} from './shared/components/add-song-dialog/add-song-dialog.component';
 
 
 @NgModule({
@@ -39,13 +41,15 @@ import { UsernameDialogComponent } from './modules/settings/components/username-
     HttpClientModule,
     ServerErrorModule,
     ToastrModule.forRoot(),
-    CropperModule
+    CropperModule,
+    SharedModule
   ],
   entryComponents: [
     PasswordDialogComponent,
     AddSetDialogComponent,
     CropperComponent,
-    UsernameDialogComponent
+    UsernameDialogComponent,
+    AddSongDialogComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],

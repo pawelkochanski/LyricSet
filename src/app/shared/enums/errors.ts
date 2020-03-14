@@ -6,5 +6,6 @@ export enum Errors {
     EMAIL_EXISTS,
     SERVER_ERROR,
     UNAUTHORIZED,
-    NO_PERMISSIONS
+    NO_PERMISSIONS,
+    NOT_FOUND
 }

@@ -2,9 +2,9 @@ import {MysetsService} from '../../../../core/services/mysets.service';
 import {ErrorService} from '../../../../core/services/error.service';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {environment} from '../../../../../environments/environment';
 import {CropperComponent} from '../../../../shared/components/cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
+import {AppSettings} from '../../../../shared/constants';
 
 @Component({
   selector: 'app-set-header',
@@ -24,7 +24,7 @@ export class SetHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.imageUrl = environment.apiUrl + this.mySetsService.activeSet.imageId;
+    this.imageUrl = AppSettings.apiUrl + this.mySetsService.activeSet.imageId;
   }
 
   onRemoveSet(): void {
@@ -49,7 +49,7 @@ export class SetHeaderComponent implements OnInit {
   finishEdit(): void {
     let name = this.mySetsService.activeSet.name;
     let desc = this.mySetsService.activeSet.description;
-    const tracklist = this.mySetsService.activeSet.tracklist;
+    const tracklist = [];
     const nameInput = this.titleinput.nativeElement.value;
     const descInput = this.descinput.nativeElement.value;
     if (nameInput !== '' && nameInput !== name) {

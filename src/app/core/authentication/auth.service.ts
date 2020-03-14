@@ -5,13 +5,13 @@ import {LoginResponse} from '../../shared/interfaces/loginResponse';
 import {User} from '../../shared/interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {environment} from 'environments/environment';
 import {tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {PasswordData} from '../../shared/interfaces/passwordData';
 import {UsernameData} from '../../shared/interfaces/usernameData';
 import {LoginData} from '../../shared/interfaces/loginData';
 import {RegisterData} from '../../shared/interfaces/registerData';
+import {AppSettings} from '../../shared/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,7 @@ export class AuthService {
 
   public register(registerData: RegisterData): Observable<any> {
     return this.http.post(
-      environment.apiUrl + 'users/register',
+      AppSettings.apiUrl + 'users/register',
       registerData,
     );
 
@@ -36,7 +36,7 @@ export class AuthService {
 
   public login(loginData: LoginData): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
-      environment.apiUrl + 'users/login',
+      AppSettings.apiUrl + 'users/login',
       loginData
     ).pipe(
       tap(resData => {
@@ -113,13 +113,13 @@ export class AuthService {
 
   changePassword(paswordData: PasswordData): Observable<any> {
     return this.http.put(
-      environment.apiUrl + 'users/password',
+      AppSettings.apiUrl + 'users/password',
       paswordData);
   }
 
   changeUsername(usernameData: UsernameData): Observable<any> {
     return this.http.put(
-      environment.apiUrl + 'users/username',
+      AppSettings.apiUrl + 'users/username',
       usernameData
     );
   }

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, tap} from 'rxjs/operators';
+import {debounceTime} from 'rxjs/operators';
 import {MysetsService} from '../services/mysets.service';
-import {TrackResponse} from '../../shared/interfaces/search-track-response';
-import {Constants} from '../../shared/constants';
-import {error} from 'util';
+import {SearchBarResponse} from '../../shared/interfaces/search-track-response';
 import {ErrorService} from '../services/error.service';
+import {AppSettings} from '../../shared/constants';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -14,56 +14,49 @@ import {ErrorService} from '../services/error.service';
 })
 export class SearchBarComponent implements OnInit {
 
-  public byTitleSearchResult: TrackResponse[] = [];
-  public byArtistSearchResult: TrackResponse[] = [];
-  public userQuestion: string;
-  userQuestionUpdate = new Subject<string>();
-  public isLoading = false;
-  public noResult = false;
+  public searchFrom: FormGroup;
+  public searchResult: SearchBarResponse;
+  public noResult: boolean;
+  public isLoading: boolean;
 
-  constructor(private readonly  mysetsService: MysetsService, private readonly errorService: ErrorService) {
-    // Debounce search.
-    this.userQuestionUpdate.pipe(
-      debounceTime(400),
-      tap(res => {
-        this.isLoading = true;
-        this.byTitleSearchResult = [];
-        this.byArtistSearchResult = [];
-        this.noResult = false;
-      }),
-      distinctUntilChanged())
-      .subscribe(value => {
-        this.mysetsService.quickSearch(this.userQuestion, Constants.searchBarPageSize, Constants.searchBarPage).subscribe(
-          response => {
-            console.log(response);
-            this.isLoading = false;
-            const byArtist = response.byArtist.track_list;
-            const byTitle = response.byTitle.track_list;
-            if (byArtist.length === 0 && byTitle.length === 0) {
-              this.noResult = true;
-              return;
-            }
-            byTitle.forEach(element => {
-              this.byTitleSearchResult.push(element.track);
-            });
-            byArtist.forEach(element => {
-              this.byArtistSearchResult.push(element.track);
-            });
-          },
-          err => {
-            this.isLoading = false;
-            this.errorService.handleError(err);
-          }
-        );
-      });
+  constructor(private readonly  mysetsService: MysetsService,
+              private readonly errorService: ErrorService,
+              private readonly router: Router,
+              private readonly fb: FormBuilder) {
   }
 
-  onInputFocusOut() {
-    this.byTitleSearchResult = [];
-    this.byArtistSearchResult = [];
+  onOptionSelect(value: string) {
+    this.router.navigate(['/song', value]);
   }
 
   ngOnInit() {
+    this.searchFrom = this.fb.group({
+      searchInput: null
+    });
+    this.noResult = false;
+
+
+    this.searchFrom.controls.searchInput.valueChanges
+      .pipe(debounceTime(300))
+      .subscribe(
+        value => {
+          this.isLoading = true;
+          this.handleValueChange(value);
+        }
+      );
   }
 
+  handleValueChange(value: string): void {
+    this.mysetsService.quickSearch(value, AppSettings.searchBarPageSize, AppSettings.searchBarPage)
+      .subscribe(response => {
+          console.log(response);
+          this.searchResult = response;
+          this.noResult = this.searchResult.byArtist.track_list.length === 0 && this.searchResult.byTitle.track_list.length === 0;
+          this.isLoading = false;
+        },
+        error => {
+          this.errorService.handleError(error);
+          this.isLoading = false;
+        });
+  }
 }

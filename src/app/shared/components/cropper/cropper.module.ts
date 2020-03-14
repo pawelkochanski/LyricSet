@@ -2,7 +2,6 @@ import { AngularMaterialModule } from '../../angular-material.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CropperComponent } from './cropper.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
 import {MatExpansionModule} from '@angular/material';
 
@@ -14,6 +13,6 @@ import {MatExpansionModule} from '@angular/material';
     AngularMaterialModule,
     MatExpansionModule
   ],
-  declarations: [CropperComponent]
+  declarations: []
 })
 export class CropperModule { }

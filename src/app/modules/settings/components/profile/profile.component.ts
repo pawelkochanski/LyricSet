@@ -6,8 +6,9 @@ import {Subscription} from 'rxjs';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {CropperComponent} from 'app/shared/components/cropper/cropper.component';
-import {environment} from 'environments/environment';
+
 import {MysetsService} from '../../../../core/services/mysets.service';
+import {AppSettings} from '../../../../shared/constants';
 
 @Component({
   selector: 'app-profile',
@@ -89,6 +90,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onImgError($event) {
-    $event.target.src = environment.defaultAvatar;
+    $event.target.src = AppSettings.defaultAvatar;
   }
 }

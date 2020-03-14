@@ -22,17 +22,17 @@ export class ErrorService {
     switch (errorResponse.status) {
       case 500:
       case 504:
-        this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error', {timeOut: 7000});
+        this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error');
         return Errors.SERVER_ERROR;
       case 401:
-        if (message === 'session expired') {
-          this.authService.logout();
-          this.toastr.error('Looks like your session has expired, try to login again.', 'Unauthorized', {timeOut: 7000});
-          this.router.navigate(['login']);
-          return Errors.UNAUTHORIZED;
-        }
+        this.authService.logout();
+        this.router.navigate(['login']);
         this.toastr.error('You dont have permissions for this kind of activity :/');
-        return Errors.NO_PERMISSIONS;
+        return Errors.UNAUTHORIZED;
+      case 404:
+        this.toastr.error('Looks like we dont have resource you are looking for.', 'Not found.');
+        this.router.navigate(['../']);
+        return Errors.NOT_FOUND;
       case 400:
         switch (message) {
           case 'Invalid credentials':

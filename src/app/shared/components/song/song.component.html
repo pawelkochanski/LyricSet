@@ -1,0 +1,62 @@
+<div class="main-container">
+  <div *ngIf="this.mysetsService.activeSet">
+    <mat-toolbar *ngIf="playMode; else temp">
+      <button
+        routerLink="../"
+        mat-button>
+        <mat-icon>close</mat-icon>
+      </button>
+      <div class="separator"></div>
+      <button
+        [disabled]="checkIfTrackIsFirst()"
+        [routerLink]="['../',getPreviousSongIndex()]"
+        queryParamsHandling="preserve"
+        mat-button>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button
+        [disabled]="checkIfTrackIsLast()"
+        [routerLink]="['../',getNextSongIndex()]"
+        queryParamsHandling="preserve"
+        mat-button>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <ng-template #temp>
+      <mat-toolbar>
+        <button
+          routerLink="../"
+          mat-button>
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-toolbar>
+    </ng-template>
+  </div>
+
+
+  <div class="loading" *ngIf="lyricsLoading || trackLoading else showTrack">
+    <mat-spinner diameter="100" color="accent"></mat-spinner>
+  </div>
+
+  <ng-template #showTrack>
+    <mat-card>
+      <mat-card-actions align="start">
+        <button *ngIf="this.user" mat-icon-button (click)="onAddSongClick()"><mat-icon>add</mat-icon></button>
+      </mat-card-actions>
+      <mat-card-title class="text-highlight">
+        {{track.track_name}}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{track.artist_name}}
+      </mat-card-subtitle>
+      <mat-card-content>
+        <span class="lyrics">
+          {{lyrics.lyrics_body}}
+        </span>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+</div>
+

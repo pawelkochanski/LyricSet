@@ -3,9 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:4200/api/',
-  defaultAvatar: 'http://cdn.onlinewebfonts.com/svg/img_266351.png'
+  production: false
 };
 
 /*

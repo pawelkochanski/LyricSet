@@ -14,11 +14,10 @@ import {
   MatDialogModule,
   MatSelectModule,
   MatAutocompleteModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule, MatTooltipModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDialog} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -43,7 +42,8 @@ import {MatDialog} from '@angular/material/dialog';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ]
 })
 export class AngularMaterialModule {
