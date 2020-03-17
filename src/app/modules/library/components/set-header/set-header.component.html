@@ -19,7 +19,10 @@
     </ng-template>
     <div class="separator"></div>
     <div *ngIf="!mySetsService.isEditMode else normalMode">
-      <button mat-button [routerLink]="[0]" [queryParams]="{playMode: 1}">
+      <button mat-button
+              [disabled]="mySetsService.activeSet.tracklist.length===0"
+              [routerLink]="[mySetsService.activeSet.tracklist[0]?.track_id]"
+              [queryParams]="{playMode: 1, currentIndex: 0}">
         <mat-icon>play_circle_outline</mat-icon>
       </button>
       <button mat-button (click)="startEdit()">

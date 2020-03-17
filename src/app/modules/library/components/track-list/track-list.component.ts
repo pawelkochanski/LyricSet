@@ -11,8 +11,6 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class TrackListComponent implements OnInit {
 
-  set: LyricSet;
-
   constructor(private readonly mysetsService: MysetsService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -21,17 +19,13 @@ export class TrackListComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        if (!this.mysetsService.mysetlist.find(set => set.id === params.setid)) {
-          this.router.navigate(['/library']);
-        }
-        this.mysetsService.setActiveSet(this.mysetsService.getSet(params.setid));
-        this.mysetsService.setEditMode(false);
+        this.mysetsService.handleParamSetId(params.setid);
       }
     );
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.set.tracklist, event.previousIndex, event.currentIndex);
-    console.log(this.set.tracklist);
+    moveItemInArray(this.mysetsService.activeSet.tracklist, event.previousIndex, event.currentIndex);
+    console.log(this.mysetsService.activeSet.tracklist);
   }
 }

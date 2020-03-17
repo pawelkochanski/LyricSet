@@ -13,6 +13,7 @@ import {SettingsComponent} from './modules/settings/settings.component';
 import {ProfileComponent} from './modules/settings/components/profile/profile.component';
 import {AccountComponent} from './modules/settings/components/account/account.component';
 import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
+import {SearchComponent} from './modules/search/search.component';
 
 const appRoutes: Routes = [
   {
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
       {path: 'account', component: AccountComponent}
     ]
   },
+  {path: 'search/:query', component: SearchComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: '**', component: PageNotFoundComponent}
 ];

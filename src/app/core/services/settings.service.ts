@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Settings} from '../../shared/interfaces/settings';
 import {Observable} from 'rxjs';
 import {ImagesData} from '../../shared/interfaces/imageData';
-import {AppSettings} from '../../shared/constants';
+import {AppSettings} from '../../shared/AppSettings';
 
 @Injectable({
   providedIn: 'root'

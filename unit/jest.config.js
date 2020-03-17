@@ -2,14 +2,14 @@
 module.exports = {
   preset: 'jest-preset-angular',
   collectCoverage: true,
-  coverageThreshold: {
+ /* coverageThreshold: {
     global: {
       branches: 30,
       functions: 30,
       lines: 30,
       statements: 30
     }
-  },
+  },*/
   globals: {
     'ts-jest': {
       tsConfig: '<rootDir>/tsconfig.spec.json',

@@ -23,9 +23,9 @@
       <label>URL:</label>
       <mat-form-field floatLabel="never" appearance="outline">
         <label>
-          <input matInput type="url" formControlName="URL" [placeholder]="user.url">
+          <input matInput type="url" formControlName="url" [placeholder]="user.url">
         </label>
-        <mat-error *ngIf="formControls.URL.errors?.pattern">This must be a valid url!</mat-error>
+        <mat-error *ngIf="formControls.url.errors?.pattern">This must be a valid url!</mat-error>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit">Update</button>
     </form>

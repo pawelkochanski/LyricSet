@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material';
 import {CropperComponent} from 'app/shared/components/cropper/cropper.component';
 
 import {MysetsService} from '../../../../core/services/mysets.service';
-import {AppSettings} from '../../../../shared/constants';
+import {AppSettings} from '../../../../shared/AppSettings';
 
 @Component({
   selector: 'app-profile',
@@ -60,7 +60,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm = this.fb.group({
         displayname: ['', [Validators.minLength(3)]],
         bio: [''],
-        URL: ['', [Validators.pattern(new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'))]]
+        url: ['', [Validators.pattern(new RegExp('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'))]]
       }
     );
   }

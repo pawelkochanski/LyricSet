@@ -21,6 +21,7 @@ import { CropperComponent } from './shared/components/cropper/cropper.component'
 import { UsernameDialogComponent } from './modules/settings/components/username-dialog/username-dialog.component';
 import {SharedModule} from './shared/shared.module';
 import {AddSongDialogComponent} from './shared/components/add-song-dialog/add-song-dialog.component';
+import {SearchModule} from './modules/search/search.module';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import {AddSongDialogComponent} from './shared/components/add-song-dialog/add-so
     ServerErrorModule,
     ToastrModule.forRoot(),
     CropperModule,
-    SharedModule
+    SharedModule,
+    SearchModule
   ],
   entryComponents: [
     PasswordDialogComponent,

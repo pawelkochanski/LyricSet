@@ -4,7 +4,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CropperComponent} from '../../../../shared/components/cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AppSettings} from '../../../../shared/constants';
+import {AppSettings} from '../../../../shared/AppSettings';
 
 @Component({
   selector: 'app-set-header',
@@ -49,7 +49,6 @@ export class SetHeaderComponent implements OnInit {
   finishEdit(): void {
     let name = this.mySetsService.activeSet.name;
     let desc = this.mySetsService.activeSet.description;
-    const tracklist = [];
     const nameInput = this.titleinput.nativeElement.value;
     const descInput = this.descinput.nativeElement.value;
     if (nameInput !== '' && nameInput !== name) {
@@ -58,7 +57,7 @@ export class SetHeaderComponent implements OnInit {
     if (descInput !== '' && descInput !== desc) {
       desc = descInput;
     }
-    this.mySetsService.updateActiveSet(name, desc, tracklist)
+    this.mySetsService.updateActiveSet(name, desc)
       .subscribe(response => {
         },
         error => {

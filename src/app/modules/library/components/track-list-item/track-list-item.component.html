@@ -1,19 +1,17 @@
 <div class="track mat-elevation-z3" [ngClass]="this.mysetsService.isEditMode ? 'cursor-pointer hover' : ''">
-  <img
-    alt=""
-    (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
-    [src]="track.img"
-  >
+  <div class="avatar">
+    <mat-icon>music_note</mat-icon>
+  </div>
   <div class="track-header" >
-    <h3>{{track.title}}</h3>
-    <p>{{track.artist}}</p>
+    <h3>{{track.track_name}}</h3>
+    <p>{{track.artist_name}}</p>
   </div>
   <div class="separator">
   </div>
   <button
     *ngIf="!mysetsService.isEditMode; else tmp"
     mat-icon-button
-    [routerLink]="[mysetsService.getTrackIndex(track)]"
+    [routerLink]="[track.track_id]"
     [queryParams]="{playMode : 0}">
     <mat-icon>remove_red_eye</mat-icon>
   </button>

@@ -11,7 +11,7 @@ import {PasswordData} from '../../shared/interfaces/passwordData';
 import {UsernameData} from '../../shared/interfaces/usernameData';
 import {LoginData} from '../../shared/interfaces/loginData';
 import {RegisterData} from '../../shared/interfaces/registerData';
-import {AppSettings} from '../../shared/constants';
+import {AppSettings} from '../../shared/AppSettings';
 
 @Injectable({
   providedIn: 'root'

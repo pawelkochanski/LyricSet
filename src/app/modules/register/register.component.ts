@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(userData)
       .subscribe(response => {
         console.log(response);
-        this.toast.success('Your accoun has been created. You can now log in.');
+        this.toast.success('Your account has been created. You can now log in.');
         this.router.navigate(['/login']);
       },
       error => {

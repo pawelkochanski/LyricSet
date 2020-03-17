@@ -3,7 +3,7 @@ import {debounceTime} from 'rxjs/operators';
 import {MysetsService} from '../services/mysets.service';
 import {SearchBarResponse} from '../../shared/interfaces/search-track-response';
 import {ErrorService} from '../services/error.service';
-import {AppSettings} from '../../shared/constants';
+import {AppSettings} from '../../shared/AppSettings';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
@@ -58,5 +58,12 @@ export class SearchBarComponent implements OnInit {
           this.errorService.handleError(error);
           this.isLoading = false;
         });
+  }
+
+  onSearchClick() {
+    if (this.searchFrom.controls.searchInput.value) {
+      this.router.navigate(['/search', this.searchFrom.controls.searchInput.value]);
+    }
+
   }
 }

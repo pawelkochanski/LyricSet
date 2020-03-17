@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'app/core/authentication/auth.service';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
-import { take, exhaustMap, catchError } from 'rxjs/operators';
+import {take, exhaustMap, catchError, map} from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 import { error } from 'protractor';
 

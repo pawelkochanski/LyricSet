@@ -6,10 +6,12 @@ import {Injectable} from '@angular/core';
 import {SearchBarResponse, SerachTrackResponse, TrackResponse} from '../../shared/interfaces/search-track-response';
 import {ImagesData} from '../../shared/interfaces/imageData';
 import {map} from 'rxjs/operators';
-import {AppSettings} from '../../shared/constants';
+import {AppSettings} from '../../shared/AppSettings';
 import {LyricsResponse} from '../../shared/interfaces/lyrics-response';
 import {Track} from '../../shared/interfaces/track';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {Errors} from '../../shared/enums/errors';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class MysetsService {
 
   constructor(private readonly http: HttpClient,
               private readonly errorService: ErrorService,
-              private readonly toastr: ToastrService) {
+              private readonly toastr: ToastrService,
+              private readonly router: Router) {
 
   }
 
@@ -59,7 +62,7 @@ export class MysetsService {
       {name: result});
   }
 
-  updateActiveSet(name: string, desc: string, tracklist: SerachTrackResponse[]): Observable<any> {
+  updateActiveSet(name: string, desc: string): Observable<any> {
     if (name) {
       this.activeSet.name = name;
     }
@@ -70,6 +73,7 @@ export class MysetsService {
   }
 
   updateSet(set: LyricSet) {
+    console.log(typeof set.tracklist[0]);
     return this.http.put(AppSettings.apiUrl + 'lyricsets/' + set.id,
       {
         name: set.name,
@@ -146,8 +150,6 @@ export class MysetsService {
   }
 
   updateSets(sets: LyricSet[], track: Track): void {
-    console.log(sets);
-    console.log(track);
     this.isLoading = true;
 
     let updated = 0;
@@ -162,9 +164,58 @@ export class MysetsService {
           }
         },
         error => {
-          this.errorService.handleError(error);
+          const errorRes = this.errorService.handleError(error);
+          if (errorRes === Errors.TRACK_EXISTS) {
+            this.toastr.error('Set "' + set.name + '" alerady includes that song!');
+          }
         }
       );
+    }
+  }
+
+  getTrackIndex(track: Track): number {
+    return this.activeSet.tracklist.indexOf(track);
+  }
+
+  handleParamSetId(setid: string): void {
+    if (!setid) {
+      return;
+    }
+    if (!this.mysetlist.find(set => set.id === setid)) {
+      this.router.navigate(['/library']);
+    }
+    this.setActiveSet(this.getSet(setid));
+    this.setEditMode(false);
+    console.log(this.activeSet);
+  }
+
+  isNextDisabled(trackId: number): boolean {
+    const exists = this.activeSet.tracklist.find(track => track.track_id === trackId);
+    return this.getTrackIndex(exists) === this.activeSet.tracklist.length - 1;
+  }
+
+  isPreviousDisabled(trackId: number): boolean {
+    const exists = this.activeSet.tracklist.find(track => track.track_id === trackId);
+    return this.getTrackIndex(exists) === 0;
+  }
+
+  getNextTrackId(trackId: number): number {
+    const exists = this.activeSet.tracklist.find(track => track.track_id === trackId);
+    const next = this.activeSet.tracklist[this.getTrackIndex(exists) + 1];
+    if (next) {
+      return next.track_id;
+    } else {
+      return null;
+    }
+  }
+
+  getPreviousTrackId(trackId: number) {
+    const exists = this.activeSet.tracklist.find(track => track.track_id === trackId);
+    const previous = this.activeSet.tracklist[this.getTrackIndex(exists) - 1];
+    if (previous) {
+      return previous.track_id;
+    } else {
+      return null;
     }
   }
 }

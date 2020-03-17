@@ -45,6 +45,11 @@ export class ErrorService {
             return Errors.EMAIL_EXISTS;
           case 'username exists':
             return Errors.USERNAME_EXISTS;
+          case 'track exists':
+            return Errors.TRACK_EXISTS;
+          default:
+            this.toastr.error('You have sent an invalid request.');
+            return Errors.BAD_REQUEST;
         }
     }
 
