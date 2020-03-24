@@ -6,4 +6,5 @@ export interface LyricSet {
   imageId: string;
   tracklist: Track[];
   id: string;
+  isPrivate: boolean;
 }

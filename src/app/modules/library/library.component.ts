@@ -13,6 +13,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.mysetsService.refreshSetlist();
+    this.mysetsService.isGuestMode = false;
   }
 
   ngOnDestroy() {

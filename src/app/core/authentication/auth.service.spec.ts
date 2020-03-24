@@ -200,4 +200,24 @@ describe('Service: Auth', () => {
       expect(service.user.value).toEqual(user);
     });
   });
+
+  test('changePassword should send put request with users/password', () => {
+    const passwordData = {password: 'password', newpassword: 'newpassword'};
+    service.changePassword(passwordData).subscribe(
+      response => {}
+    );
+    const req = http.expectOne(AppSettings.apiUrl + 'users/password');
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual(passwordData);
+  });
+
+  test('changeUsername should send put request with users/username', () => {
+    const usernameData = {username: 'username', password: 'password'};
+    service.changeUsername(usernameData).subscribe(
+      response => {}
+    );
+    const req = http.expectOne(AppSettings.apiUrl + 'users/username');
+    expect(req.request.method).toBe('PUT');
+    expect(req.request.body).toEqual(usernameData);
+  });
 });

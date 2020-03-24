@@ -1,7 +1,7 @@
-import { MysetsService } from 'app/core/services/mysets.service';
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {MysetsService} from 'app/core/services/mysets.service';
+import {Component, OnInit} from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 
 @Component({
@@ -14,29 +14,34 @@ export class AddSetDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddSetDialogComponent>,
     private readonly fb: FormBuilder,
-    private readonly setService: MysetsService) {}
+    private readonly setService: MysetsService) {
+  }
 
   setNameForm: FormGroup;
 
   ngOnInit() {
     this.setNameForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(15)]],
-    });
+      isPrivate: ['', []]
+  })
+    ;
   }
 
-  get f() {
+  get formcontrols() {
     return this.setNameForm.controls;
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onSendClick() {
-    const name = this.f.name.value;
-    console.log(name);
+    const name = this.formcontrols.name.value;
+    const value = this.setNameForm.value;
     if (name) {
-      this.setService.addSet(name).subscribe(
-        response => {}
+      this.setService.addSet(value).subscribe(
+        response => {
+        }
       );
     }
     this.dialogRef.close();

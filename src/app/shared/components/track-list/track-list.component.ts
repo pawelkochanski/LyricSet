@@ -1,8 +1,8 @@
-import {LyricSet} from '../../../../shared/interfaces/lyric-set';
-import {Component, OnInit} from '@angular/core';
-import {MysetsService} from '../../../../core/services/mysets.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {MysetsService} from '../../../core/services/mysets.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
 
 @Component({
   selector: 'app-track-list',
@@ -12,14 +12,14 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class TrackListComponent implements OnInit {
 
   constructor(private readonly mysetsService: MysetsService,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
         this.mysetsService.handleParamSetId(params.setid);
+        this.mysetsService.getSet(params.setid);
       }
     );
   }

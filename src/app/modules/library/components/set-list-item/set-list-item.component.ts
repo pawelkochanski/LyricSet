@@ -14,6 +14,9 @@ export class SetListItemComponent implements OnInit {
   constructor(private readonly mysetsService: MysetsService) {
   }
 
+
+
+
   ngOnInit() {
   }
 

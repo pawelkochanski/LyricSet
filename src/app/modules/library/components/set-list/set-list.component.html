@@ -1,7 +1,17 @@
 <div>
+  <label>Public:</label>
   <mat-nav-list>
-    <app-set-list-item *ngFor="let set of mysetsService.mysetlist" [set]="set">
-    </app-set-list-item>
+    <div *ngFor="let set of mysetsService.mysetlist">
+      <app-set-list-item *ngIf="!set.isPrivate" [set]="set">
+      </app-set-list-item>
+    </div>
+  </mat-nav-list>
+  <label>Private:</label>
+  <mat-nav-list>
+    <div *ngFor="let set of mysetsService.mysetlist">
+      <app-set-list-item *ngIf="set.isPrivate" [set]="set">
+      </app-set-list-item>
+    </div>
   </mat-nav-list>
   <button mat-raised-button color="accent" (click)="openDialog()"><mat-icon>add</mat-icon></button>
 </div>

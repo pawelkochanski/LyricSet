@@ -1,0 +1,30 @@
+<div class="loading" *ngIf="isLoading else content">
+  <mat-spinner diameter="50" color="accent"></mat-spinner>
+</div>
+<ng-template #content>
+  <div class="contianer">
+    <mat-card>
+      <mat-card-title>
+        <mat-toolbar>
+          Public Library
+        </mat-toolbar>
+      </mat-card-title>
+      <mat-nav-list>
+        <div *ngFor="let set of setService.mysetlist">
+          <mat-list-item
+            [routerLink]="[set.id]"
+            [routerLinkActive]="['text-highlight']">
+            <img alt="" matListAvatar
+                 [src]="setService.getImageUrl(set.imageId)"
+                 (error)="setService.onImgError($event)">
+            <h1 matLine>{{set?.name}}</h1>
+          </mat-list-item>
+        </div>
+      </mat-nav-list>
+    </mat-card>
+    <router-outlet></router-outlet>
+  </div>
+
+</ng-template>
+
+

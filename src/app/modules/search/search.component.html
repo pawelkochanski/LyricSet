@@ -1,5 +1,5 @@
 <div class="main-container">
-  <mat-toolbar>Serach results:</mat-toolbar>
+  <mat-toolbar>Search results:</mat-toolbar>
 
   <div class="loading" *ngIf="isLoading else searchResults">
     <mat-spinner diameter="100" color="accent"></mat-spinner>
@@ -21,9 +21,19 @@
         <p *ngIf="this.noArtistResult">No results found...</p>
         <mat-action-list>
           <mat-list-item *ngFor="let element of searchResult?.byArtist.track_list"
-              [routerLink]="['song', element.track.track_id]">
+              [routerLink]="['/song', element.track.track_id]">
             <mat-icon>music_note</mat-icon>
             {{element.track.artist_name + ' - ' + element.track.track_name}}
+          </mat-list-item>
+        </mat-action-list>
+      </mat-tab>
+      <mat-tab label="Users">
+        <p *ngIf="this.noUsersResult">No results found...</p>
+        <mat-action-list>
+          <mat-list-item *ngFor="let element of searchResult?.users"
+                         [routerLink]="['/user', element.id]">
+            <mat-icon>person</mat-icon>
+            {{element.displayname}}
           </mat-list-item>
         </mat-action-list>
       </mat-tab>

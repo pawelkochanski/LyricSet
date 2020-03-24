@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   public searchResult: SearchBarResponse;
   public noArtistResult: boolean;
   public noTitleResult: boolean;
+  public noUsersResult: boolean;
   public isLoading: boolean;
 
   constructor(private readonly route: ActivatedRoute,
@@ -32,6 +33,7 @@ export class SearchComponent implements OnInit {
               this.searchResult = response;
               this.noTitleResult =  this.searchResult.byTitle.track_list.length === 0;
               this.noArtistResult = this.searchResult.byArtist.track_list.length === 0;
+              this.noUsersResult = this.searchResult.users.length === 0;
               console.log(this.noArtistResult);
               console.log(this.noTitleResult);
               this.isLoading = false;

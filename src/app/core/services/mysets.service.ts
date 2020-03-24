@@ -12,6 +12,8 @@ import {Track} from '../../shared/interfaces/track';
 import {ToastrService} from 'ngx-toastr';
 import {Router} from '@angular/router';
 import {Errors} from '../../shared/enums/errors';
+import {AddSetData} from '../../shared/interfaces/addSetData';
+import {UserResponse} from '../../shared/interfaces/userResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,8 @@ export class MysetsService {
   isEditMode = false;
   activeSet: LyricSet = null;
   mysetlist: LyricSet[] = [];
+  isGuestMode: boolean;
+  url = AppSettings.apiUrl;
 
   constructor(private readonly http: HttpClient,
               private readonly errorService: ErrorService,
@@ -32,7 +36,7 @@ export class MysetsService {
 
   getMySetList(): Observable<any> {
     return this.http.get<LyricSet[]>(
-      AppSettings.apiUrl + 'lyricsets',
+      this.url + 'lyricsets',
     );
   }
 
@@ -41,7 +45,7 @@ export class MysetsService {
   }
 
   removeSet(setId: string): Observable<any> {
-    return this.http.delete(AppSettings.apiUrl + 'lyricsets/user/' + setId
+    return this.http.delete(this.url + 'lyricsets/' + setId
     );
   }
 
@@ -57,28 +61,33 @@ export class MysetsService {
     this.isEditMode = mode;
   }
 
-  addSet(result: string): Observable<any> {
-    return this.http.post(AppSettings.apiUrl + 'lyricsets',
-      {name: result});
+  addSet(value: AddSetData): Observable<LyricSet> {
+    return this.http.post<LyricSet>(this.url + 'lyricsets',
+      value);
   }
 
-  updateActiveSet(name: string, desc: string): Observable<any> {
-    if (name) {
-      this.activeSet.name = name;
+  updateActiveSet(lyriccsetFormValue: { name: string, description: string, isPrivate: boolean }): Observable<void> {
+    console.log(lyriccsetFormValue);
+    if (!this.activeSet) {
+      return null;
     }
-    if (desc) {
-      this.activeSet.description = desc;
+    if (lyriccsetFormValue.name) {
+      this.activeSet.name = lyriccsetFormValue.name;
     }
+    if (lyriccsetFormValue.description) {
+      this.activeSet.description = lyriccsetFormValue.description;
+    }
+    this.activeSet.isPrivate = lyriccsetFormValue.isPrivate;
     return this.updateSet(this.activeSet);
   }
 
-  updateSet(set: LyricSet) {
-    console.log(typeof set.tracklist[0]);
-    return this.http.put(AppSettings.apiUrl + 'lyricsets/' + set.id,
+  updateSet(set: LyricSet): Observable<void> {
+    return this.http.put<void>(this.url + 'lyricsets/' + set.id,
       {
         name: set.name,
         description: set.description,
-        tracklist: set.tracklist
+        tracklist: set.tracklist,
+        isPrivate: `${set.isPrivate}`
       });
   }
 
@@ -86,10 +95,12 @@ export class MysetsService {
     this.isLoading = true;
     this.getMySetList().subscribe(
       setlist => {
+        console.log(setlist);
         this.setMySetList(setlist);
         this.isLoading = false;
       },
       error => {
+        console.log(error);
         this.errorService.handleError(error);
       }
     );
@@ -132,11 +143,17 @@ export class MysetsService {
         .append('page_size', `${pagesize}`)
         .append('page', `${page}`)
     });
-    return forkJoin([byTitle, byArtist])
+    const users = this.http.get<UserResponse[]>(AppSettings.apiUrl + 'users/search', {
+      params: new HttpParams()
+        .append('user', query)
+    });
+    return forkJoin([byTitle, byArtist, users])
       .pipe(map(responses => {
+        responses[2].splice(3);
         return {
           byTitle: responses[0],
-          byArtist: responses[1]
+          byArtist: responses[1],
+          users: responses[2],
         };
       }));
   }
@@ -156,8 +173,9 @@ export class MysetsService {
 
     for (const set of sets) {
       set.tracklist.push(track);
+      console.log(set);
       this.updateSet(set).subscribe(
-        response => {
+        () => {
           updated++;
           if (updated === sets.length) {
             this.toastr.success('All sets successfully updated!');
@@ -165,6 +183,7 @@ export class MysetsService {
         },
         error => {
           const errorRes = this.errorService.handleError(error);
+          console.log(error);
           if (errorRes === Errors.TRACK_EXISTS) {
             this.toastr.error('Set "' + set.name + '" alerady includes that song!');
           }
@@ -218,4 +237,17 @@ export class MysetsService {
       return null;
     }
   }
+
+  getUser(userId: string) {
+    return this.http.get<UserResponse>(AppSettings.apiUrl + 'users/' + userId);
+  }
+
+  getSetList(userId: string) {
+    return this.http.get<LyricSet[]>(AppSettings.apiUrl + 'users/' + userId + '/setlist');
+  }
+
+  onImgError($event) {
+    $event.target.src = AppSettings.defaultAvatar;
+  }
+
 }

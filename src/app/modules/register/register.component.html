@@ -27,8 +27,8 @@
           <input type="password" formControlName="repPassword" matInput>
           <mat-error *ngIf="f.repPassword.errors?.matchOther">Passwords don't match!</mat-error>
         </mat-form-field>
-        <button  mat-raised-button type="submit" color="accent">Submit</button>
-      </form>
-      <a [routerLink]="['/login']">Already have an account? Log in here!</a>
+          <button  mat-raised-button type="submit" color="accent">Submit</button>
+          <a mat-raised-button [routerLink]="['/login']">Already have an account? Log in here!</a>
+        </form>
   </mat-card>
 </div>

@@ -9,8 +9,8 @@ import {User} from '../../interfaces/user';
 import {Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material';
 import {AddSongDialogComponent} from '../add-song-dialog/add-song-dialog.component';
-import {Errors} from '../../enums/errors';
 import {ToastrService} from 'ngx-toastr';
+import {BandService} from '../../../core/services/band.service';
 
 @Component({
   selector: 'app-song',
@@ -32,7 +32,8 @@ export class SongComponent implements OnInit, OnDestroy {
               private readonly errorService: ErrorService,
               private readonly authService: AuthService,
               private dialog: MatDialog,
-              private readonly toastr: ToastrService) {
+              private readonly toastr: ToastrService,
+              private readonly bandService: BandService) {
   }
 
 
@@ -71,7 +72,7 @@ export class SongComponent implements OnInit, OnDestroy {
         this.lyricsLoading = false;
       },
       error => {
-        const errorRes = this.errorService.handleError(error);
+        this.errorService.handleError(error);
       }
     );
   }
@@ -80,10 +81,23 @@ export class SongComponent implements OnInit, OnDestroy {
     this.userSub.unsubscribe();
   }
 
-  onAddSongClick() {
+  onAddToSetSongClick() {
     const dialogRef = this.dialog.open(AddSongDialogComponent, {
       width: '350px',
-      data: this.track
+      data: {
+        track: this.track,
+        where: 'set'
+      }
+    });
+  }
+
+  onAddToBandSongClick() {
+    const dialogRef = this.dialog.open(AddSongDialogComponent, {
+      width: '350px',
+      data: {
+        track: this.track,
+        where: 'band'
+      }
     });
   }
 

@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MysetsService} from '../../../../core/services/mysets.service';
-import {TrackResponse} from '../../../../shared/interfaces/search-track-response';
-import {Track} from '../../../../shared/interfaces/track';
+import {MysetsService} from '../../../core/services/mysets.service';
+import {Track} from '../../interfaces/track';
 
 @Component({
   selector: 'app-track-list-item',

@@ -3,8 +3,7 @@
   [routerLinkActive]="['text-highlight']">
   <img alt="" matListAvatar
        [src]="mysetsService.getImageUrl(set.imageId)"
-       (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'">
+       (error)="mysetsService.onImgError($event)">
   <h1 matLine>{{set?.name}}</h1>
 </mat-list-item>
-<mat-divider></mat-divider>
 

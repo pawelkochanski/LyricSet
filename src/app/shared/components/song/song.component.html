@@ -7,11 +7,12 @@
   <ng-template #showTrack>
     <mat-card [ngClass]="mysetsService ? 'wide' : ''">
       <mat-card-actions align="start">
-        <mat-toolbar *ngIf="user && !mysetsService.activeSet else inLibraryToolbar" >
-          <button mat-raised-button (click)="onAddSongClick()" color="accent">Add to LyricSet <mat-icon>add</mat-icon></button>
+        <mat-toolbar *ngIf="user && !mysetsService.activeSet && !bandService.activeBand else inLibraryToolbar" >
+          <button mat-raised-button (click)="onAddToSetSongClick()" color="accent">Add to your LyricSet <mat-icon>add</mat-icon></button>
+          <button mat-raised-button (click)="onAddToBandSongClick()" color="accent">Add to your Band<mat-icon>add</mat-icon></button>
         </mat-toolbar>
         <ng-template #inLibraryToolbar>
-          <mat-toolbar>
+          <mat-toolbar *ngIf="user && mysetsService.activeSet">
             <div *ngIf="playMode">
               <button
                 [disabled]="mysetsService.isPreviousDisabled(track.track_id)"
@@ -23,6 +24,30 @@
               <button
                 [disabled]="mysetsService.isNextDisabled(track.track_id)"
                 [routerLink]="['../', mysetsService.getNextTrackId(track.track_id)]"
+                [queryParams]="{playMode: 1}"
+                mat-flat-button>
+                <mat-icon>arrow_forward</mat-icon>
+              </button>
+            </div>
+            <div class="separator"></div>
+            <button
+              routerLink="../"
+              mat-flat-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-toolbar>
+          <mat-toolbar *ngIf="user && bandService.activeBand">
+            <div *ngIf="playMode">
+              <button
+                [disabled]="bandService.isPreviousDisabled(track.track_id)"
+                [routerLink]="['../', bandService.getPreviousTrackId(track.track_id)]"
+                [queryParams]="{playMode: 1}"
+                mat-flat-button>
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <button
+                [disabled]="bandService.isNextDisabled(track.track_id)"
+                [routerLink]="['../', bandService.getNextTrackId(track.track_id)]"
                 [queryParams]="{playMode: 1}"
                 mat-flat-button>
                 <mat-icon>arrow_forward</mat-icon>

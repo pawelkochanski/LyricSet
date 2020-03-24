@@ -1,0 +1,20 @@
+<button mat-raised-button
+        [disabled]="bandService.activeBand.tracklist.length===0"
+        [routerLink]="[bandService.activeBand.tracklist[0]?.track_id]"
+        [queryParams]="{playMode: 1, currentIndex: 0}"
+        color="accent">
+  <mat-icon>play_circle_outline</mat-icon>
+</button>
+<div *ngIf="bandService.isEditMode else fixedlist">
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="track-holder" *ngFor="let track of bandService.activeBand.tracklist" cdkDrag>
+      <app-band-tracklist-item [track]="track"></app-band-tracklist-item></div>
+  </div>
+</div>
+<ng-template #fixedlist>
+  <div class="example-list">
+    <div class="track-holder" *ngFor="let track of bandService.activeBand.tracklist">
+      <app-band-tracklist-item [track]="track"></app-band-tracklist-item></div>
+  </div>
+</ng-template>
+

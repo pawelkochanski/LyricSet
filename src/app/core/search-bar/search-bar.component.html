@@ -7,7 +7,7 @@
       type="search"
       placeholder="Search for songs..."
     >
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onOptionSelect($event.option.id)'>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onOptionSelect($event.option.value)'>
 
       <mat-option *ngIf="isLoading">
         <mat-spinner diameter="30" color="accent"></mat-spinner>
@@ -20,8 +20,7 @@
         Searched by title ------------------
       </mat-option>
       <mat-option *ngFor="let element of searchResult?.byTitle.track_list"
-                  [value]="element.track.track_name"
-                  [id]="element.track.track_id"
+                  [value]="{url: 'song', id: element.track.track_id, name: element.track.track_name}"
                   [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
@@ -31,11 +30,20 @@
         Searched by artist ------------------
       </mat-option>
       <mat-option *ngFor="let element of searchResult?.byArtist.track_list"
-                  [value]="element.track.track_name"
-                  [id]="element.track.track_id"
+                  [value]="{url: 'song', id: element.track.track_id, name: element.track.track_name}"
                   [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
+      </mat-option>
+
+      <mat-option disabled *ngIf="searchResult && searchResult?.users.length>0">
+        Searched users ----------------------
+      </mat-option>
+      <mat-option *ngFor="let element of searchResult?.users"
+                  [value]="{url: 'user', id: element.id, name: element.displayname}"
+                  [matTooltip]="element.displayname">
+        <mat-icon>person</mat-icon>
+        {{element.displayname}}
       </mat-option>
     </mat-autocomplete>
   <button mat-icon-button (click)="onSearchClick()"><mat-icon>search</mat-icon></button>

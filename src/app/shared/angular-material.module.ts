@@ -14,7 +14,7 @@ import {
   MatDialogModule,
   MatSelectModule,
   MatAutocompleteModule,
-  MatProgressSpinnerModule, MatTooltipModule
+  MatProgressSpinnerModule, MatTooltipModule,
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';

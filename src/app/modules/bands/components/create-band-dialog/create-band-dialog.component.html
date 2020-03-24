@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Create new Band!</h1>
+<div mat-dialog-content>
+  <form [formGroup]="setNameForm" id="psForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name your band</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="formcontrols.name.errors?.required">Name is required!</mat-error>
+      <mat-error *ngIf="formcontrols.name.errors?.maxlength">Maximum allowed length is 15 characters!</mat-error>
+    </mat-form-field>
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="onSendClick()" form="psForm" cdkFocusInitial [disabled]="!setNameForm.valid">Send</button>
+</div>

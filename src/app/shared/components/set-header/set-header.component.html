@@ -9,12 +9,16 @@
     </div>
     <ng-template #temp>
       <div class="edit-title">
-        <mat-card-title>
-          <input matInput maxlength="15" class="mat-title" #title placeholder="Edit me!">
-        </mat-card-title>
-        <mat-card-subtitle>
-          <textarea class="mat-body" #description rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
-        </mat-card-subtitle>
+        <form [formGroup]="lyricsetForm">
+          <mat-card-title>
+            <input formControlName="name" matInput maxlength="15" class="mat-title" #title placeholder="Edit me!">
+          </mat-card-title>
+          <mat-card-subtitle>
+            <textarea formControlName="description"  class="mat-body" #description rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
+          </mat-card-subtitle>
+          <mat-checkbox
+            formControlName="isPrivate" >Private</mat-checkbox>
+        </form>
       </div>
     </ng-template>
     <div class="separator"></div>
@@ -25,7 +29,7 @@
               [queryParams]="{playMode: 1, currentIndex: 0}">
         <mat-icon>play_circle_outline</mat-icon>
       </button>
-      <button mat-button (click)="startEdit()">
+      <button mat-button (click)="startEdit()" *ngIf="!mySetsService.isGuestMode">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
@@ -42,7 +46,7 @@
   </mat-card-title-group>
   <div class="img-container">
     <img mat-card-md-image alt=""
-         (error)="this.$event.target.src = 'https://karateintsa.com/wp-content/uploads/2017/04/default-image-800x600.jpg'"
+         (error)="mySetsService.onImgError($event)"
          [src]="mySetsService.getImageUrl(this.mySetsService.activeSet.imageId)"/>
     <div class="img-buttons-container" *ngIf="mySetsService.isEditMode">
       <button mat-icon-button color="accent" (click)="onRemoveImage()"><mat-icon>close</mat-icon></button>

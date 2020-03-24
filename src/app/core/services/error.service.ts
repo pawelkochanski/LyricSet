@@ -21,13 +21,21 @@ export class ErrorService {
     console.log(message);
     switch (errorResponse.status) {
       case 500:
+        switch (message) {
+          case 'band exists':
+            this.toastr.error('Band with that name already exists');
+            break;
+          default:
+            this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error');
+        }
+        break;
       case 504:
         this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error');
         return Errors.SERVER_ERROR;
       case 401:
         this.authService.logout();
         this.router.navigate(['login']);
-        this.toastr.error('You dont have permissions for this kind of activity :/');
+        this.toastr.error('Look like your token has expired :/');
         return Errors.UNAUTHORIZED;
       case 404:
         this.toastr.error('Looks like we dont have resource you are looking for.', 'Not found.');
@@ -35,6 +43,9 @@ export class ErrorService {
         return Errors.NOT_FOUND;
       case 400:
         switch (message) {
+          case 'user exists in band':
+            this.toastr.error('User is already a member of your band!');
+            return Errors.USERNAME_EXISTS;
           case 'Invalid credentials':
             return Errors.INVALID_CREDENTIALS;
           case 'username is required':

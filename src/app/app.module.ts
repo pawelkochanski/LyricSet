@@ -1,4 +1,4 @@
-import { CropperModule } from './shared/components/cropper/cropper.module';
+
 import { ServerErrorModule } from './modules/server-error/server-error.module';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -22,7 +22,13 @@ import { UsernameDialogComponent } from './modules/settings/components/username-
 import {SharedModule} from './shared/shared.module';
 import {AddSongDialogComponent} from './shared/components/add-song-dialog/add-song-dialog.component';
 import {SearchModule} from './modules/search/search.module';
+import {UserModule} from './modules/user/user.module';
+import {BandsModule} from './modules/bands/bands.module';
+import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
+import {CreateBandDialogComponent} from './modules/bands/components/create-band-dialog/create-band-dialog.component';
+import {AddToBandDialogComponent} from './modules/user/components/add-to-band-dialog/add-to-band-dialog.component';
 
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 
 @NgModule({
   declarations: [
@@ -42,16 +48,21 @@ import {SearchModule} from './modules/search/search.module';
     HttpClientModule,
     ServerErrorModule,
     ToastrModule.forRoot(),
-    CropperModule,
     SharedModule,
-    SearchModule
+    SearchModule,
+    UserModule,
+    BandsModule,
+    SocketIoModule.forRoot(config)
+
   ],
   entryComponents: [
     PasswordDialogComponent,
     AddSetDialogComponent,
     CropperComponent,
     UsernameDialogComponent,
-    AddSongDialogComponent
+    AddSongDialogComponent,
+    CreateBandDialogComponent,
+    AddToBandDialogComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }],

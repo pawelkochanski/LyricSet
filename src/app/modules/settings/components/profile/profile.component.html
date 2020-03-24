@@ -35,7 +35,7 @@
     <div class="button-holder">
       <label>Profile picture:</label>
     </div>
-    <img [src]="mysetsService.getImageUrl(user.avatarId)" (error)="onImgError($event)" alt="">
+    <img [src]="mysetsService.getImageUrl(user.avatarId)" (error)="mysetsService.onImgError($event)" alt="">
     <div class="button-holder">
       <button mat-raised-button [matMenuTriggerFor]="appMenu">
         <mat-icon>edit</mat-icon>

@@ -3,6 +3,9 @@
   <button
   *ngIf="isAuthenticated"
   mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
+  <button
+    *ngIf="isAuthenticated"
+    mat-button [routerLink]="['bands']" routerLinkActive="mat-accent">Bands</button>
   <div class="separator"></div>
   <app-search-bar></app-search-bar>
   <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>

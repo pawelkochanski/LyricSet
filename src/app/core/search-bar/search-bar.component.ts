@@ -18,6 +18,7 @@ export class SearchBarComponent implements OnInit {
   public searchResult: SearchBarResponse;
   public noResult: boolean;
   public isLoading: boolean;
+  selectedOption: any;
 
   constructor(private readonly  mysetsService: MysetsService,
               private readonly errorService: ErrorService,
@@ -25,8 +26,9 @@ export class SearchBarComponent implements OnInit {
               private readonly fb: FormBuilder) {
   }
 
-  onOptionSelect(value: string) {
-    this.router.navigate(['/song', value]);
+  onOptionSelect(value: { url: string, id: string, name: string }) {
+    this.searchFrom.controls.searchInput.setValue(value.name);
+    this.router.navigate([`/${value.url}`, value.id]);
   }
 
   ngOnInit() {
@@ -51,7 +53,9 @@ export class SearchBarComponent implements OnInit {
       .subscribe(response => {
           console.log(response);
           this.searchResult = response;
-          this.noResult = this.searchResult.byArtist.track_list.length === 0 && this.searchResult.byTitle.track_list.length === 0;
+          this.noResult = this.searchResult.byArtist.track_list.length === 0
+            && this.searchResult.byTitle.track_list.length === 0
+            && this.searchResult.users.length === 0;
           this.isLoading = false;
         },
         error => {

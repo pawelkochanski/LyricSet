@@ -1,0 +1,19 @@
+<mat-list>
+  <div class="item mat-elevation-z3" *ngFor="let member of bandService.members">
+    <img [src]="setService.getImageUrl(member.avatarId)"
+         (error)="setService.onImgError($event)">
+    <div class="name-role">
+      <h3>{{member.displayname}}</h3>
+      <p class="text-highlight">{{bandService.getRoleToString(member.id)}}</p>
+    </div>
+    <div class="separator">
+    </div>
+    <button *ngIf="!bandService.isEditMode" mat-icon-button [routerLink]="['/user', member.id]">
+      <mat-icon>remove_red_eye</mat-icon>
+    </button>
+    <button *ngIf="bandService.isEditMode && member.id !== bandService.user.id" mat-icon-button (click)="bandService.removeUserFromActiveBand(member.id)">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </div>
+</mat-list>

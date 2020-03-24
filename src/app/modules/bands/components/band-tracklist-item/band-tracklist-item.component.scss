@@ -1,0 +1,34 @@
+.track{
+  /*ALL MARGIN CHANGES FOR TRACK SHOULD BE PLACED IN track-holder */
+  height:70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  img{
+    margin-left: 15px;
+    margin-right: 15px;
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+  .track-header{
+    display: flex;
+    flex-direction: column;
+    h3{
+      margin: 0;
+      font-weight: 500;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  button{
+    margin-right: 15px
+  }
+
+}
+
+.avatar{
+  margin: 0 20px;
+}

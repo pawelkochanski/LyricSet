@@ -1,0 +1,27 @@
+<div class="main-container">
+
+  <div class="loading" *ngIf="isLoading else content">
+    <mat-spinner diameter="50" color="accent"></mat-spinner>
+  </div>
+  <ng-template #content>
+    <div class="split-container">
+      <div class="left">
+        <app-user-library [userId] = "user.id"></app-user-library>
+      </div>
+      <div class="right">
+        <mat-card>
+          <img mat-card-image [src] = "setService.getImageUrl(user.avatarId)" (error)="setService.onImgError($event)"/>
+          <mat-card-title>
+            {{user.displayname}}
+          </mat-card-title>
+          <mat-card-content>
+            <p>{{user.bio}}</p>
+            <a href="{{user.url}}">{{user.url}}</a>
+            <button mat-raised-button color="accent" (click)="onInviteClick()">Add to band</button>
+          </mat-card-content>
+
+        </mat-card>
+      </div>
+    </div>
+  </ng-template>
+</div>

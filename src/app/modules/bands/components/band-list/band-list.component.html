@@ -1,0 +1,26 @@
+<div class="main-container">
+  <div class="loading" *ngIf="bandSerivce.isLoading else content">
+    <mat-spinner diameter="50" color="accent"></mat-spinner>
+  </div>
+  <ng-template #content>
+    <mat-card>
+      <p class="text-highlight">Your Bands</p>
+      <p *ngIf="bandSerivce.bandlist.length===0">You don't have any bands right now.</p>
+      <mat-nav-list>
+        <mat-list-item *ngFor="let band of bandSerivce.bandlist" [routerLink]="['../',band.id]">
+          <img [src]="setService.getImageUrl(band.imageId)" (error)="setService.onImgError($event)">
+          <p>{{band.name}}</p>
+          <div class="separator"></div>
+          <mat-icon *ngIf="amILeader(band)" color="accent">grade</mat-icon>
+        </mat-list-item>
+      </mat-nav-list>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="openDialog()">
+          Create Band
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+  </ng-template>
+</div>

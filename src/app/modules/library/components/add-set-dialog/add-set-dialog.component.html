@@ -1,13 +1,15 @@
 <h1 mat-dialog-title>Add new LyricSet!</h1>
 <div mat-dialog-content>
   <form [formGroup]="setNameForm" id="psForm">
-  <mat-form-field appearance="outline">
-    <mat-label>Name your set</mat-label>
-    <input formControlName="name" matInput>
-    <mat-error *ngIf="f.name.errors?.required">Name is required!</mat-error>
-    <mat-error *ngIf="f.name.errors?.maxlength">Maximum allowed length is 15 characters!</mat-error>
-  </mat-form-field>
-</form>
+    <mat-form-field appearance="outline">
+      <mat-label>Name your set</mat-label>
+      <input formControlName="name" matInput>
+      <mat-error *ngIf="formcontrols.name.errors?.required">Name is required!</mat-error>
+      <mat-error *ngIf="formcontrols.name.errors?.maxlength">Maximum allowed length is 15 characters!</mat-error>
+    </mat-form-field>
+    <mat-checkbox  formControlName="isPrivate">Private</mat-checkbox>
+  </form>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>

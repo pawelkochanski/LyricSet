@@ -1,17 +1,14 @@
-import { Router } from '@angular/router';
 import { AuthService } from 'app/core/authentication/auth.service';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
-import {take, exhaustMap, catchError, map} from 'rxjs/operators';
-import { throwError, Observable } from 'rxjs';
-import { error } from 'protractor';
+import { HttpInterceptor, HttpRequest, HttpHandler} from '@angular/common/http';
+import {take, exhaustMap} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private readonly authService: AuthService,
-              private readonly router: Router) { }
+  constructor(private readonly authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
 

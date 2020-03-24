@@ -1,10 +1,11 @@
-import {MysetsService} from '../../../../core/services/mysets.service';
-import {ErrorService} from '../../../../core/services/error.service';
+import {MysetsService} from '../../../core/services/mysets.service';
+import {ErrorService} from '../../../core/services/error.service';
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {CropperComponent} from '../../../../shared/components/cropper/cropper.component';
+import {CropperComponent} from '../cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AppSettings} from '../../../../shared/AppSettings';
+import {AppSettings} from '../../AppSettings';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-set-header',
@@ -16,27 +17,37 @@ export class SetHeaderComponent implements OnInit {
   @ViewChild('title', {static: false}) titleinput: ElementRef;
   @ViewChild('description', {static: false}) descinput: ElementRef;
   imageUrl: string;
+  lyricsetForm: FormGroup;
 
   constructor(private readonly mySetsService: MysetsService,
               private readonly router: Router,
               private readonly errorService: ErrorService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private readonly fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.imageUrl = AppSettings.apiUrl + this.mySetsService.activeSet.imageId;
+    this.lyricsetForm = this.fb.group({
+      name: ['', []],
+      description: ['', []],
+      isPrivate: ['', []]
+    });
+    console.log(this.mySetsService.activeSet.isPrivate);
+
   }
 
   onRemoveSet(): void {
     this.mySetsService.isLoading = true;
     this.mySetsService.removeSet(this.mySetsService.activeSet.id).subscribe(
-      response => {
+      () => {
         this.mySetsService.isLoading = false;
         this.mySetsService.refreshSetlist();
         this.mySetsService.activeSet = null;
         this.router.navigate(['library']);
       },
       error => {
+        console.log(error);
         this.errorService.handleError(error);
       }
     );
@@ -44,25 +55,20 @@ export class SetHeaderComponent implements OnInit {
 
   startEdit(): void {
     this.mySetsService.setEditMode(true);
+    this.lyricsetForm.controls.isPrivate.setValue(this.mySetsService.activeSet.isPrivate);
   }
 
   finishEdit(): void {
-    let name = this.mySetsService.activeSet.name;
-    let desc = this.mySetsService.activeSet.description;
-    const nameInput = this.titleinput.nativeElement.value;
-    const descInput = this.descinput.nativeElement.value;
-    if (nameInput !== '' && nameInput !== name) {
-      name = nameInput;
+    if (this.lyricsetForm.valid) {
+      this.mySetsService.updateActiveSet(this.lyricsetForm.value)
+        .subscribe(() => {
+          },
+          error => {
+            console.log(error);
+            this.errorService.handleError(error);
+          });
     }
-    if (descInput !== '' && descInput !== desc) {
-      desc = descInput;
-    }
-    this.mySetsService.updateActiveSet(name, desc)
-      .subscribe(response => {
-        },
-        error => {
-          this.errorService.handleError(error);
-        });
+
     this.mySetsService.setEditMode(false);
   }
 
@@ -83,7 +89,7 @@ export class SetHeaderComponent implements OnInit {
   }
 
   onRemoveImage() {
-    this.mySetsService.removeImageSet(this.mySetsService.activeSet.imageId, this.mySetsService.activeSet.id).subscribe(response => {
+    this.mySetsService.removeImageSet(this.mySetsService.activeSet.imageId, this.mySetsService.activeSet.id).subscribe(() => {
         this.mySetsService.activeSet.imageId = undefined;
       },
       error => {
