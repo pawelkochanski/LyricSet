@@ -1,50 +1,55 @@
-<form [formGroup]="searchFrom">
+<form [formGroup]="searchFrom" class="search-container">
+  <div class="searchinput-contianer">
     <input
-      spellcheck="false"
+      (focusin)="onInputFocusIn()"
+      (focusout)="onInputFocusOut()"
       formControlName="searchInput"
-      [matAutocomplete]="auto"
-      class="search mat-body"
-      type="search"
       placeholder="Search for songs..."
-    >
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)='onOptionSelect($event.option.value)'>
+      type="text"
+      class="search">
+    <div class="auto-complete mat-elevation-z7" *ngIf="isAutocomplete">
+      <div class="auto-complete-item-disabled" *ngIf="isLoading">
+        <mat-spinner diameter="25" color="accent"></mat-spinner>
+      </div>
 
-      <mat-option *ngIf="isLoading">
-        <mat-spinner diameter="30" color="accent"></mat-spinner>
-      </mat-option>
-      <mat-option *ngIf="noResult && !isLoading" disabled>
-        No results found.
-      </mat-option>
+      <div class="auto-complete-item-disabled" *ngIf="noResult && !isLoading">
+        --------- No results found ---------
+      </div>
 
-      <mat-option disabled *ngIf="searchResult && searchResult?.byTitle.track_list.length>0">
-        Searched by title ------------------
-      </mat-option>
-      <mat-option *ngFor="let element of searchResult?.byTitle.track_list"
-                  [value]="{url: 'song', id: element.track.track_id, name: element.track.track_name}"
-                  [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name">
+      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byTitle.track_list.length>0" >
+        --------- Searched by title ---------
+      </div>
+
+      <div class="auto-complete-item" *ngFor="let element of searchResult?.byTitle.track_list"
+           [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
+            (click)="onSongClick(element.track)">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
-      </mat-option>
+      </div>
 
-      <mat-option disabled *ngIf="searchResult && searchResult?.byArtist.track_list.length>0">
-        Searched by artist ------------------
-      </mat-option>
-      <mat-option *ngFor="let element of searchResult?.byArtist.track_list"
-                  [value]="{url: 'song', id: element.track.track_id, name: element.track.track_name}"
-                  [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name">
+      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byArtist.track_list.length>0">
+        --------- Searched by artist ---------
+      </div>
+
+      <div class="auto-complete-item" *ngFor="let element of searchResult?.byArtist.track_list"
+           [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
+           (click)="onSongClick(element.track)">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
-      </mat-option>
+      </div>
 
-      <mat-option disabled *ngIf="searchResult && searchResult?.users.length>0">
-        Searched users ----------------------
-      </mat-option>
-      <mat-option *ngFor="let element of searchResult?.users"
-                  [value]="{url: 'user', id: element.id, name: element.displayname}"
-                  [matTooltip]="element.displayname">
+      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.users.length>0">
+        --------- Searched by user ---------
+      </div>
+
+      <div class="auto-complete-item" *ngFor="let element of searchResult?.users"
+                  [matTooltip]="element.displayname"
+                  (click) = "onUserClick(element)">
         <mat-icon>person</mat-icon>
         {{element.displayname}}
-      </mat-option>
-    </mat-autocomplete>
-  <button mat-icon-button (click)="onSearchClick()"><mat-icon>search</mat-icon></button>
+      </div>
+
+    </div>
+  </div>
+  <a class="nav-button" mat-icon-button (click)="onSearchClick()"><mat-icon>search</mat-icon></a>
 </form>

@@ -6,6 +6,8 @@ import {ErrorService} from '../services/error.service';
 import {AppSettings} from '../../shared/AppSettings';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {Track} from '../../shared/interfaces/track';
+import {UserResponse} from '../../shared/interfaces/userResponse';
 
 @Component({
   selector: 'app-search-bar',
@@ -19,16 +21,12 @@ export class SearchBarComponent implements OnInit {
   public noResult: boolean;
   public isLoading: boolean;
   selectedOption: any;
+  isAutocomplete: boolean;
 
   constructor(private readonly  mysetsService: MysetsService,
               private readonly errorService: ErrorService,
               private readonly router: Router,
               private readonly fb: FormBuilder) {
-  }
-
-  onOptionSelect(value: { url: string, id: string, name: string }) {
-    this.searchFrom.controls.searchInput.setValue(value.name);
-    this.router.navigate([`/${value.url}`, value.id]);
   }
 
   ngOnInit() {
@@ -43,6 +41,7 @@ export class SearchBarComponent implements OnInit {
       .subscribe(
         value => {
           this.isLoading = true;
+          this.searchResult = null;
           this.handleValueChange(value);
         }
       );
@@ -64,10 +63,30 @@ export class SearchBarComponent implements OnInit {
         });
   }
 
-  onSearchClick() {
+  onSearchClick(): void {
     if (this.searchFrom.controls.searchInput.value) {
       this.router.navigate(['/search', this.searchFrom.controls.searchInput.value]);
     }
 
+  }
+
+  onSongClick(track: Track): void {
+    this.searchFrom.controls.searchInput.setValue(`${track.track_name}`);
+    this.router.navigate(['/song', track.track_id]);
+  }
+
+  onUserClick(element: UserResponse): void {
+    this.searchFrom.controls.searchInput.setValue(`${element.displayname}`);
+    this.router.navigate(['user', element.id]);
+  }
+
+  onInputFocusIn(): void {
+    this.isAutocomplete = true;
+    this.isLoading = false;
+  }
+
+  async onInputFocusOut() {
+    await new Promise(resolve => setTimeout(resolve, 100));
+    this.isAutocomplete = false;
   }
 }

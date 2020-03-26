@@ -1,17 +1,29 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
-  <button mat-button class="brand" [routerLink]="['home']"><mat-icon>queue_music</mat-icon>LyricSet</button>
-  <button
+  <a
+    class="brand"
+    [routerLink]="['home']">
+    <mat-icon>
+      queue_music
+    </mat-icon>
+    LyricSet
+  </a>
+  <a
   *ngIf="isAuthenticated"
-  mat-button [routerLink]="['library']" routerLinkActive="mat-accent">Library</button>
-  <button
-    *ngIf="isAuthenticated"
-    mat-button [routerLink]="['bands']" routerLinkActive="mat-accent">Bands</button>
+  [routerLink]="['library']"
+  routerLinkActive="nav-button-active"
+  class="nav-button">Library</a>
   <a
     *ngIf="isAuthenticated"
-    mat-button [href]="'mailto:pok.koch@gmail.com'" routerLinkActive="mat-accent">Contact</a>
-  <div class="separator"></div>
+    [routerLink]="['bands']"
+    routerLinkActive="nav-button-active"
+    class="nav-button">Bands</a>
+  <a
+    *ngIf="isAuthenticated"
+    [href]="'mailto:pok.koch@gmail.com'"
+    routerLinkActive="nav-button-active"
+    class="nav-button">Contact</a>
   <app-search-bar></app-search-bar>
-  <button mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></button>
+  <a class="nav-button" mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></a>
   <mat-menu #appMenu="matMenu">
     <ng-container *ngIf="isAuthenticated; else not">
       <button

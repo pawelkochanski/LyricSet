@@ -13,6 +13,17 @@ mat-option{
 .divid{
   height: 20px;
 }
+
 .divid:first-of-type{
   margin-top: 10px;
+}
+.search-container{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 60%;
+  margin-left: auto;
+}
+a{
+  margin: 10px;
 }

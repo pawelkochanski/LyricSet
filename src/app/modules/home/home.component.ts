@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  content: string[] = [];
+  isLoading: boolean;
+
+  constructor() {
+  }
 
   ngOnInit() {
+  }
+
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async changeLoading() {
+    this.isLoading = true;
+    await this.delay(300);
+    this.isLoading = false;
+    this.content = ['Lorem Ipsum', 'Lorem Ipsum', 'Lorem ipsum', 'Lorem Ipsum',
+      'Lorem Ipsum', 'Lorem ipsum', 'Lorem Ipsum', 'Lorem Ipsum', 'Lorem ipsum'];
+
   }
 
 }
