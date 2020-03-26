@@ -1,0 +1,30 @@
+<div class="chat-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div class="msg" *ngFor="let mess of messages" [ngClass]="{'right' : user.id !== mess.userId}">
+    <img
+      *ngIf="user.id !== mess.userId"
+      [src]="this.authService.getImageUrl(mess.avatarId)"
+      (error)="this.authService.onImgError($event)"
+      alt="Avatar">
+    <div class="content mat-elevation-z3" [ngClass]="{'background-highlight' : user.id === mess.userId}">
+      <p class="name text-highlight">{{mess.displayname}}</p>
+      <p>{{mess.content}}</p>
+      <footer class="time-right">{{getDateFormat(mess.date)}}</footer>
+    </div>
+    <img
+      *ngIf="user.id === mess.userId"
+      [src]="this.authService.getImageUrl(mess.avatarId)"
+      (error)="this.authService.onImgError($event)"
+      alt="Avatar">
+  </div>
+</div>
+<div class="form-container">
+  <form [formGroup]="messageForm" class="input-container" (keydown)="keyDownFunction($event)" (ngSubmit)="onSendClick()">
+    <textarea formControlName="messageInput" placeholder="Type your message..." rows="3"></textarea>
+    <button mat-icon-button color="accent" type="submit">
+      <mat-icon>send</mat-icon>
+    </button>
+  </form>
+</div>
+
+
+

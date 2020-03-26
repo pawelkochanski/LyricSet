@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LyricSet} from '../../../../shared/interfaces/lyric-set';
 import {MysetsService} from '../../../../core/services/mysets.service';
 import {ErrorService} from '../../../../core/services/error.service';
+import {StarRatingComponent} from 'ng-starrating';
 
 @Component({
   selector: 'app-user-library',

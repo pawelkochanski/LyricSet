@@ -12,6 +12,7 @@ import { BadTracklistComponent } from './components/bad-tracklist/bad-tracklist.
 import { BandTracklistItemComponent } from './components/band-tracklist-item/band-tracklist-item.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { MembersListComponent } from './components/members-list/members-list.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { MembersListComponent } from './components/members-list/members-list.com
     BandListComponent,
     BadTracklistComponent,
     BandTracklistItemComponent,
-    MembersListComponent],
+    MembersListComponent,
+    ChatComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,

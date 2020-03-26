@@ -26,7 +26,6 @@ export class BandsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.bandSerivce.refreshBandlist();
   }
 
   ngOnDestroy(): void {

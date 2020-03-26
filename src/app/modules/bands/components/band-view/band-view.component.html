@@ -73,8 +73,10 @@
       </div>
       <div class="right">
 
-        <mat-tab-group>
-          <mat-tab label="Chat"></mat-tab>
+        <mat-tab-group animationDuration="0">
+          <mat-tab label="Chat">
+            <app-chat></app-chat>
+          </mat-tab>
           <mat-tab label="Live Set!">
             <mat-card>
               <router-outlet></router-outlet>

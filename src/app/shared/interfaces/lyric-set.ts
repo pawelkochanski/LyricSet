@@ -7,4 +7,5 @@ export interface LyricSet {
   tracklist: Track[];
   id: string;
   isPrivate: boolean;
+  rating: number;
 }

@@ -34,6 +34,14 @@ export class AuthService {
 
   }
 
+  getImageUrl(imageId: string): string {
+    return AppSettings.apiUrl + 'images/' + imageId;
+  }
+
+  onImgError($event) {
+    $event.target.src = AppSettings.defaultAvatar;
+  }
+
   public login(loginData: LoginData): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(
       AppSettings.apiUrl + 'users/login',

@@ -7,6 +7,7 @@ import {RouterModule} from '@angular/router';
 import { AddToBandDialogComponent } from './components/add-to-band-dialog/add-to-band-dialog.component';
 import {MatRadioModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
+import {RatingModule} from 'ng-starrating';
 
 
 
@@ -17,7 +18,8 @@ import {FormsModule} from '@angular/forms';
     AngularMaterialModule,
     RouterModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    RatingModule
   ]
 })
 export class UserModule { }

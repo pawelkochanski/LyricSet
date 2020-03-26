@@ -6,6 +6,9 @@ import {CropperComponent} from '../cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
 import {AppSettings} from '../../AppSettings';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {StarRatingComponent} from 'ng-starrating';
+import {ToastrService} from 'ngx-toastr';
+import {error} from 'util';
 
 @Component({
   selector: 'app-set-header',
@@ -23,7 +26,8 @@ export class SetHeaderComponent implements OnInit {
               private readonly router: Router,
               private readonly errorService: ErrorService,
               public dialog: MatDialog,
-              private readonly fb: FormBuilder) {
+              private readonly fb: FormBuilder,
+              private readonly toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -46,9 +50,8 @@ export class SetHeaderComponent implements OnInit {
         this.mySetsService.activeSet = null;
         this.router.navigate(['library']);
       },
-      error => {
-        console.log(error);
-        this.errorService.handleError(error);
+      error1 => {
+        this.errorService.handleError(error1);
       }
     );
   }
@@ -63,9 +66,8 @@ export class SetHeaderComponent implements OnInit {
       this.mySetsService.updateActiveSet(this.lyricsetForm.value)
         .subscribe(() => {
           },
-          error => {
-            console.log(error);
-            this.errorService.handleError(error);
+          error2 => {
+            this.errorService.handleError(error2);
           });
     }
 
@@ -92,8 +94,20 @@ export class SetHeaderComponent implements OnInit {
     this.mySetsService.removeImageSet(this.mySetsService.activeSet.imageId, this.mySetsService.activeSet.id).subscribe(() => {
         this.mySetsService.activeSet.imageId = undefined;
       },
-      error => {
-        this.errorService.handleError(error);
+      error2 => {
+        this.errorService.handleError(error2);
       });
+  }
+
+  onRate($event: { oldValue: number; newValue: number; starRating: StarRatingComponent }) {
+    this.mySetsService.rateSet($event.newValue).subscribe(
+      response => {
+        this.mySetsService.activeSet.rating = response.rating;
+        this.toastr.success(`Rated ${this.mySetsService.activeSet.name} with ${$event.newValue} stars!` );
+      },
+      error1 => {
+        this.errorService.handleError(error1);
+      }
+    );
   }
 }

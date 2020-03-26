@@ -135,7 +135,6 @@ export class BandService {
       },
       error => {
         this.errorService.handleError(error);
-        this.isLoading = false;
       }
     );
   }

@@ -12,6 +12,7 @@ import {TrackListComponent} from './components/track-list/track-list.component';
 import {TrackListItemComponent} from './components/track-list-item/track-list-item.component';
 import {SetHeaderComponent} from './components/set-header/set-header.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {RatingModule} from 'ng-starrating';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ReactiveFormsModule,
     MatRadioModule,
     DragDropModule,
+    RatingModule
   ]
 })
 export class SharedModule {

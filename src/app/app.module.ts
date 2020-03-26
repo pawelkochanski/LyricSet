@@ -52,7 +52,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     SearchModule,
     UserModule,
     BandsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
 
   ],
   entryComponents: [

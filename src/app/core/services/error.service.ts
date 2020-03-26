@@ -31,6 +31,7 @@ export class ErrorService {
         break;
       case 504:
         this.toastr.error('Ooops! We\'ve got a problem on our server side...:( Try again later!', 'Server Error');
+        this.router.navigate(['/home']);
         return Errors.SERVER_ERROR;
       case 401:
         this.authService.logout();

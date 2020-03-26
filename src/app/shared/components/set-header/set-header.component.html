@@ -21,6 +21,14 @@
         </form>
       </div>
     </ng-template>
+    <star-rating *ngIf="!mySetsService.isEditMode && !mySetsService.activeSet.isPrivate"
+      [value]="mySetsService.activeSet.rating"
+      totalstars="5"
+      checkedcolor="#ff8605"
+      uncheckedcolor="black"
+      size="23px"
+      [readonly]="!mySetsService.isGuestMode"
+      (rate)="onRate($event)"></star-rating>
     <div class="separator"></div>
     <div *ngIf="!mySetsService.isEditMode else normalMode">
       <button mat-button

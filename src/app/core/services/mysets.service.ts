@@ -250,4 +250,12 @@ export class MysetsService {
     $event.target.src = AppSettings.defaultAvatar;
   }
 
+  rateSet(rate: number): Observable<LyricSet> {
+    return this.http.put<LyricSet>(AppSettings.apiUrl + 'lyricsets/' + this.activeSet.id + '/rate', {},
+      {
+        params: new HttpParams()
+          .append('rate', `${rate}`)
+      });
+  }
+
 }
