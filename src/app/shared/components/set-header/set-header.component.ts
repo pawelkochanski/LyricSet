@@ -1,6 +1,6 @@
 import {MysetsService} from '../../../core/services/mysets.service';
 import {ErrorService} from '../../../core/services/error.service';
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {CropperComponent} from '../cropper/cropper.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,7 +15,7 @@ import {error} from 'util';
   templateUrl: './set-header.component.html',
   styleUrls: ['./set-header.component.scss']
 })
-export class SetHeaderComponent implements OnInit {
+export class SetHeaderComponent implements OnInit, OnDestroy {
 
   @ViewChild('title', {static: false}) titleinput: ElementRef;
   @ViewChild('description', {static: false}) descinput: ElementRef;
@@ -46,9 +46,9 @@ export class SetHeaderComponent implements OnInit {
     this.mySetsService.removeSet(this.mySetsService.activeSet.id).subscribe(
       () => {
         this.mySetsService.isLoading = false;
-        this.mySetsService.refreshSetlist();
         this.mySetsService.activeSet = null;
-        this.router.navigate(['library']);
+        this.mySetsService.refreshSetlist();
+        this.router.navigate(['/library', null]);
       },
       error1 => {
         this.errorService.handleError(error1);
@@ -103,11 +103,15 @@ export class SetHeaderComponent implements OnInit {
     this.mySetsService.rateSet($event.newValue).subscribe(
       response => {
         this.mySetsService.activeSet.rating = response.rating;
-        this.toastr.success(`Rated ${this.mySetsService.activeSet.name} with ${$event.newValue} stars!` );
+        this.toastr.success(`Rated ${this.mySetsService.activeSet.name} with ${$event.newValue} stars!`);
       },
       error1 => {
         this.errorService.handleError(error1);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.mySetsService.activeSet = null;
   }
 }

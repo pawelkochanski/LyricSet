@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 import {Errors} from '../../shared/enums/errors';
 import {AddSetData} from '../../shared/interfaces/addSetData';
 import {UserResponse} from '../../shared/interfaces/userResponse';
+import {Lyrics} from '../../shared/interfaces/lyrics';
 
 @Injectable({
   providedIn: 'root'
@@ -102,6 +103,7 @@ export class MysetsService {
       error => {
         console.log(error);
         this.errorService.handleError(error);
+        this.isLoading = false;
       }
     );
   }
@@ -256,6 +258,15 @@ export class MysetsService {
         params: new HttpParams()
           .append('rate', `${rate}`)
       });
+  }
+
+  getTopSets(top: number): Observable<LyricSet[]> {
+    return this.http.get<LyricSet[]>(AppSettings.apiUrl + 'lyricsets/top/' + top);
+  }
+
+  getTopSongs(count: string): Observable<SerachTrackResponse> {
+    return this.http.get<SerachTrackResponse>(AppSettings.apiUrl + '/track/search/popular',
+      {params: new HttpParams().append('count', count)});
   }
 
 }

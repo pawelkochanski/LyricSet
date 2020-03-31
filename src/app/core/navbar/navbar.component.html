@@ -18,7 +18,10 @@
     routerLinkActive="nav-button-active"
     class="nav-button">Bands</a>
   <a
-    *ngIf="isAuthenticated"
+    [routerLink]="['popular']"
+    routerLinkActive="nav-button-active"
+    class="nav-button">Popular</a>
+  <a
     [href]="'mailto:pok.koch@gmail.com'"
     routerLinkActive="nav-button-active"
     class="nav-button">Contact</a>
@@ -37,6 +40,5 @@
       <button
       mat-menu-item [routerLink]="['register']">Register</button>
     </ng-template>
-
   </mat-menu>
 </mat-toolbar>

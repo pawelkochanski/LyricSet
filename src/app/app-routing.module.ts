@@ -18,41 +18,64 @@ import {UserComponent} from './modules/user/user.component';
 import {BandsComponent} from './modules/bands/bands.component';
 import {BandListComponent} from './modules/bands/components/band-list/band-list.component';
 import {BandViewComponent} from './modules/bands/components/band-view/band-view.component';
-import { BadTracklistComponent } from './modules/bands/components/bad-tracklist/bad-tracklist.component';
+import {BadTracklistComponent} from './modules/bands/components/bad-tracklist/bad-tracklist.component';
+import {PopularComponent} from './modules/popular/popular.component';
+
 const appRoutes: Routes = [
   {
-    path: 'library', canActivate: [AuthGuard], component: LibraryComponent, children: [
+    path: 'library', canActivate: [AuthGuard],
+    component: LibraryComponent,
+    data: {state: 'library'},
+    children: [
       {path: ':setid', component: TrackListComponent},
       {path: ':setid/:songid', component: SongComponent}
     ]
   },
+  {path: 'popular', data: {state: 'popular'}, component: PopularComponent},
   {
-    path: 'bands', canActivate: [AuthGuard], component: BandsComponent, children: [
+    path: 'bands',
+    canActivate: [AuthGuard],
+    component: BandsComponent,
+    data: {state: 'bands'},
+    children: [
       {path: '', redirectTo: 'list', pathMatch: 'full'},
       {path: 'list', component: BandListComponent},
-      {path: ':bandid', component: BandViewComponent, children: [
+      {
+        path: ':bandid',
+        component: BandViewComponent,
+        data: {state: ':bandid'},
+        children: [
           {path: '', redirectTo: 'tracklist', pathMatch: 'full'},
           {path: 'tracklist', component: BadTracklistComponent},
           {path: 'tracklist/:songid', component: SongComponent}
-        ]}
+        ]
+      }
     ]
   },
   {path: 'song/:songid', component: SongComponent},
-  {path: 'home', component: HomeComponent},
-  {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
   {
-    path: 'settings', canActivate: [AuthGuard], component: SettingsComponent, children: [
+    path: 'home',
+    component: HomeComponent,
+    data: {state: 'home'}
+  },
+  {path: '', redirectTo: '/home', pathMatch: 'full', data: {state: 'page'}},
+  {path: 'login', component: LoginComponent, data: {state: 'login'}},
+  {path: 'register', component: RegisterComponent, data: {state: 'register'}},
+  {
+    path: 'settings',
+    canActivate: [AuthGuard],
+    component: SettingsComponent,
+    data: {state: 'settings'},
+    children: [
       {path: '', redirectTo: 'profile', pathMatch: 'full'},
       {path: 'profile', component: ProfileComponent},
       {path: 'account', component: AccountComponent}
     ]
   },
-  {path: 'search/:query', component: SearchComponent},
+  {path: 'search/:query', data: {state: 'search'}, component: SearchComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {
-    path: 'user/:id', component: UserComponent, children: [
+    path: 'user/:id', data: {state: 'user'}, component: UserComponent, children: [
       {path: ':setid', component: TrackListComponent},
       {path: ':setid/:songid', component: SongComponent}
     ]

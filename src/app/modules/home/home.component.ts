@@ -9,6 +9,7 @@ export class HomeComponent implements OnInit {
 
   content: string[] = [];
   isLoading: boolean;
+  swipe = false;
 
   constructor() {
   }

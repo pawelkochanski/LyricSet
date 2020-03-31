@@ -21,8 +21,8 @@ mat-option{
   display:flex;
   flex-direction: row;
   align-items: center;
-  max-width: 60%;
-  margin-left: auto;
+  justify-content: flex-end;
+  width:100%;
 }
 a{
   margin: 10px;

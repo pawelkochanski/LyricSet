@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { PopularComponent } from './popular.component';
 import {AngularMaterialModule} from '../../shared/angular-material.module';
+import {RatingModule} from 'ng-starrating';
 import {RouterModule} from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [PopularComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
+    RatingModule,
     RouterModule
   ]
 })
-export class HomeModule { }
+export class PopularModule { }

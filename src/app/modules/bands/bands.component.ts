@@ -7,10 +7,13 @@ import {Subscription} from 'rxjs';
 import {AuthService} from '../../core/authentication/auth.service';
 import {User} from '../../shared/interfaces/user';
 import {MatDialog} from '@angular/material';
+import {RouterOutlet} from '@angular/router';
+import {routerTransition} from '../../router.animations';
 
 @Component({
   selector: 'app-bands',
   templateUrl: './bands.component.html',
+  animations: [routerTransition],
   styleUrls: ['./bands.component.scss']
 })
 export class BandsComponent implements OnInit, OnDestroy {
@@ -32,4 +35,7 @@ export class BandsComponent implements OnInit, OnDestroy {
     this.bandSerivce.activeBand = null;
   }
 
+  getState(outlet: RouterOutlet) {
+    return outlet.activatedRouteData.state;
+  }
 }

@@ -27,6 +27,7 @@ import {BandsModule} from './modules/bands/bands.module';
 import {SocketIoConfig, SocketIoModule} from 'ngx-socket-io';
 import {CreateBandDialogComponent} from './modules/bands/components/create-band-dialog/create-band-dialog.component';
 import {AddToBandDialogComponent} from './modules/user/components/add-to-band-dialog/add-to-band-dialog.component';
+import {PopularModule} from './modules/popular/popular.module';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
 
@@ -53,6 +54,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {}};
     UserModule,
     BandsModule,
     SocketIoModule.forRoot(config),
+    PopularModule
 
   ],
   entryComponents: [

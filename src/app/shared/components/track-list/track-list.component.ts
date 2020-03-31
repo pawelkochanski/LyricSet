@@ -12,12 +12,14 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 export class TrackListComponent implements OnInit {
 
   constructor(private readonly mysetsService: MysetsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private readonly router: Router) {
   }
 
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
+        console.log(this.route);
         this.mysetsService.handleParamSetId(params.setid);
         this.mysetsService.getSet(params.setid);
       }

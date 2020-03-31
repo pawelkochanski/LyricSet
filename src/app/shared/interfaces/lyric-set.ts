@@ -8,4 +8,5 @@ export interface LyricSet {
   id: string;
   isPrivate: boolean;
   rating: number;
+  ownerId: string;
 }

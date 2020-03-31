@@ -1,6 +1,99 @@
-<div class="main-container">
-  <mat-toolbar>
-    <h1>Welcome to Lyric Set!</h1>
-  </mat-toolbar>
+<div class="landing-page">
+  <div class="content-1" [ngClass]="{'swipe-1' : swipe}">
+    <div class="front">
+      <div class="welcome">
+        <div class="welcome-1">WELCOME</div>
+        <div class="welcome-2">
+          <div class="welcome-2-1">TO</div>
+          <div class="welcome-2-2">LyricSet</div>
+        </div>
+      </div>
+      <div class="get-started" routerLink="/register">
+        GET STARTED
+        <mat-icon>play_arrow</mat-icon>
+      </div>
+    </div>
+    <div class="footer" (click)="swipe=true">
+      <p>LEARN MORE</p>
+      <mat-icon>arrow_downward</mat-icon>
+    </div>
+  </div>
+  <div class="content-2" [ngClass]="{'swipe-2' : swipe}">
+    <div class="header" (click)="swipe=false">
+      <mat-icon>arrow_upward</mat-icon>
+      <p>GO BACK</p>
+    </div>
+    <div class="front-2">
+      <h1>LYRICSET</h1>
+      <mat-card>
+        <p>
+          <span class="text-highlight">LyricSet</span> is a web-app designed for singers to <span
+          class="text-highlight">help</span> them organize their repertoire.
+          With our help you can find any lyrics that you want and keep them well-organized inside your <span
+          class="text-highlight">Library</span>. LyricSet also gives you an opportunity to share your
+          favourite tracks with other users by creating <span class="text-highlight"> Bands</span>, and allows you to
+          <span class="text-highlight">rate</span> other libraries. Don't keep us waiting - just register and start to
+          explore!
+        </p>
+
+      </mat-card>
+
+    </div>
+  </div>
+  <div class="animation">
+    <div class="set">
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+    </div>
+    <div class="set set2">
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+    </div>
+
+    <div class="set set3">
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+    </div>
+
+    <div class="set set4">
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+    </div>
+
+    <div class="set set5">
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+      <div><img src="../../../assets/note1.png" class="note1"/></div>
+      <div><img src="../../../assets/note2.png" class="note2"/></div>
+      <div><img src="../../../assets/note3.png" class="note3"/></div>
+      <div><img src="../../../assets/note4.png" class="note4"/></div>
+    </div>
+  </div>
 </div>
 

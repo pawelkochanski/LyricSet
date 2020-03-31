@@ -2,6 +2,7 @@ import {MysetsService} from 'app/core/services/mysets.service';
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material/dialog';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class AddSetDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddSetDialogComponent>,
     private readonly fb: FormBuilder,
-    private readonly setService: MysetsService) {
+    private readonly setService: MysetsService,
+    private readonly router: Router) {
   }
 
   setNameForm: FormGroup;
@@ -41,6 +43,8 @@ export class AddSetDialogComponent implements OnInit {
     if (name) {
       this.setService.addSet(value).subscribe(
         response => {
+          this.setService.refreshSetlist();
+          this.router.navigate(['/library', null]);
         }
       );
     }

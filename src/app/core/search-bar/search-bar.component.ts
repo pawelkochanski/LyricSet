@@ -20,7 +20,6 @@ export class SearchBarComponent implements OnInit {
   public searchResult: SearchBarResponse;
   public noResult: boolean;
   public isLoading: boolean;
-  selectedOption: any;
   isAutocomplete: boolean;
 
   constructor(private readonly  mysetsService: MysetsService,
@@ -77,16 +76,16 @@ export class SearchBarComponent implements OnInit {
 
   onUserClick(element: UserResponse): void {
     this.searchFrom.controls.searchInput.setValue(`${element.displayname}`);
-    this.router.navigate(['user', element.id]);
+    this.router.navigate(['/user', element.id]);
   }
 
-  onInputFocusIn(): void {
+  async onInputFocusIn(): Promise<void> {
     this.isAutocomplete = true;
     this.isLoading = false;
   }
 
-  async onInputFocusOut() {
-    await new Promise(resolve => setTimeout(resolve, 100));
+  async onInputFocusOut(): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, 500));
     this.isAutocomplete = false;
   }
 }

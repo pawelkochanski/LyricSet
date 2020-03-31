@@ -1,0 +1,31 @@
+.main-container{
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  margin: 30px 0;
+}
+h4{
+  font-weight: 300;
+}
+mat-list-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+mat-card{
+  width: 500px;
+  margin: 30px;
+}
+
+.set-image{
+  height: 40px;
+  width: 40px;
+  margin: 0 30px;
+}
+
+star-rating{
+  margin-left: auto;
+}

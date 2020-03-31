@@ -1,0 +1,48 @@
+<div class="main-container">
+  <div class="loading" *ngIf="isLoading else content">
+    <mat-spinner diameter="100" color="accent"></mat-spinner>
+  </div>
+  <ng-template #content>
+    <h3>CHECK OUT THE MOST POPULAR SONGS AND LYRICSETS</h3>
+
+    <mat-card>
+      <mat-card-title>
+        TOP RATED LYRICSETS
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <mat-list-item
+            *ngFor="let set of topSets"
+            [routerLink]="['/user', set.ownerId, set.id]">
+            <img class="set-image" [src] = "setService.getImageUrl(set.imageId)" (error)="setService.onImgError($event)">
+            <h4>{{set.name}}</h4>
+            <star-rating
+                         [value]="set.rating"
+                         totalstars="5"
+                         checkedcolor="#ff8605"
+                         uncheckedcolor="black"
+                         size="23px"
+                         [readonly]="true"></star-rating>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
+        MOST VIEWED SONGS FROM 7 DAYS
+      </mat-card-title>
+      <mat-card-content>
+        <mat-nav-list>
+          <mat-list-item
+            *ngFor="let element of topSongs.track_list"
+            [routerLink]="['/song', element.track.track_id]">
+            <mat-icon>music_note</mat-icon>
+            <h4>{{element.track.artist_name+ ' - ' + element.track.track_name}}</h4>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+</div>

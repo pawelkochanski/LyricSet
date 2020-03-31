@@ -4,7 +4,7 @@
   <div class="splitted-left">
     <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
       <label>Display Name:</label>
-      <mat-form-field floatLabel="never" appearance="outline">
+      <mat-form-field floatLabel="never" appearance="outline" color="accent">
         <label>
           <input matInput [placeholder]="user.displayname" formControlName="displayname">
         </label>
@@ -14,14 +14,14 @@
         <mat-hint>This is the name that is being shown to others!</mat-hint>
       </mat-form-field>
       <label>Bio:</label>
-      <mat-form-field floatLabel="never" appearance="outline">
+      <mat-form-field floatLabel="never" appearance="outline" color="accent">
         <label>
           <textarea matInput formControlName="bio" [placeholder]="user.bio"></textarea>
         </label>
         <mat-hint>Tell the world something about you :)</mat-hint>
       </mat-form-field>
       <label>URL:</label>
-      <mat-form-field floatLabel="never" appearance="outline">
+      <mat-form-field floatLabel="never" appearance="outline" color="accent">
         <label>
           <input matInput type="url" formControlName="url" [placeholder]="user.url">
         </label>
