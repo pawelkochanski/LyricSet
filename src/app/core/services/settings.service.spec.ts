@@ -1,10 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {ToastrModule, ToastrService} from 'ngx-toastr';
-import {MysetsService} from './mysets.service';
-import {ErrorService} from './error.service';
-import {Router} from '@angular/router';
 import {SettingsService} from './settings.service';
 import {Settings} from '../../shared/interfaces/settings';
 import {AppSettings} from '../../shared/AppSettings';
