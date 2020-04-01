@@ -48,21 +48,28 @@ export class BandService {
     );
   }
 
-  deleteAvtiveBand() {
+  deleteAvtiveBand(): void {
+    if (!this.activeBand) {
+      return;
+    }
     this.deleteBand(this.activeBand.id).subscribe(
       () => {
+        this.activeBand = null;
         this.router.navigate(['/bands']);
       }
     );
   }
 
-  deleteBand(bandid: string) {
+  deleteBand(bandid: string): Observable<void> {
     return this.http.delete<void>(AppSettings.apiUrl + 'bands/' + bandid);
   }
 
 
   getRoleToString(userId: string): string {
     const member = this.activeBand.members.find(user => user.userId === userId);
+    if (!member) {
+      return '';
+    }
     return MemberRoles[member.role];
   }
 
@@ -105,10 +112,9 @@ export class BandService {
   }
 
   public uploadImageBand(image: any, bandid: string): Observable<ImagesData> {
-    console.log(image);
-    const formData = new FormData();
-    formData.append('file', image, image.filename);
     if (image) {
+      const formData = new FormData();
+      formData.append('file', image, image.filename);
       return this.http.post<ImagesData>(
         AppSettings.apiUrl + 'images/band/' + bandid,
         formData);
@@ -116,7 +122,7 @@ export class BandService {
     return null;
   }
 
-  public removeImageBand(imageId: string, bandid): Observable<any> {
+  public removeImageBand(imageId: string, bandid: string): Observable<any> {
     const params = new HttpParams().set('bandId', bandid);
     return this.http.delete(AppSettings.apiUrl + 'images/' + imageId,
       {params});
@@ -196,6 +202,10 @@ export class BandService {
               this.errorService.handleError(error);
             }
           );
+        },
+        error1 => {
+          this.isLoading = false;
+          this.errorService.handleError(error1);
         }
       );
   }
