@@ -20,11 +20,10 @@ export class SettingsService {
     );
   }
 
-  public updateAvatar(avatar: any): Observable<ImagesData> {
-    console.log(avatar);
-    const formData = new FormData();
-    formData.append('file', avatar, avatar.filename);
+  public updateAvatar(avatar: File): Observable<ImagesData> {
     if (avatar) {
+      const formData = new FormData();
+      formData.append('file', avatar, avatar.name);
       return this.http.post<ImagesData>(
         AppSettings.apiUrl + 'images/avatar',
         formData);
@@ -32,8 +31,8 @@ export class SettingsService {
     return null;
   }
 
-  public removeAvatar(avatarId: string): Observable<any> {
-    return this.http.delete(AppSettings.apiUrl + 'images/' + avatarId);
+  public removeAvatar(avatarId: string): Observable<void> {
+    return this.http.delete<void>(AppSettings.apiUrl + 'images/' + avatarId);
   }
 
 }
