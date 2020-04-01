@@ -1,5 +1,5 @@
 import {LyricSet} from '../../shared/interfaces/lyric-set';
-import {forkJoin, Observable} from 'rxjs';
+import {forkJoin, Observable, throwError} from 'rxjs';
 import {ErrorService} from './error.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
@@ -14,7 +14,6 @@ import {Router} from '@angular/router';
 import {Errors} from '../../shared/enums/errors';
 import {AddSetData} from '../../shared/interfaces/addSetData';
 import {UserResponse} from '../../shared/interfaces/userResponse';
-import {Lyrics} from '../../shared/interfaces/lyrics';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +67,6 @@ export class MysetsService {
   }
 
   updateActiveSet(lyriccsetFormValue: { name: string, description: string, isPrivate: boolean }): Observable<void> {
-    console.log(lyriccsetFormValue);
     if (!this.activeSet) {
       return null;
     }
@@ -96,12 +94,10 @@ export class MysetsService {
     this.isLoading = true;
     this.getMySetList().subscribe(
       setlist => {
-        console.log(setlist);
         this.setMySetList(setlist);
         this.isLoading = false;
       },
       error => {
-        console.log(error);
         this.errorService.handleError(error);
         this.isLoading = false;
       }
@@ -113,11 +109,10 @@ export class MysetsService {
   }
 
 
-  public uploadImageSet(image: any, setid: string): Observable<ImagesData> {
-    console.log(image);
-    const formData = new FormData();
-    formData.append('file', image, image.filename);
+  public uploadImageSet(image: File, setid: string): Observable<ImagesData> {
     if (image) {
+      const formData = new FormData();
+      formData.append('file', image, image.name);
       return this.http.post<ImagesData>(
         AppSettings.apiUrl + 'images/set/' + setid,
         formData);
@@ -125,9 +120,9 @@ export class MysetsService {
     return null;
   }
 
-  public removeImageSet(imageId: string, setId): Observable<any> {
+  public removeImageSet(imageId: string, setId: string): Observable<void> {
     const params = new HttpParams().set('setId', setId);
-    return this.http.delete(AppSettings.apiUrl + 'images/' + imageId,
+    return this.http.delete<void>(AppSettings.apiUrl + 'images/' + imageId,
       {params});
   }
 
@@ -175,7 +170,6 @@ export class MysetsService {
 
     for (const set of sets) {
       set.tracklist.push(track);
-      console.log(set);
       this.updateSet(set).subscribe(
         () => {
           updated++;
@@ -185,7 +179,6 @@ export class MysetsService {
         },
         error => {
           const errorRes = this.errorService.handleError(error);
-          console.log(error);
           if (errorRes === Errors.TRACK_EXISTS) {
             this.toastr.error('Set "' + set.name + '" alerady includes that song!');
           }
@@ -207,7 +200,6 @@ export class MysetsService {
     }
     this.setActiveSet(this.getSet(setid));
     this.setEditMode(false);
-    console.log(this.activeSet);
   }
 
   isNextDisabled(trackId: number): boolean {
@@ -253,6 +245,9 @@ export class MysetsService {
   }
 
   rateSet(rate: number): Observable<LyricSet> {
+    if (!this.activeSet) {
+      return throwError(new Error('no active set'));
+    }
     return this.http.put<LyricSet>(AppSettings.apiUrl + 'lyricsets/' + this.activeSet.id + '/rate', {},
       {
         params: new HttpParams()
