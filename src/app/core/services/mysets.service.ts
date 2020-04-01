@@ -232,7 +232,7 @@ export class MysetsService {
     }
   }
 
-  getUser(userId: string) {
+  getUser(userId: string): Observable<UserResponse> {
     return this.http.get<UserResponse>(AppSettings.apiUrl + 'users/' + userId);
   }
 
