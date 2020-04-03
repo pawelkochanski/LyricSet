@@ -52,7 +52,6 @@ export class SearchBarComponent implements OnInit {
   handleValueChange(value: string): void {
     this.mysetsService.quickSearch(value, AppSettings.searchBarPageSize, AppSettings.searchBarPage)
       .subscribe(response => {
-          console.log(response);
           this.searchResult = response;
           this.noResult = this.searchResult.byArtist.track_list.length === 0
             && this.searchResult.byTitle.track_list.length === 0

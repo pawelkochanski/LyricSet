@@ -8,37 +8,37 @@
       type="text"
       class="search">
     <div class="auto-complete mat-elevation-z7" *ngIf="isAutocomplete">
-      <div class="auto-complete-item-disabled" *ngIf="isLoading">
+      <div class="auto-complete-item-disabled spinner" *ngIf="isLoading">
         <mat-spinner diameter="25" color="accent"></mat-spinner>
       </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="noResult && !isLoading">
+      <div class="auto-complete-item-disabled no-result" *ngIf="noResult && !isLoading">
         --------- No results found ---------
       </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byTitle.track_list.length>0" >
+      <div class="auto-complete-item-disabled label-by-title" *ngIf="searchResult && searchResult?.byTitle.track_list.length>0" >
         --------- Searched by title ---------
       </div>
 
-      <div class="auto-complete-item" *ngFor="let element of searchResult?.byTitle.track_list"
+      <div class="auto-complete-item" *ngFor="let element of searchResult?.byTitle?.track_list"
            [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
             (click)="onSongClick(element.track)">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
       </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byArtist.track_list.length>0">
+      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byArtist?.track_list.length>0">
         --------- Searched by artist ---------
       </div>
 
-      <div class="auto-complete-item" *ngFor="let element of searchResult?.byArtist.track_list"
+      <div class="auto-complete-item" *ngFor="let element of searchResult?.byArtist?.track_list"
            [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
            (click)="onSongClick(element.track)">
         <mat-icon>music_note</mat-icon>
         {{element.track.artist_name + ' - ' + element.track.track_name}}
       </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.users.length>0">
+      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.users?.length>0">
         --------- Searched by user ---------
       </div>
 

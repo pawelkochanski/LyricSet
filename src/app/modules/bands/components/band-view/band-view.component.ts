@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BandService} from '../../../../core/services/band.service';
 import {ErrorService} from '../../../../core/services/error.service';
 import {MysetsService} from '../../../../core/services/mysets.service';
@@ -20,7 +20,8 @@ export class BandViewComponent implements OnInit, OnDestroy {
               private readonly bandService: BandService,
               private readonly errorService: ErrorService,
               private readonly setService: MysetsService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private readonly router: Router) {
   }
 
   onEditImage(): void {
@@ -81,6 +82,7 @@ export class BandViewComponent implements OnInit, OnDestroy {
       error => {
         this.isLoading = false;
         this.errorService.handleError(error);
+        this.router.navigate(['/bands']);
       }
     );
   }
