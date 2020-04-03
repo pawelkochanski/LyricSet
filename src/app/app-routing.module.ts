@@ -20,6 +20,7 @@ import {BandListComponent} from './modules/bands/components/band-list/band-list.
 import {BandViewComponent} from './modules/bands/components/band-view/band-view.component';
 import {BadTracklistComponent} from './modules/bands/components/bad-tracklist/bad-tracklist.component';
 import {PopularComponent} from './modules/popular/popular.component';
+import {LoggedOutGuard} from './core/guards/logged-out.guard';
 
 const appRoutes: Routes = [
   {
@@ -59,8 +60,8 @@ const appRoutes: Routes = [
     data: {state: 'home'}
   },
   {path: '', redirectTo: '/home', pathMatch: 'full', data: {state: 'page'}},
-  {path: 'login', component: LoginComponent, data: {state: 'login'}},
-  {path: 'register', component: RegisterComponent, data: {state: 'register'}},
+  {path: 'login', canActivate: [LoggedOutGuard], component: LoginComponent, data: {state: 'login'}},
+  {path: 'register', canActivate: [LoggedOutGuard], component: RegisterComponent, data: {state: 'register'}},
   {
     path: 'settings',
     canActivate: [AuthGuard],

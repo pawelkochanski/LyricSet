@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="mat-elevation-z8">
   <a
     class="brand"
-    [routerLink]="['home']">
+    [routerLink]="['/home']">
     <mat-icon>
       queue_music
     </mat-icon>
@@ -9,36 +9,35 @@
   </a>
   <a
   *ngIf="isAuthenticated"
-  [routerLink]="['library']"
+  [routerLink]="['/library']"
   routerLinkActive="nav-button-active"
-  class="nav-button">Library</a>
+  class="nav-button library-button">Library</a>
   <a
     *ngIf="isAuthenticated"
-    [routerLink]="['bands']"
+    [routerLink]="['/bands']"
     routerLinkActive="nav-button-active"
-    class="nav-button">Bands</a>
+    class="nav-button bands-button">Bands</a>
   <a
-    [routerLink]="['popular']"
+    [routerLink]="['/popular']"
     routerLinkActive="nav-button-active"
-    class="nav-button">Popular</a>
+    class="nav-button popular-button">Popular</a>
   <a
     [href]="'mailto:pok.koch@gmail.com'"
-    routerLinkActive="nav-button-active"
-    class="nav-button">Contact</a>
+    class="nav-button contact-button">Contact</a>
   <app-search-bar></app-search-bar>
-  <a class="nav-button" mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></a>
+  <a class="nav-button menu-trigger" mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></a>
   <mat-menu #appMenu="matMenu">
     <ng-container *ngIf="isAuthenticated; else not">
       <button
-      mat-menu-item [routerLink]="['settings']">Settings</button>
+      mat-menu-item [routerLink]="['/settings']">Settings</button>
       <button
-      mat-menu-item (click)="onLogout()">Logout</button>
+      mat-menu-item class="login" (click)="onLogout()">Logout</button>
     </ng-container>
     <ng-template #not>
       <button
-      mat-menu-item [routerLink]="['login']">Log In</button>
+      mat-menu-item class="logout" [routerLink]="['/login']">Log In</button>
       <button
-      mat-menu-item [routerLink]="['register']">Register</button>
+      mat-menu-item [routerLink]="['/register']">Register</button>
     </ng-template>
   </mat-menu>
 </mat-toolbar>

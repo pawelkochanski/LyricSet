@@ -34,7 +34,7 @@ export class MysetsService {
 
   }
 
-  getMySetList(): Observable<any> {
+  getMySetList(): Observable<LyricSet[]> {
     return this.http.get<LyricSet[]>(
       this.url + 'lyricsets',
     );
@@ -44,8 +44,8 @@ export class MysetsService {
     this.mysetlist = setlist;
   }
 
-  removeSet(setId: string): Observable<any> {
-    return this.http.delete(this.url + 'lyricsets/' + setId
+  removeSet(setId: string): Observable<void> {
+    return this.http.delete<void>(this.url + 'lyricsets/' + setId
     );
   }
 
@@ -236,11 +236,11 @@ export class MysetsService {
     return this.http.get<UserResponse>(AppSettings.apiUrl + 'users/' + userId);
   }
 
-  getSetList(userId: string) {
+  getSetList(userId: string): Observable<LyricSet[]> {
     return this.http.get<LyricSet[]>(AppSettings.apiUrl + 'users/' + userId + '/setlist');
   }
 
-  onImgError($event) {
+  onImgError($event): void {
     $event.target.src = AppSettings.defaultAvatar;
   }
 

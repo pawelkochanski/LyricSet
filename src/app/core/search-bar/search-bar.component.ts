@@ -42,6 +42,9 @@ export class SearchBarComponent implements OnInit {
           this.isLoading = true;
           this.searchResult = null;
           this.handleValueChange(value);
+        },
+        error => {
+          console.log(error);
         }
       );
   }

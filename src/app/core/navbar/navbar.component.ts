@@ -12,7 +12,6 @@ import {MatMenuTrigger} from '@angular/material/menu';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
-  @ViewChild('searchTrigger', {static: true}) public menuTrigger: MatMenuTrigger;
   private userSub: Subscription;
 
   constructor(private readonly authService: AuthService,
@@ -22,7 +21,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.userSub = this.authService.user.subscribe(user => {
       this.isAuthenticated = !!user;
-      console.log(user);
     });
   }
 
@@ -30,7 +28,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userSub.unsubscribe();
   }
 
-  onLogout() {
+  onLogout(): void {
     this.authService.logout();
     this.toastr.success('You have been sucessfully logged out!');
   }

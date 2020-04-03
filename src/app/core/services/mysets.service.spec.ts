@@ -13,6 +13,7 @@ import {HttpParams} from '@angular/common/http';
 import {query} from '@angular/animations';
 import {TrackResponse} from '../../shared/interfaces/search-track-response';
 import {Track} from '../../shared/interfaces/track';
+import {MysetsServiceSpecStub} from './mysets.service.spec.stub';
 
 describe('MySetsService', () => {
   let router: Router;
@@ -40,7 +41,8 @@ describe('MySetsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
         imports: [RouterTestingModule, HttpClientTestingModule, ToastrModule.forRoot()],
-        providers: [MysetsService,
+        providers: [
+          MysetsService,
           {
             provide: ErrorService, useClass: class {
               handleError = jest.fn();
@@ -138,7 +140,7 @@ describe('MySetsService', () => {
   });
 
   test('refreshSetlist should call getMySetListt', () => {
-    service.getMySetList = jest.fn(() => of({setlist: [mockSet]}));
+    const spy = jest.spyOn(service, 'getMySetList').mockReturnValue(of({} as LyricSet[]));
     service.refreshSetlist();
     expect(service.getMySetList).toHaveBeenCalled();
   });
