@@ -1,5 +1,5 @@
 <mat-list-item
-  [routerLink]="[set.id]"
+  routerLink="{{set.id}}"
   [routerLinkActive]="['text-highlight']">
   <img alt="" matListAvatar
        [src]="mysetsService.getImageUrl(set.imageId)"
