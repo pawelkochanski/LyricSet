@@ -5,29 +5,29 @@
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Username</mat-label>
         <input formControlName="username" matInput>
-        <mat-error *ngIf="f.username.errors?.required">Username is required!</mat-error>
-        <mat-error *ngIf="f.username.errors?.minlength">Username must be at least 3 characters!</mat-error>
-        <mat-error *ngIf="f.username.errors?.notUnique">Username already exists!</mat-error>
+        <mat-error *ngIf="registerForm.controls.username.errors?.required">Username is required!</mat-error>
+        <mat-error *ngIf="registerForm.controls.username.errors?.minlength">Username must be at least 3 characters!</mat-error>
+        <mat-error *ngIf="registerForm.controls.username.errors?.notUnique">Username already exists!</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>E-mail</mat-label>
         <input formControlName="email" matInput>
-        <mat-error *ngIf="f.email.errors?.required">Email is required!</mat-error>
-        <mat-error *ngIf="f.email.errors?.email">This isn't a correct E-mail!</mat-error>
-        <mat-error *ngIf="f.email.errors?.notUnique">E-mail already exists!</mat-error>
+        <mat-error *ngIf="registerForm.controls.email.errors?.required">Email is required!</mat-error>
+        <mat-error *ngIf="registerForm.controls.email.errors?.email">This isn't a correct E-mail!</mat-error>
+        <mat-error *ngIf="registerForm.controls.email.errors?.notUnique">E-mail already exists!</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Password</mat-label>
         <input type="password" formControlName="password" matInput>
-        <mat-error *ngIf="f.password.errors?.required">Password is required!</mat-error>
-        <mat-error *ngIf="f.password.errors?.specialsign && !f.password.errors?.required">Minimum 8 characters, at least
+        <mat-error *ngIf="registerForm.controls.password.errors?.required">Password is required!</mat-error>
+        <mat-error *ngIf="registerForm.controls.password.errors?.specialsign && !registerForm.controls.password.errors?.required">Minimum 8 characters, at least
           one letter and one number:
         </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" color="accent">
         <mat-label>Repeat password</mat-label>
         <input type="password" formControlName="repPassword" matInput>
-        <mat-error *ngIf="f.repPassword.errors?.matchOther">Passwords don't match!</mat-error>
+        <mat-error *ngIf="registerForm.controls.repPassword.errors?.matchOther">Passwords don't match!</mat-error>
       </mat-form-field>
       <button mat-raised-button type="submit" color="accent">Submit</button>
       <a mat-raised-button [routerLink]="['/login']">Already have an account? Log in here!</a>
