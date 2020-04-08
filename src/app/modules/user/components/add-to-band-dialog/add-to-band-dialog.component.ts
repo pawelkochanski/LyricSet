@@ -8,43 +8,46 @@ import {ErrorService} from '../../../../core/services/error.service';
 
 
 export interface AddToBandData {
-  userid: string;
+	userid: string;
 }
 
 @Component({
-  selector: 'app-add-to-band-dialog',
-  templateUrl: './add-to-band-dialog.component.html',
-  styleUrls: ['./add-to-band-dialog.component.scss']
+	selector: 'app-add-to-band-dialog',
+	templateUrl: './add-to-band-dialog.component.html',
+	styleUrls: ['./add-to-band-dialog.component.scss']
 })
 export class AddToBandDialogComponent implements OnInit {
 
-  selectedBand: Band;
+	selectedBand: Band;
 
-  constructor(private readonly bandService: BandService,
-              private readonly setService: MysetsService,
-              public dialogRef: MatDialogRef<AddToBandDialogComponent>,
-              private readonly toastr: ToastrService,
-              private readonly errorService: ErrorService,
-              @Inject(MAT_DIALOG_DATA) public data: AddToBandData) {
-  }
+	constructor(private readonly bandService: BandService,
+	            private readonly setService: MysetsService,
+	            public dialogRef: MatDialogRef<AddToBandDialogComponent>,
+	            private readonly toastr: ToastrService,
+	            private readonly errorService: ErrorService,
+	            @Inject(MAT_DIALOG_DATA) public data: AddToBandData) {
+	}
 
-  onNoClick() {
-    this.dialogRef.close();
-  }
+	onNoClick() {
+		this.dialogRef.close();
+	}
 
-  onSendClick() {
-    this.bandService.addUserToBand(this.selectedBand.id, this.data.userid).subscribe(
-      () => {
-        this.toastr.success('User added to band!');
-        this.dialogRef.close();
-      }, error1 => {
-        this.errorService.handleError(error1);
-      }
-    );
-  }
+	onSendClick() {
+		if (!this.selectedBand) {
+			return;
+		}
+		this.bandService.addUserToBand(this.selectedBand.id, this.data.userid).subscribe(
+			() => {
+				this.toastr.success('User added to band!');
+				this.dialogRef.close();
+			}, error1 => {
+				this.errorService.handleError(error1);
+			}
+		);
+	}
 
-  ngOnInit() {
-    this.bandService.refreshBandlist();
-  }
+	ngOnInit() {
+		this.bandService.refreshBandlist();
+	}
 
 }

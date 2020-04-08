@@ -1,29 +1,29 @@
-<h1 mat-dialog-title>Pick a Band!</h1>
+<script src="add-to-band-dialog.component.ts"></script><h1 mat-dialog-title>Pick a Band!</h1>
 <div mat-dialog-content>
 
-  <div class="loading-container" *ngIf="this.bandService.isLoading else bandsContainer">
-    <mat-spinner diameter="50" color="accent">
-    </mat-spinner>
-  </div>
+    <div *ngIf="this.bandService.isLoading else bandsContainer" class="loading-container">
+        <mat-spinner color="accent" diameter="50">
+        </mat-spinner>
+    </div>
 
-  <ng-template #bandsContainer>
-    <mat-radio-group [(ngModel)]="selectedBand">
-      <div *ngFor="let band of bandService.bandlist">
-        <mat-radio-button *ngIf="bandService.amILeader(band)" [value]="band">
-          <div class="radio-content">
-            <p>{{band.name}}</p>
-            <img matListAvatar
-                 [src]="setService.getImageUrl(band.imageId)"
-                 (error)="setService.onImgError($event)">
+    <ng-template #bandsContainer>
+        <mat-radio-group [(ngModel)]="selectedBand">
+            <div *ngFor="let band of bandService.bandlist">
+                <mat-radio-button *ngIf="bandService.amILeader(band)" [value]="band">
+                    <div class="radio-content">
+                        <p>{{band.name}}</p>
+                        <img (error)="setService.onImgError($event)"
+                             [src]="setService.getImageUrl(band.imageId)"
+                             matListAvatar>
 
-          </div>
-        </mat-radio-button>
-      </div>
-    </mat-radio-group>
-  </ng-template>
+                    </div>
+                </mat-radio-button>
+            </div>
+        </mat-radio-group>
+    </ng-template>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="onSendClick()" [disabled]="!selectedBand">Send
-  </button>
+    <button (click)="onNoClick()" mat-button>No Thanks</button>
+    <button (click)="onSendClick()" [disabled]="!selectedBand" mat-button>Send
+    </button>
 </div>

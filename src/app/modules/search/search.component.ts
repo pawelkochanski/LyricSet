@@ -6,44 +6,41 @@ import {AppSettings} from '../../shared/AppSettings';
 import {ErrorService} from '../../core/services/error.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+	selector: 'app-search',
+	templateUrl: './search.component.html',
+	styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 
-  public searchResult: SearchBarResponse;
-  public noArtistResult: boolean;
-  public noTitleResult: boolean;
-  public noUsersResult: boolean;
-  public isLoading: boolean;
+	public searchResult: SearchBarResponse;
+	public noArtistResult: boolean;
+	public noTitleResult: boolean;
+	public noUsersResult: boolean;
+	public isLoading: boolean;
 
-  constructor(private readonly route: ActivatedRoute,
-              private readonly mysetsService: MysetsService,
-              private readonly errorService: ErrorService) {
-  }
+	constructor(private readonly route: ActivatedRoute,
+	            private readonly mysetsService: MysetsService,
+	            private readonly errorService: ErrorService) {
+	}
 
-  ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.isLoading = true;
-        this.mysetsService.quickSearch(params.query, 9999999, AppSettings.searchBarPage)
-          .subscribe(response => {
-              console.log(response);
-              this.searchResult = response;
-              this.noTitleResult =  this.searchResult.byTitle.track_list.length === 0;
-              this.noArtistResult = this.searchResult.byArtist.track_list.length === 0;
-              this.noUsersResult = this.searchResult.users.length === 0;
-              console.log(this.noArtistResult);
-              console.log(this.noTitleResult);
-              this.isLoading = false;
-            },
-            error => {
-              this.errorService.handleError(error);
-              this.isLoading = false;
-            });
-      }
-    );
-  }
+	ngOnInit() {
+		this.route.params.subscribe(
+			(params: Params) => {
+				this.isLoading = true;
+				this.mysetsService.quickSearch(params.query, 9999999, AppSettings.searchBarPage)
+					.subscribe(response => {
+							this.searchResult = response;
+							this.noTitleResult = this.searchResult.byTitle.track_list.length === 0;
+							this.noArtistResult = this.searchResult.byArtist.track_list.length === 0;
+							this.noUsersResult = this.searchResult.users.length === 0;
+							this.isLoading = false;
+						},
+						error => {
+							this.errorService.handleError(error);
+							this.isLoading = false;
+						});
+			}
+		);
+	}
 
 }
