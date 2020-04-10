@@ -4,34 +4,34 @@ import {ReceiveMessage, SendMessage} from '../../shared/interfaces/messages';
 import {Observable} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class ChatService {
 
-  constructor(private socket: Socket) {
-  }
+	constructor(private socket: Socket) {
+	}
 
-  sendChat(message: SendMessage) {
-    this.socket.emit('chat', message);
-  }
+	sendChat(message: SendMessage): void {
+		this.socket.emit('chat', message);
+	}
 
-  receiveChat(): Observable<ReceiveMessage> {
-    return this.socket.fromEvent('chat');
-  }
+	receiveChat(): Observable<ReceiveMessage> {
+		return this.socket.fromEvent('chat');
+	}
 
-  getUsers() {
-    return this.socket.fromEvent('users');
-  }
+	getUsers() {
+		return this.socket.fromEvent('users');
+	}
 
-  getMessages(): Observable<ReceiveMessage[]> {
-    return this.socket.fromEvent('messages');
-  }
+	getMessages(): Observable<ReceiveMessage[]> {
+		return this.socket.fromEvent('messages');
+	}
 
-  joinRoom(message: SendMessage) {
-    return this.socket.emit('joinRoom', message);
-  }
+	joinRoom(message: SendMessage): void {
+		this.socket.emit('joinRoom', message);
+	}
 
-  leaveRoom(message: SendMessage) {
-    return this.socket.emit('leaveRoom', message);
-  }
+	leaveRoom(message: SendMessage): void {
+		this.socket.emit('leaveRoom', message);
+	}
 }

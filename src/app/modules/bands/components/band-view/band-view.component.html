@@ -1,95 +1,96 @@
 <div class="main-container">
-  <div class="loading" *ngIf="isLoading else content">
-    <mat-spinner diameter="100" color="accent"></mat-spinner>
-  </div>
-  <ng-template #content>
-    <div class="split-container">
-      <div class="left">
-        <mat-card>
-          <div class="band-image-container">
-            <img class="band-img" mat-card-image [src]="setService.getImageUrl(bandService.activeBand.imageId)"
-                 (error)="setService.onImgError($event)"/>
-            <button
-              mat-raised-button
-              class="left-btn"
-              color="warn"
-              *ngIf="bandService.isEditMode"
-              (click)="onEditImage()">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button
-              mat-raised-button
-              class="right-btn"
-              color="warn"
-              *ngIf="bandService.isEditMode"
-              (click)="onRemoveImage()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
-          <mat-card-title>
-            {{bandService.activeBand.name}}
-          </mat-card-title>
-          <mat-card-content>
-            <label>Members:</label>
-            <mat-nav-list>
-              <mat-list-item *ngFor="let user of bandService.members" [routerLink]="['/user',user.id]">
-                <img class="avatar-img" [src]="setService.getImageUrl(user.avatarId)"
-                     (error)="setService.onImgError($event)">
-                {{user.displayname}}
-              </mat-list-item>
-            </mat-nav-list>
-            <div *ngIf="bandService.amILeader(bandService.activeBand)" class="button-container">
-              <button
-                class="top-button"
-                *ngIf="bandService.isEditMode"
-                mat-raised-button
-                (click)="onFinishEditClick()">Finish Editing
-                <mat-icon>check</mat-icon>
-              </button>
-              <button
-                *ngIf="bandService.isEditMode"
-                mat-raised-button
-                color="warn"
-                (click)="onRemoveBandClick()">Remove Band
-                <mat-icon>delete_forever</mat-icon>
-              </button>
-              <button
-                *ngIf="!bandService.isEditMode"
-                mat-raised-button
-                color="accent"
-                (click)="onEditClick()">Edit Band
-                <mat-icon>edit</mat-icon>
-              </button>
-            </div>
-            <button
-              *ngIf="!bandService.isEditMode && bandService.getRoleToString(bandService.user.id) !== 'Leader'"
-              mat-raised-button
-              color="accent"
-              (click)="onLeaveBandClick()">Leave Band
-              <mat-icon>exit_to_app</mat-icon>
-            </button>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="right">
-        <mat-card>
-          <mat-tab-group animationDuration="0" color="accent">
-            <mat-tab label="Chat">
-              <app-chat></app-chat>
-            </mat-tab>
-            <mat-tab label="Live Set!">
-              <mat-card>
-                <router-outlet></router-outlet>
-              </mat-card>
-            </mat-tab>
-            <mat-tab label="Members">
-              <app-members-list></app-members-list>
-            </mat-tab>
-          </mat-tab-group>
-        </mat-card>
-      </div>
+    <div *ngIf="isLoading else content" class="loading">
+        <mat-spinner color="accent" diameter="100"></mat-spinner>
     </div>
-  </ng-template>
+    <ng-template #content>
+        <div class="split-container">
+            <div class="left">
+                <mat-card>
+                    <div class="band-image-container">
+                        <img (error)="setService.onImgError($event)" [src]="setService.getImageUrl(bandService.activeBand?.imageId)"
+                             class="band-img"
+                             mat-card-image/>
+                        <button
+                                (click)="onEditImage()"
+                                *ngIf="bandService.isEditMode"
+                                class="left-btn"
+                                color="warn"
+                                mat-raised-button>
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button
+                                (click)="onRemoveImage()"
+                                *ngIf="bandService.isEditMode"
+                                class="right-btn"
+                                color="warn"
+                                mat-raised-button>
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+                    <mat-card-title>
+                        {{bandService.activeBand?.name}}
+                    </mat-card-title>
+                    <mat-card-content>
+                        <label>Members:</label>
+                        <mat-nav-list>
+                            <mat-list-item *ngFor="let user of bandService.members" [routerLink]="['/user',user?.id]">
+                                <img (error)="setService.onImgError($event)" [src]="setService.getImageUrl(user?.avatarId)"
+                                     class="avatar-img">
+                                {{user.displayname}}
+                            </mat-list-item>
+                        </mat-nav-list>
+                        <div *ngIf="bandService.amILeader(bandService.activeBand)" class="button-container">
+                            <button
+                                    (click)="onFinishEditClick()"
+                                    *ngIf="bandService.isEditMode"
+                                    class="top-button"
+                                    mat-raised-button>Finish Editing
+                                <mat-icon>check</mat-icon>
+                            </button>
+                            <button
+                                    (click)="onRemoveBandClick()"
+                                    *ngIf="bandService.isEditMode"
+                                    color="warn"
+                                    mat-raised-button>Remove Band
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                            <button
+                                    (click)="onEditClick()"
+                                    *ngIf="!bandService.isEditMode"
+                                    color="accent"
+                                    mat-raised-button>Edit Band
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                        <button
+                                (click)="onLeaveBandClick()"
+                                *ngIf="!bandService.isEditMode && bandService.getRoleToString(bandService.user?.id) !== 'Leader'"
+                                color="accent"
+                                mat-raised-button>Leave Band
+                            <mat-icon>exit_to_app</mat-icon>
+                        </button>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="right">
+                <mat-card>
+                    <mat-tab-group animationDuration="0" color="accent">
+                        <mat-tab label="Chat">
+                            <app-chat></app-chat>
+                        </mat-tab>
+                        <mat-tab label="Live Set!">
+                            <mat-card>
+                                <router-outlet></router-outlet>
+                            </mat-card>
+                        </mat-tab>
+                        <mat-tab label="Members">
+                            <app-members-list></app-members-list>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+            </div>
+        </div>
+    </ng-template>
 </div>
 
 

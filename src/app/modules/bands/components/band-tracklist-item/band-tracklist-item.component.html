@@ -1,26 +1,27 @@
-<div class="track mat-elevation-z3" [ngClass]="this.bandSerivce.isEditMode ? 'cursor-pointer hover' : ''">
-  <div class="avatar">
-    <mat-icon>music_note</mat-icon>
-  </div>
-  <div class="track-header" >
-    <h3>{{track.track_name}}</h3>
-    <p>{{track.artist_name}}</p>
-  </div>
-  <div class="separator">
-  </div>
-  <button
-    *ngIf="!bandSerivce.isEditMode; else tmp"
-    mat-icon-button
-    [routerLink]="[track.track_id]"
-    [queryParams]="{playMode : 0}">
-    <mat-icon>remove_red_eye</mat-icon>
-  </button>
-  <ng-template #tmp>
+<script src="band-tracklist-item.component.ts"></script>
+<div [ngClass]="this.bandSerivce.isEditMode ? 'cursor-pointer hover' : ''" class="track mat-elevation-z3">
+    <div class="avatar">
+        <mat-icon>music_note</mat-icon>
+    </div>
+    <div class="track-header">
+        <h3>{{track?.track_name}}</h3>
+        <p>{{track?.artist_name}}</p>
+    </div>
+    <div class="separator">
+    </div>
     <button
-      mat-icon-button
-      (click) = OnRemoveClick()
-      color="warn">
-      <mat-icon>delete</mat-icon>
+            *ngIf="!bandSerivce.isEditMode; else tmp"
+            [queryParams]="{playMode : 0}"
+            [routerLink]="[track?.track_id]"
+            mat-icon-button>
+        <mat-icon>remove_red_eye</mat-icon>
     </button>
-  </ng-template>
+    <ng-template #tmp>
+        <button
+                (click)=OnRemoveClick()
+                color="warn"
+                mat-icon-button>
+            <mat-icon>delete</mat-icon>
+        </button>
+    </ng-template>
 </div>
