@@ -1,55 +1,59 @@
 <form [formGroup]="searchFrom" class="search-container">
-  <div class="searchinput-contianer">
-    <input
-      (focusin)="onInputFocusIn()"
-      (focusout)="onInputFocusOut()"
-      formControlName="searchInput"
-      placeholder="Search for songs..."
-      type="text"
-      class="search">
-    <div class="auto-complete mat-elevation-z7" *ngIf="isAutocomplete">
-      <div class="auto-complete-item-disabled spinner" *ngIf="isLoading">
-        <mat-spinner diameter="25" color="accent"></mat-spinner>
-      </div>
+    <div class="searchinput-contianer">
+        <input
+                (focusin)="onInputFocusIn()"
+                (focusout)="onInputFocusOut()"
+                (keydown)="onKeyDown($event)"
+                class="search"
+                formControlName="searchInput"
+                placeholder="Search for songs..."
+                type="search">
+        <div *ngIf="isAutocomplete" class="auto-complete mat-elevation-z7">
+            <div *ngIf="isLoading" class="auto-complete-item-disabled spinner">
+                <mat-spinner color="accent" diameter="25"></mat-spinner>
+            </div>
 
-      <div class="auto-complete-item-disabled no-result" *ngIf="noResult && !isLoading">
-        --------- No results found ---------
-      </div>
+            <div *ngIf="noResult && !isLoading" class="auto-complete-item-disabled no-result">
+                --------- No results found ---------
+            </div>
 
-      <div class="auto-complete-item-disabled label-by-title" *ngIf="searchResult && searchResult?.byTitle.track_list.length>0" >
-        --------- Searched by title ---------
-      </div>
+            <div *ngIf="searchResult && searchResult?.byTitle.track_list.length>0"
+                 class="auto-complete-item-disabled label-by-title">
+                --------- Searched by title ---------
+            </div>
 
-      <div class="auto-complete-item" *ngFor="let element of searchResult?.byTitle?.track_list"
-           [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
-            (click)="onSongClick(element.track)">
-        <mat-icon>music_note</mat-icon>
-        {{element.track.artist_name + ' - ' + element.track.track_name}}
-      </div>
+            <div (click)="onSongClick(element.track)" *ngFor="let element of searchResult?.byTitle?.track_list"
+                 [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
+                 class="auto-complete-item">
+                <mat-icon>music_note</mat-icon>
+                {{element.track.artist_name + ' - ' + element.track.track_name}}
+            </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.byArtist?.track_list.length>0">
-        --------- Searched by artist ---------
-      </div>
+            <div *ngIf="searchResult && searchResult?.byArtist?.track_list.length>0"
+                 class="auto-complete-item-disabled">
+                --------- Searched by artist ---------
+            </div>
 
-      <div class="auto-complete-item" *ngFor="let element of searchResult?.byArtist?.track_list"
-           [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
-           (click)="onSongClick(element.track)">
-        <mat-icon>music_note</mat-icon>
-        {{element.track.artist_name + ' - ' + element.track.track_name}}
-      </div>
+            <div (click)="onSongClick(element.track)" *ngFor="let element of searchResult?.byArtist?.track_list"
+                 [matTooltip]="element.track.artist_name + ' - ' + element.track.track_name"
+                 class="auto-complete-item">
+                <mat-icon>music_note</mat-icon>
+                {{element.track.artist_name + ' - ' + element.track.track_name}}
+            </div>
 
-      <div class="auto-complete-item-disabled" *ngIf="searchResult && searchResult?.users?.length>0">
-        --------- Searched by user ---------
-      </div>
+            <div *ngIf="searchResult && searchResult?.users?.length>0" class="auto-complete-item-disabled">
+                --------- Searched by user ---------
+            </div>
 
-      <div class="auto-complete-item" *ngFor="let element of searchResult?.users"
-                  [matTooltip]="element.displayname"
-                  (click) = "onUserClick(element)">
-        <mat-icon>person</mat-icon>
-        {{element.displayname}}
-      </div>
-
+            <div (click)="onUserClick(element)" *ngFor="let element of searchResult?.users"
+                 [matTooltip]="element.displayname"
+                 class="auto-complete-item">
+                <mat-icon>person</mat-icon>
+                {{element.displayname}}
+            </div>
+        </div>
     </div>
-  </div>
-  <a class="nav-button" mat-icon-button (click)="onSearchClick()"><mat-icon>search</mat-icon></a>
+    <a (click)="onSearchClick()" class="nav-button search-click" mat-icon-button>
+        <mat-icon>search</mat-icon>
+    </a>
 </form>

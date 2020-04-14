@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ChatService} from '../../../../core/services/chat.service';
 import {BandService} from '../../../../core/services/band.service';
 import {Subscription} from 'rxjs';
@@ -14,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
+	@ViewChild('scrollMe', {static: false}) scroll: ElementRef;
 	public messages: ReceiveMessage[] = [];
 	public message: string;
 	public messageForm: FormGroup;
@@ -25,6 +26,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 	            private readonly authService: AuthService,
 	            private fb: FormBuilder) {
 	}
+
 
 	getDateFormat(date: number): string {
 		const d = new Date(date);
@@ -96,11 +98,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	keyDownFunction(event: KeyboardEvent) {
+	keyDownFunction(event: KeyboardEvent): void {
 		if (event.keyCode === 13 && !event.shiftKey) {
 			event.preventDefault();
 			this.onSendClick();
 			return;
 		}
 	}
+
 }

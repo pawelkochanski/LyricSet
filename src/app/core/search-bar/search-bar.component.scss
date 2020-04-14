@@ -1,29 +1,54 @@
 //Go into theme.scss
-mat-option{
+@import "src/theme.scss";
+
+mat-option {
   font-size: 14px;
   height: 40px;
 }
 
-.is-loading{
+.is-loading {
   height: 50px;
   align-items: center;
   width: 100%;
 }
 
-.divid{
+.divid {
   height: 20px;
 }
 
-.divid:first-of-type{
+.divid:first-of-type {
   margin-top: 10px;
 }
-.search-container{
-  display:flex;
+
+.search-container {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
-  width:100%;
+  width: 100%;
 }
-a{
+
+a {
   margin: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .searchinput-contianer {
+    width: 100%;
+    transition: none;
+  }
+
+  .search {
+    box-shadow: 0 0 0 2px mat-color($theme-accent);
+    transition: none;
+  }
+
+  .searchinput-contianer:focus-within {
+    width: 100%;
+  }
+
+  .search-click {
+    display: none;
+  }
+
 }

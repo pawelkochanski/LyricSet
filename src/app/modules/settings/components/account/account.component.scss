@@ -1,10 +1,33 @@
-.splitted-left{
-  display:flex;
+.splitted-left {
+  display: flex;
   flex-direction: column;
 }
-label{
+
+label {
   margin: 10px;
 }
-button{
+
+button {
   margin: 10px 70px;
+}
+
+.vertical {
+  display: block;
+}
+
+@media only screen and (max-width: 768px) {
+  .vertical {
+    display: none;
+  }
+  .splitted-right {
+    display: none;
+  }
+  button {
+    margin: 0 auto;
+  }
+  .splitted-left {
+    width: 100%;
+    margin: 20px 0;
+  }
+
 }

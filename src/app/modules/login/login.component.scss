@@ -1,27 +1,36 @@
-mat-card{
-  width : 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.main-container{
+mat-card {
+  width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-mat-form-field{
-  height: 100px;
-}
-form{
+.main-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-mat-card-title{
+
+mat-form-field {
+  height: 100px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-card-title {
   margin-bottom: 30px;
 }
 
-a{
+a {
   margin-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .mat-card {
+    width: 90%;
+  }
 }

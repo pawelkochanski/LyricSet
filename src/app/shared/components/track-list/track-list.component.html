@@ -1,23 +1,28 @@
-<div *ngIf="!mysetsService.isLoading else loading" >
-  <app-set-header></app-set-header>
-  <div *ngIf="mysetsService.activeSet">
-    <div *ngIf="mysetsService.isEditMode; else fixedList" class="track-list" cdkDropList (cdkDropListDropped)="drop($event)">
-      <div cdkDrag class="track-holder" *ngFor="let track of mysetsService.activeSet.tracklist">
-        <app-track-list-item [track]="track"></app-track-list-item>
-      </div>
-    </div>
-    <ng-template #fixedList>
-      <div class="track-list">
-        <div class="track-holder" *ngFor="let track of mysetsService.activeSet.tracklist">
-          <app-track-list-item [track]="track"></app-track-list-item>
+<div *ngIf="!mysetsService.isLoading else loading">
+    <div *ngIf="mysetsService.activeSet">
+        <app-set-header></app-set-header>
+        <div (cdkDropListDropped)="drop($event)" *ngIf="mysetsService.isEditMode; else fixedList" cdkDropList
+             class="track-list">
+            <div *ngFor="let track of mysetsService.activeSet.tracklist" cdkDrag class="track-holder">
+                <app-track-list-item [track]="track"></app-track-list-item>
+            </div>
         </div>
-      </div>
-    </ng-template>
-  </div>
+        <ng-template #fixedList>
+            <div class="track-list">
+                <div *ngFor="let track of mysetsService.activeSet.tracklist" class="track-holder">
+                    <app-track-list-item [track]="track"></app-track-list-item>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>
 <ng-template #loading>
-  <div class="loading">
-    <div class="lds-facebook"><div></div><div></div><div></div></div>
-  </div>
+    <div class="loading">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 </ng-template>
 

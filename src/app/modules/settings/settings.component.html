@@ -1,20 +1,24 @@
 <div class="main-container">
-  <mat-sidenav-container>
-    <mat-sidenav mode="side" opened>
-      <mat-toolbar><h1>Personal Settings</h1></mat-toolbar>
-      <mat-nav-list>
-        <mat-list-item
-          routerLink="profile"
-          [routerLinkActive]="['text-highlight']"><mat-icon>assignment</mat-icon> Profile</mat-list-item>
-        <mat-list-item
-        routerLink="account"
-        [routerLinkActive]="['text-highlight']"><mat-icon>account_box</mat-icon> Account</mat-list-item>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+    <mat-card>
+        <mat-toolbar><h1>Personal Settings</h1></mat-toolbar>
+        <mat-nav-list>
+            <mat-list-item
+                    [routerLinkActive]="['text-highlight']"
+                    routerLink="profile">
+                <mat-icon>assignment</mat-icon>
+                Profile
+            </mat-list-item>
+            <mat-list-item
+                    [routerLinkActive]="['text-highlight']"
+                    routerLink="account">
+                <mat-icon>account_box</mat-icon>
+                Account
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-card>
+    <mat-card class="right">
+        <router-outlet></router-outlet>
+    </mat-card>
 </div>
 
 

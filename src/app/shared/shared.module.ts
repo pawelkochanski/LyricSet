@@ -16,25 +16,25 @@ import {RatingModule} from 'ng-starrating';
 
 
 @NgModule({
-  declarations: [CropperComponent, SongComponent, AddSongDialogComponent, TrackListComponent,
-    TrackListItemComponent, SetHeaderComponent],
-  exports: [
-    TrackListComponent,
-    TrackListItemComponent
-  ],
-  imports: [
-    CommonModule,
-    MatExpansionModule,
-    ImageCropperModule,
-    MatDialogModule,
-    AngularMaterialModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatRadioModule,
-    DragDropModule,
-    RatingModule
-  ]
+	declarations: [CropperComponent, SongComponent, AddSongDialogComponent, TrackListComponent,
+		TrackListItemComponent, SetHeaderComponent],
+	exports: [
+		TrackListComponent,
+		TrackListItemComponent,
+	],
+	imports: [
+		CommonModule,
+		MatExpansionModule,
+		ImageCropperModule,
+		MatDialogModule,
+		AngularMaterialModule,
+		RouterModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatRadioModule,
+		DragDropModule,
+		RatingModule
+	]
 })
 export class SharedModule {
 }

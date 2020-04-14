@@ -1,65 +1,72 @@
 <mat-card>
-  <mat-card-title-group>
-    <div *ngIf="!mySetsService.isEditMode; else temp">
-      <mat-card-title class="text-highlight">
-        {{mySetsService.activeSet.name}}</mat-card-title>
-      <mat-card-subtitle>
-          {{mySetsService.activeSet.description}}
-      </mat-card-subtitle>
+    <mat-card-title-group>
+        <div *ngIf="!mySetsService.isEditMode; else temp">
+            <mat-card-title class="text-highlight">
+                {{mySetsService.activeSet.name}}</mat-card-title>
+            <mat-card-subtitle>
+                {{mySetsService.activeSet.description}}
+            </mat-card-subtitle>
+        </div>
+        <ng-template #temp>
+            <div class="edit-title">
+                <form [formGroup]="lyricsetForm">
+                    <mat-card-title>
+                        <input #title class="mat-title" formControlName="name" matInput maxlength="15"
+                               placeholder="Edit me!">
+                    </mat-card-title>
+                    <mat-card-subtitle>
+                        <textarea #description class="mat-body" cols="35" formControlName="description" maxlength="70"
+                                  placeholder="Edit me!" rows="2"></textarea>
+                    </mat-card-subtitle>
+                    <mat-checkbox
+                            formControlName="isPrivate">Private
+                    </mat-checkbox>
+                </form>
+            </div>
+        </ng-template>
+        <star-rating #starRating (rate)="onRate($event)"
+                     *ngIf="!mySetsService.isEditMode && !mySetsService.activeSet.isPrivate"
+                     [value]="mySetsService.activeSet.rating"
+                     checkedcolor="#ff8605"
+                     size="23px"
+                     totalstars="5"
+                     uncheckedcolor="black"></star-rating>
+        <div class="separator"></div>
+        <div *ngIf="!mySetsService.isEditMode else normalMode">
+            <button [disabled]="mySetsService.activeSet.tracklist.length===0"
+                    [queryParams]="{playMode: 1, currentIndex: 0}"
+                    [routerLink]="[mySetsService.activeSet.tracklist[0]?.track_id]"
+                    mat-button>
+                <mat-icon>play_circle_outline</mat-icon>
+            </button>
+            <button (click)="startEdit()" *ngIf="!mySetsService.isGuestMode" mat-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        <ng-template #normalMode>
+            <div>
+                <button (click)="onRemoveSet()" color="warn" mat-raised-button>
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+                <button (click)="finishEdit()" mat-button>
+                    <mat-icon>check</mat-icon>
+                </button>
+            </div>
+        </ng-template>
+    </mat-card-title-group>
+    <div class="img-container">
+        <img (error)="mySetsService.onImgError($event)"
+             [src]="mySetsService.getImageUrl(this.mySetsService.activeSet.imageId)"
+             alt=""
+             mat-card-md-image/>
+        <div *ngIf="mySetsService.isEditMode" class="img-buttons-container">
+            <button (click)="onRemoveImage()" color="accent" mat-icon-button>
+                <mat-icon>close</mat-icon>
+            </button>
+            <button (click)="onEditImage()" color="accent" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
     </div>
-    <ng-template #temp>
-      <div class="edit-title">
-        <form [formGroup]="lyricsetForm">
-          <mat-card-title>
-            <input formControlName="name" matInput maxlength="15" class="mat-title" #title placeholder="Edit me!">
-          </mat-card-title>
-          <mat-card-subtitle>
-            <textarea formControlName="description"  class="mat-body" #description rows="2" cols="35" placeholder="Edit me!" maxlength="70"></textarea>
-          </mat-card-subtitle>
-          <mat-checkbox
-            formControlName="isPrivate" >Private</mat-checkbox>
-        </form>
-      </div>
-    </ng-template>
-    <star-rating *ngIf="!mySetsService.isEditMode && !mySetsService.activeSet.isPrivate"
-      [value]="mySetsService.activeSet.rating"
-      totalstars="5"
-      checkedcolor="#ff8605"
-      uncheckedcolor="black"
-      size="23px"
-      [readonly]="!mySetsService.isGuestMode"
-      (rate)="onRate($event)"></star-rating>
-    <div class="separator"></div>
-    <div *ngIf="!mySetsService.isEditMode else normalMode">
-      <button mat-button
-              [disabled]="mySetsService.activeSet.tracklist.length===0"
-              [routerLink]="[mySetsService.activeSet.tracklist[0]?.track_id]"
-              [queryParams]="{playMode: 1, currentIndex: 0}">
-        <mat-icon>play_circle_outline</mat-icon>
-      </button>
-      <button mat-button (click)="startEdit()" *ngIf="!mySetsService.isGuestMode">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-    <ng-template #normalMode>
-      <div>
-        <button mat-raised-button  (click)="onRemoveSet()" color="warn">
-          <mat-icon>delete_forever</mat-icon>
-        </button>
-        <button mat-button (click)="finishEdit()">
-          <mat-icon>check</mat-icon>
-        </button>
-      </div>
-    </ng-template>
-  </mat-card-title-group>
-  <div class="img-container">
-    <img mat-card-md-image alt=""
-         (error)="mySetsService.onImgError($event)"
-         [src]="mySetsService.getImageUrl(this.mySetsService.activeSet.imageId)"/>
-    <div class="img-buttons-container" *ngIf="mySetsService.isEditMode">
-      <button mat-icon-button color="accent" (click)="onRemoveImage()"><mat-icon>close</mat-icon></button>
-      <button mat-icon-button color="accent" (click)="onEditImage()"><mat-icon>edit</mat-icon></button>
-    </div>
-  </div>
 
 </mat-card>

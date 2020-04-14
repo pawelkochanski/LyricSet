@@ -1,52 +1,51 @@
 <div class="header">Profile</div>
 <mat-divider></mat-divider>
 <div class="split-container">
-  <div class="splitted-left">
-    <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
-      <label>Display Name:</label>
-      <mat-form-field floatLabel="never" appearance="outline" color="accent">
-        <label>
-          <input matInput [placeholder]="user.displayname" formControlName="displayname">
-        </label>
-        <mat-error *ngIf="formControls.displayname.errors?.required">Username is required!</mat-error>
-        <mat-error *ngIf="formControls.displayname.errors?.minlength">Username must be at least 3 characters!
-        </mat-error>
-        <mat-hint>This is the name that is being shown to others!</mat-hint>
-      </mat-form-field>
-      <label>Bio:</label>
-      <mat-form-field floatLabel="never" appearance="outline" color="accent">
-        <label>
-          <textarea matInput formControlName="bio" [placeholder]="user.bio"></textarea>
-        </label>
-        <mat-hint>Tell the world something about you :)</mat-hint>
-      </mat-form-field>
-      <label>URL:</label>
-      <mat-form-field floatLabel="never" appearance="outline" color="accent">
-        <label>
-          <input matInput type="url" formControlName="url" [placeholder]="user.url">
-        </label>
-        <mat-error *ngIf="formControls.url.errors?.pattern">This must be a valid url!</mat-error>
-      </mat-form-field>
-      <button mat-raised-button color="accent" type="submit">Update</button>
-    </form>
-  </div>
-  <mat-divider [vertical]="true"></mat-divider>
-  <div class="splitted-right">
-    <div class="button-holder">
-      <label>Profile picture:</label>
-    </div>
-    <img [src]="mysetsService.getImageUrl(user.avatarId)" (error)="mysetsService.onImgError($event)" alt="">
-    <div class="button-holder">
-      <button mat-raised-button [matMenuTriggerFor]="appMenu">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <mat-menu #appMenu="matMenu">
-        <form>
-          <label mat-menu-item (click)="openDialog()">Upload Photo</label>
-          <label mat-menu-item (click)="onRemovePhoto()">Remove Photo</label>
+    <div class="splitted-left">
+        <form (ngSubmit)="onSubmit()" [formGroup]="profileForm">
+            <label>Display Name:</label>
+            <mat-form-field appearance="outline" color="accent" floatLabel="never">
+                <label>
+                    <input [placeholder]="user?.displayname" formControlName="displayname" matInput>
+                </label>
+                <mat-error *ngIf="formControls.displayname.errors?.required">Username is required!</mat-error>
+                <mat-error *ngIf="formControls.displayname.errors?.minlength">Username must be at least 3 characters!
+                </mat-error>
+                <mat-hint>This is the name that is being shown to others!</mat-hint>
+            </mat-form-field>
+            <label>Bio:</label>
+            <mat-form-field appearance="outline" color="accent" floatLabel="never">
+                <label>
+                    <textarea [placeholder]="user?.bio" formControlName="bio" matInput></textarea>
+                </label>
+                <mat-hint>Tell the world something about you :)</mat-hint>
+            </mat-form-field>
+            <label>URL:</label>
+            <mat-form-field appearance="outline" color="accent" floatLabel="never">
+                <label>
+                    <input [placeholder]="user?.url" formControlName="url" matInput type="url">
+                </label>
+                <mat-error *ngIf="formControls.url.errors?.pattern">This must be a valid url!</mat-error>
+            </mat-form-field>
+            <button color="accent" mat-raised-button type="submit">Update</button>
         </form>
-      </mat-menu>
-
     </div>
-  </div>
+    <mat-divider [vertical]="true" class="vertical"></mat-divider>
+    <div class="splitted-right">
+        <div class="button-holder">
+            <label>Profile picture:</label>
+        </div>
+        <img (error)="mysetsService.onImgError($event)" [src]="mysetsService.getImageUrl(user?.avatarId)" alt="">
+        <div class="button-holder">
+            <button [matMenuTriggerFor]="appMenu" mat-raised-button>
+                <mat-icon>edit</mat-icon>
+            </button>
+            <mat-menu #appMenu="matMenu">
+                <form>
+                    <label (click)="openDialog()" mat-menu-item>Upload Photo</label>
+                    <label (click)="onRemovePhoto()" mat-menu-item>Remove Photo</label>
+                </form>
+            </mat-menu>
+        </div>
+    </div>
 </div>

@@ -1,20 +1,23 @@
 <script src="set-list.component.ts"></script>
 <div>
-  <label>Public:</label>
-  <mat-nav-list>
-    <div *ngFor="let set of mysetsService.mysetlist">
-      <app-set-list-item *ngIf="!set.isPrivate" [set]="set">
-      </app-set-list-item>
-    </div>
-  </mat-nav-list>
-  <label>Private:</label>
-  <mat-nav-list>
-    <div *ngFor="let set of mysetsService.mysetlist">
-      <app-set-list-item *ngIf="set.isPrivate" [set]="set">
-      </app-set-list-item>
-    </div>
-  </mat-nav-list>
-  <button mat-raised-button color="accent" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+    <h2>SetList</h2>
+    <label>Public:</label>
+    <mat-nav-list>
+        <div *ngFor="let set of mysetsService.mysetlist">
+            <app-set-list-item *ngIf="!set.isPrivate" [set]="set">
+            </app-set-list-item>
+        </div>
+    </mat-nav-list>
+    <label>Private:</label>
+    <mat-nav-list>
+        <div *ngFor="let set of mysetsService.mysetlist">
+            <app-set-list-item *ngIf="set.isPrivate" [set]="set">
+            </app-set-list-item>
+        </div>
+    </mat-nav-list>
+    <button (click)="openDialog()" color="accent" mat-raised-button>
+        <mat-icon>add</mat-icon>
+    </button>
 </div>
 
 

@@ -1,43 +1,90 @@
-<mat-toolbar color="primary" class="mat-elevation-z8">
-  <a
-    class="brand"
-    [routerLink]="['/home']">
-    <mat-icon>
-      queue_music
-    </mat-icon>
-    LyricSet
-  </a>
-  <a
-  *ngIf="isAuthenticated"
-  [routerLink]="['/library']"
-  routerLinkActive="nav-button-active"
-  class="nav-button library-button">Library</a>
-  <a
-    *ngIf="isAuthenticated"
-    [routerLink]="['/bands']"
-    routerLinkActive="nav-button-active"
-    class="nav-button bands-button">Bands</a>
-  <a
-    [routerLink]="['/popular']"
-    routerLinkActive="nav-button-active"
-    class="nav-button popular-button">Popular</a>
-  <a
-    [href]="'mailto:pok.koch@gmail.com'"
-    class="nav-button contact-button">Contact</a>
-  <app-search-bar></app-search-bar>
-  <a class="nav-button menu-trigger" mat-icon-button [matMenuTriggerFor]="appMenu"><mat-icon>account_box</mat-icon></a>
-  <mat-menu #appMenu="matMenu">
-    <ng-container *ngIf="isAuthenticated; else not">
-      <button
-      mat-menu-item [routerLink]="['/settings']">Settings</button>
-      <button
-      mat-menu-item class="login" (click)="onLogout()">Logout</button>
-    </ng-container>
-    <ng-template #not>
-      <button
-      mat-menu-item class="logout" [routerLink]="['/login']">Log In</button>
-      <button
-      mat-menu-item [routerLink]="['/register']">Register</button>
-    </ng-template>
-  </mat-menu>
+<mat-toolbar class="mat-elevation-z8" color="primary">
+    <a (click)="onBurgerClick($event)"
+       [ngClass]="{'hide': isSearchOpen}"
+       class="burger nav-button" mat-icon-button>
+        <mat-icon>menu</mat-icon>
+    </a>
+    <div [ngClass]="{'hide': isSearchOpen}" class="separator mobile"></div>
+    <a [ngClass]="{'hide': isSearchOpen}"
+       [routerLink]="['/home']"
+       class="brand"
+       routerLinkActive="brand:hover">
+        <mat-icon>
+            queue_music
+        </mat-icon>
+        LyricSet
+    </a>
+    <a (click)="onSearchClick($event)"
+       [ngClass]="{'hide': isSearchOpen}"
+       class="search-mob nav-button" mat-icon-button>
+        <mat-icon>search</mat-icon>
+    </a>
+    <a
+            *ngIf="isAuthenticated"
+            [routerLink]="['/library']"
+            class="nav-button library-button"
+            routerLinkActive="nav-button-active">Library</a>
+    <a
+            *ngIf="isAuthenticated"
+            [routerLink]="['/bands']"
+            class="nav-button bands-button"
+            routerLinkActive="nav-button-active">Bands</a>
+    <a
+            [routerLink]="['/popular']"
+            class="nav-button popular-button"
+            routerLinkActive="nav-button-active">Popular</a>
+    <a
+            [href]="'mailto:pok.koch@gmail.com'"
+            class="nav-button contact-button">Contact</a>
+    <a (click)="onBackClick()" [ngStyle]="{'display': isSearchOpen ? 'flex' : 'none'}" class="nav-button back"
+       mat-icon-button>
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+    <app-search-bar [ngClass]="{'open-search' : isSearchOpen}"></app-search-bar>
+    <a [matMenuTriggerFor]="appMenu"
+       [ngClass]="{'hide': isSearchOpen}"
+       class="nav-button menu-trigger" mat-icon-button>
+        <mat-icon>account_box</mat-icon>
+    </a>
+    <mat-menu #appMenu="matMenu">
+        <ng-container *ngIf="isAuthenticated; else not">
+            <button
+                    [routerLink]="['/settings']" mat-menu-item>Settings
+            </button>
+            <button
+                    (click)="onLogout()" class="login" mat-menu-item>Logout
+            </button>
+        </ng-container>
+        <ng-template #not>
+            <button
+                    [routerLink]="['/login']" class="logout" mat-menu-item>Log In
+            </button>
+            <button
+                    [routerLink]="['/register']" mat-menu-item>Register
+            </button>
+        </ng-template>
+    </mat-menu>
+    <div (clickOutside)="handleClickOutside($event)" [ngClass]="{'open' : isBurgerOpen}"
+         class="mobile-menu mat-elevation-z7">
+        <mat-list>
+            <a (click)="closeMenu($event)"
+               *ngIf="isAuthenticated"
+               [routerLink]="['/library']"
+               class="mobile-button"
+               mat-list-item>Library</a>
+            <a (click)="closeMenu($event)"
+               *ngIf="isAuthenticated"
+               [routerLink]="['/bands']"
+               class="mobile-button "
+               mat-list-item>Bands</a>
+            <a (click)="closeMenu($event)"
+               [routerLink]="['/popular']"
+               class="mobile-button"
+               mat-list-item>Popular</a>
+            <a (click)="closeMenu($event)"
+               [href]="'mailto:pok.koch@gmail.com'"
+               class="mobile-button"
+               mat-list-item>Contact</a>
+        </mat-list>
+    </div>
 </mat-toolbar>

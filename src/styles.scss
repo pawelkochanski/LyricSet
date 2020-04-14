@@ -1,5 +1,6 @@
 html, body {
   height: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -78,4 +79,8 @@ body {
 
 .loading-header {
   transform: scale(0.5);
+}
+
+.mobile {
+  width: 90vw;
 }

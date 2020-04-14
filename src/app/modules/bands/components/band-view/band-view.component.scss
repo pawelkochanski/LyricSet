@@ -1,75 +1,99 @@
-.left{
+.left {
   margin: 20px;
   min-width: 200px;
 }
-.right{
+
+.right {
   margin: 20px;
   flex: 1;
 }
 
-.band-img{
+.band-img {
   width: 200px;
   height: 200px;
 }
 
-.avatar-img{
+.avatar-img {
   border-radius: 5%;
   height: 40px;
   width: 40px;
   margin: 5px;
 }
 
-a{
+a {
   margin: 10px 0;
 }
 
-mat-card-content{
+mat-card-content {
   display: flex;
   flex-direction: column;
   font-size: 12px;
 }
-mat-list-item{
+
+mat-list-item {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-mat-nav-list{
+
+mat-nav-list {
   margin-bottom: 20px;
 }
-.edit-buttons{
-  display:flex;
+
+.edit-buttons {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin-top: 0;
 
 }
 
-.band-image-container{
+.band-image-container {
   position: relative;
   width: 100%;
   max-width: 400px;
-  button{
+
+  button {
     position: absolute;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
   }
-  .left-btn{
+
+  .left-btn {
     top: 80%;
     left: 12%;
   }
-  .right-btn{
+
+  .right-btn {
     top: 80%;
     left: 88%;
   }
 
 }
 
-.button-container{
+.button-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.top-button{
+
+.top-button {
   margin-bottom: 10px;
 }
 
+@media only screen and (max-width: 768px) {
+  .split-container {
+    flex-direction: column;
+    align-items: center;
+    min-height: 1204px;
+  }
+  .left {
+  }
+  .right {
+    width: 100%;
+  }
+
+  .band-image-container {
+    width: auto;
+  }
+}

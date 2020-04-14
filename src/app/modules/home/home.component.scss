@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
 @import '../../../theme';
-.landing-page{
-  height:100vh;
+
+.landing-page {
+  height: 100vh;
   width: 100vw;
   overflow: hidden;
   position: absolute;
   top: 0;
 }
 
-.animation{
+.animation {
   position: absolute;
   z-index: 0;
   top: 0;
@@ -16,7 +17,8 @@
   height: 100%;
   overflow: hidden;
 }
-.content-1{
+
+.content-1 {
   top: 0;
   padding-top: 70px;
   z-index: 1;
@@ -28,85 +30,93 @@
   transition: transform 1s;
 }
 
-.set{
- position: relative;
+.set {
+  position: relative;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+
   div {
-    top:70px;
+    top: 70px;
     position: absolute;
     display: block;
   }
-  div:nth-child(1){
+
+  div:nth-child(1) {
     left: 20%;
     animation: animate 7s linear infinite;
     animation-delay: -0.1s;
   }
-  div:nth-child(2){
+
+  div:nth-child(2) {
     left: 50%;
     animation: animate 12s linear infinite;
     animation-delay: -0.2s;
   }
-  div:nth-child(3){
+
+  div:nth-child(3) {
     left: 70%;
     animation: animate 13s linear infinite;
     animation-delay: -0.3s;
   }
-  div:nth-child(4){
+
+  div:nth-child(4) {
     left: 12%;
     animation: animate 11s linear infinite;
     animation-delay: -0.4s;
   }
-  div:nth-child(5){
+
+  div:nth-child(5) {
     left: 85%;
     animation: animate 8s linear infinite;
     animation-delay: -0.1s;
   }
-  div:nth-child(6){
+
+  div:nth-child(6) {
     left: 77%;
     animation: animate 10s linear infinite;
   }
-  div:nth-child(7){
+
+  div:nth-child(7) {
     left: 15%;
     animation: animate 9s linear infinite;
   }
-  div:nth-child(8){
+
+  div:nth-child(8) {
     left: 60%;
     animation: animate 14s linear infinite;
   }
 }
 
 @keyframes animate {
-  0%
-  {
+  0% {
     opacity: 0;
-    top:0;
+    top: 0;
     transform: translateX(10px) rotate(0deg);
   }
-  15%{
+  15% {
     opacity: 1;
   }
-  20%{
+  20% {
     transform: translateX(-10px) rotate(45deg);
   }
-  40%{
+  40% {
     transform: translateX(-10px) rotate(90deg);
   }
-  60%{
+  60% {
     transform: translateX(10px) rotate(135deg);
   }
-  80%{
+  80% {
     transform: translateX(-10px) rotate(180deg);
   }
-  100%{
+  100% {
     top: 110%;
     transform: translateX(-10px) rotate(225deg);
   }
 }
 
-.body{
+.body {
   overflow: hidden;
 }
 
@@ -123,12 +133,14 @@
   height: auto;
   opacity: 0.5;
 }
+
 .note3 {
   position: relative;
   width: 40px;
   height: auto;
   opacity: 0.5;
 }
+
 .note4 {
   position: relative;
   width: 15px;
@@ -136,25 +148,25 @@
   opacity: 0.5;
 }
 
-.set2{
+.set2 {
   transform: scale(2) rotateY(180deg);
   filter: blur(2px);
 }
 
-.set3{
+.set3 {
   transform: scale(1.5) rotateY(45deg) translateX(112px);
   filter: blur(1px);
 }
 
-.set4{
+.set4 {
   transform: scale(0.7) translateX(-30px);
 }
 
-.set5{
+.set5 {
   transform: rotateY(134deg);
 }
 
-.front{
+.front {
   position: relative;
   top: 30%;
   display: flex;
@@ -171,46 +183,48 @@
   font-size: 27px;
 }
 
-.welcome-1{
+.welcome-1 {
   animation: welcome-animation 3s linear;
 }
-.welcome-2{
+
+.welcome-2 {
   display: flex;
   flex-direction: row;
 }
-.welcome-2-1{
+
+.welcome-2-1 {
   margin-right: 10px;
   animation: welcome-animation 5s linear;
   color: gray;
 }
 
-.welcome-2-2{
-  font-size:50px;
+.welcome-2-2 {
+  font-size: 50px;
   color: mat-color($theme-accent, darker);
   animation: welcome-animation 6s linear;
 }
 
 
 @keyframes welcome-animation {
-  0%{
+  0% {
     opacity: 0;
   }
-  66%{
+  66% {
     opacity: 0;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 
 }
 
-.get-started{
+.get-started {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 150px;
-  height:50px;
+  height: 50px;
   border-radius: 2px;
   cursor: pointer;
   animation: welcome-animation 6s linear;
@@ -218,13 +232,13 @@
   border: 0;
 }
 
-.get-started:hover{
+.get-started:hover {
   opacity: 0.5;
 }
 
-.footer{
+.footer {
   position: relative;
-  top:60%;
+  top: 60%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -233,7 +247,7 @@
   cursor: pointer;
 }
 
-.footer:hover{
+.footer:hover {
   opacity: 0.5;
 }
 
@@ -263,25 +277,26 @@
 }
 */
 
-.header{
-   position: relative;
-   top:5%;
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   font-size: 16px;
-   align-items: center;
-   margin: 0 auto;
-   cursor: pointer;
- }
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  align-items: center;
+  margin: 5% auto;
+  cursor: pointer;
+}
 
-.header:hover{
+.header:hover {
   opacity: 0.5;
 }
 
-.content-2{
+.content-2 {
   position: absolute;
   padding-top: 70px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
   z-index: 1;
   width: 100%;
   height: 100%;
@@ -291,29 +306,30 @@
   transition: transform 1s;
 }
 
-.swipe-1{
+.swipe-1 {
   transform: translateY(-100%);
   transition: transform 1s;
 }
 
-.swipe-2{
+.swipe-2 {
   transform: translateY(0);
   transition: transform 1s;
 }
 
-.front-2{
+.front-2 {
   position: relative;
-  top: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width:60%;
+  width: 60%;
   margin: 0 auto;
-  p{
+
+  p {
     text-align: justify;
   }
-  a{
+
+  a {
     display: flex;
     flex-direction: row;
     align-items: center;

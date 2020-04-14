@@ -1,21 +1,20 @@
-
-label{
+label {
   margin-right: 10px;
 }
 
-form{
-  display:flex;
+form {
+  display: flex;
   flex-direction: column;
 }
 
-mat-form-field{
+mat-form-field {
   margin-bottom: 15px;
 }
 
-img{
-  width:80%;
-  object-fit:cover;
-  border-radius:2%;
+img {
+  width: 80%;
+  object-fit: cover;
+  border-radius: 2%;
 }
 
 
@@ -24,11 +23,39 @@ img{
   position: absolute;
   z-index: -1;
 }
-ngx-mat-file-input{
+
+ngx-mat-file-input {
   cursor: pointer;
 }
 
-.button-holder{
-  width:100%;
+.button-holder {
+  width: 100%;
   margin: 10px;
+}
+
+.vertical {
+  display: block;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .vertical {
+    display: none;
+  }
+  .split-container {
+    flex-direction: column-reverse;
+  }
+  .splitted-right {
+    width: 100%;
+    margin: 0;
+  }
+
+  .splitted-left {
+    width: 100%;
+    margin: 0;
+  }
+  .button-holder {
+    text-align: center;
+  }
+
 }

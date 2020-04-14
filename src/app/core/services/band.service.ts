@@ -49,13 +49,13 @@ export class BandService {
 	}
 
 	deleteAvtiveBand(): void {
+		this.router.navigate(['/bands']);
 		if (!this.activeBand) {
 			return;
 		}
 		this.deleteBand(this.activeBand.id).subscribe(
 			() => {
 				this.activeBand = null;
-				this.router.navigate(['/bands']);
 			}
 		);
 	}

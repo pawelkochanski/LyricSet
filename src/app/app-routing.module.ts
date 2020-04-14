@@ -3,7 +3,7 @@ import {ServerErrorComponent} from './modules/server-error/server-error.componen
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LibraryComponent} from './modules/library/library.component';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './modules/home/home.component';
 import {TrackListComponent} from './shared/components/track-list/track-list.component';
 import {SongComponent} from './shared/components/song/song.component';
@@ -23,76 +23,80 @@ import {PopularComponent} from './modules/popular/popular.component';
 import {LoggedOutGuard} from './core/guards/logged-out.guard';
 
 const appRoutes: Routes = [
-  {
-    path: 'library', canActivate: [AuthGuard],
-    component: LibraryComponent,
-    data: {state: 'library'},
-    children: [
-      {path: ':setid', component: TrackListComponent},
-      {path: ':setid/:songid', component: SongComponent}
-    ]
-  },
-  {path: 'popular', data: {state: 'popular'}, component: PopularComponent},
-  {
-    path: 'bands',
-    canActivate: [AuthGuard],
-    component: BandsComponent,
-    data: {state: 'bands'},
-    children: [
-      {path: '', redirectTo: 'list', pathMatch: 'full'},
-      {path: 'list', component: BandListComponent},
-      {
-        path: ':bandid',
-        component: BandViewComponent,
-        data: {state: ':bandid'},
-        children: [
-          {path: '', redirectTo: 'tracklist', pathMatch: 'full'},
-          {path: 'tracklist', component: BadTracklistComponent},
-          {path: 'tracklist/:songid', component: SongComponent}
-        ]
-      }
-    ]
-  },
-  {path: 'song/:songid', component: SongComponent},
-  {
-    path: 'home',
-    component: HomeComponent,
-    data: {state: 'home'}
-  },
-  {path: '', redirectTo: '/home', pathMatch: 'full', data: {state: 'page'}},
-  {path: 'login', canActivate: [LoggedOutGuard], component: LoginComponent, data: {state: 'login'}},
-  {path: 'register', canActivate: [LoggedOutGuard], component: RegisterComponent, data: {state: 'register'}},
-  {
-    path: 'settings',
-    canActivate: [AuthGuard],
-    component: SettingsComponent,
-    data: {state: 'settings'},
-    children: [
-      {path: '', redirectTo: 'profile', pathMatch: 'full'},
-      {path: 'profile', component: ProfileComponent},
-      {path: 'account', component: AccountComponent}
-    ]
-  },
-  {path: 'search/:query', data: {state: 'search'}, component: SearchComponent},
-  {path: 'server-error', component: ServerErrorComponent},
-  {
-    path: 'user/:id', data: {state: 'user'}, component: UserComponent, children: [
-      {path: ':setid', component: TrackListComponent},
-      {path: ':setid/:songid', component: SongComponent}
-    ]
-  },
-  {path: '**', component: PageNotFoundComponent}
+	{path: '', redirectTo: '/home', pathMatch: 'full', data: {state: 'page'}},
+	{
+		path: 'library', canActivate: [AuthGuard],
+		component: LibraryComponent,
+		data: {state: 'library'},
+		children: [
+			{path: ':setid', component: TrackListComponent},
+			{path: ':setid/:songid', component: SongComponent}
+
+		]
+	},
+	{path: 'popular', data: {state: 'popular'}, component: PopularComponent},
+	{
+		path: 'bands',
+		canActivate: [AuthGuard],
+		component: BandsComponent,
+		data: {state: 'bands'},
+		children: [
+			{path: '', redirectTo: 'list', pathMatch: 'full'},
+			{path: 'list', component: BandListComponent},
+			{
+				path: ':bandid',
+				component: BandViewComponent,
+				data: {state: ':bandid'},
+				children: [
+					{path: '', redirectTo: 'tracklist', pathMatch: 'full'},
+					{path: 'tracklist', component: BadTracklistComponent},
+					{path: 'tracklist/:songid', component: SongComponent}
+				]
+			}
+		]
+	},
+	{path: 'song/:songid', component: SongComponent},
+	{
+		path: 'home',
+		component: HomeComponent,
+		data: {state: 'home'}
+	},
+	{path: 'login', canActivate: [LoggedOutGuard], component: LoginComponent, data: {state: 'login'}},
+	{path: 'register', canActivate: [LoggedOutGuard], component: RegisterComponent, data: {state: 'register'}},
+	{
+		path: 'settings',
+		canActivate: [AuthGuard],
+		component: SettingsComponent,
+		data: {state: 'settings'},
+		children: [
+			{path: '', redirectTo: 'profile', pathMatch: 'full'},
+			{path: 'profile', component: ProfileComponent},
+			{path: 'account', component: AccountComponent}
+		]
+	},
+	{path: 'search/:query', data: {state: 'search'}, component: SearchComponent},
+	{path: 'server-error', component: ServerErrorComponent},
+	{
+		path: 'user/:id', data: {state: 'user'}, component: UserComponent, children: [
+			{
+				path: ':setid', component: TrackListComponent
+			},
+			{path: ':setid/:songid', component: SongComponent}
+
+		]
+	},
+	{path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  exports: [
-    RouterModule
-  ]
+	declarations: [],
+	imports: [
+		CommonModule,
+		RouterModule.forRoot(appRoutes)
+	],
+	exports: [
+		RouterModule
+	]
 })
 export class AppRoutingModule {
 }

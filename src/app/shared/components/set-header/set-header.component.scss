@@ -1,60 +1,86 @@
-mat-card{
+mat-card {
   display: flex;
   justify-content: space-between;
   height: 140px;
+  margin: 0 auto;
 }
-mat-card-title-group{
-  display:flex;
-  flex-direction: column;
-}
-mat-form-field{
-  margin: 0;
-}
-.edit-container{
-  display: flex;
-  flex-direction: column;
-}
-textarea{
-  resize: none;
-}
-.img-container{
+
+mat-card-title-group {
   display: flex;
   flex-direction: column;
 }
 
-.img-buttons-container{
+mat-form-field {
+  margin: 0;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-title {
+  width: auto;
+}
+
+textarea {
+  resize: none;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-buttons-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-img{
-  border-radius:5%;
+img {
+  border-radius: 5%;
 }
-input{
+
+input {
   border: none;
   font-size: 24px;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
-textarea{
+
+textarea {
   border: none;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
-mat-card-subtitle{
+mat-card-subtitle {
   display: flex;
   flex-direction: column;
   margin: 0;
 }
-mat-card-title{
+
+mat-card-title {
 }
-form{
-  margin: 0;
-}
-mat-checkbox{
+
+
+mat-checkbox {
   margin-bottom: 0;
 }
-star-rating{
+
+star-rating {
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  mat-card {
+    width: 80vw;
+  }
+
+  mat-card-title-group {
+    max-width: 50%;
+  }
 }
